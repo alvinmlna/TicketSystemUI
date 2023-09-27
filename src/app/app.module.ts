@@ -7,13 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    TicketComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
