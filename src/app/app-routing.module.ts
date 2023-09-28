@@ -4,6 +4,11 @@ import { TicketComponent } from './ticket/ticket.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  {
+    path:'',
+    pathMatch : 'full',
+    redirectTo: '/dashboard'
+  },
   {path: 'dashboard' , component: DashboardComponent},
   {path: 'ticket' , component: TicketComponent},
 ];
