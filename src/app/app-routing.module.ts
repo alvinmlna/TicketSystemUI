@@ -10,7 +10,7 @@ const routes: Routes = [
     redirectTo: '/dashboard'
   },
   {path: 'dashboard' , component: DashboardComponent},
-  {path: 'ticket' , component: TicketComponent},
+  {path: 'ticket', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule) }
 ];
 
 
