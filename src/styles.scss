@@ -6,6 +6,7 @@
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
+@import "primeicons/primeicons.css";
 
 :root {
     --darkblue: #162029;
@@ -21,6 +22,7 @@
   
   html {
     height: -webkit-fill-available;
+    font-size: 14px;
   }
   
   main {
@@ -31,4 +33,8 @@
     overflow-x: auto;
     overflow-y: hidden;
     background-color: #ECF0F6;
+  }
+
+  .p-button-status {
+    padding: 2px 6px !important;
   }
