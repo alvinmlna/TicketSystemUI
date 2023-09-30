@@ -1,25 +1,10 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-interface City {
-  name: string;
-  code: string;
-}
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
-export interface Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
-}
+import { UploadEvent } from 'src/app/shared/shared/models/UploadEvent';
+import { City } from 'src/app/shared/shared/models/city';
+import { Product } from 'src/app/shared/shared/models/product';
+
+
 @Component({
   selector: 'app-ticket-add',
   templateUrl: './ticket-add.component.html',

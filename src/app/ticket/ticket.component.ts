@@ -1,24 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-
-interface City {
-  name: string;
-  code: string;
-}
-
-export interface Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
-}
+import { Router } from '@angular/router';
+import { Product } from '../shared/shared/models/product';
+import { City } from '../shared/shared/models/city';
 
 @Component({
   selector: 'app-ticket',
@@ -34,7 +19,7 @@ export class TicketComponent implements OnInit {
   selectedProduct!: Product;
   selectedCity: City | undefined;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private router: Router) {}
 
   ngOnInit() {
       this.cities = [
@@ -581,8 +566,13 @@ export class TicketComponent implements OnInit {
       table.clear();
   }
 
+   navigate(){
+    this.router.navigateByUrl("/dashboard");
+  }
+
   onRowSelect(event: any) {
-    this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name });
+    this.router.navigateByUrl("/ticket/" + event.data.code);
+    //this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name });
   }
 
   onRowUnselect(event: any) {
