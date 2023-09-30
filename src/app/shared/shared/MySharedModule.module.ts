@@ -7,6 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Badge, BadgeModule } from 'primeng/badge';
 import { TableModule } from 'primeng/table';
+import { CardModule } from 'primeng/card';
+import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -18,7 +22,11 @@ import { TableModule } from 'primeng/table';
     ModalModule.forRoot(),
     ButtonModule,
     BadgeModule,
-    TableModule
+    TableModule,
+    CardModule,
+    EditorModule,
+    FileUploadModule,
+    ToastModule
   ],
   exports: [
     DropdownModule,
@@ -27,7 +35,11 @@ import { TableModule } from 'primeng/table';
     FormsModule,
     ButtonModule,
     BadgeModule,
-    TableModule
+    TableModule,
+    CardModule,
+    EditorModule,
+    FileUploadModule,
+    ToastModule
   ]
 })
 export class MySharedModule { }

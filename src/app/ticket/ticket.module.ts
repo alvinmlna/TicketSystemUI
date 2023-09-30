@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TicketComponent } from './ticket.component';
 import { MySharedModule } from '../shared/shared/MySharedModule.module';
 import { TicketRoutingModule } from './ticket-routing.module';
+import { TicketAddComponent } from './ticket-add/ticket-add.component';
 
 @NgModule({
   declarations: [
-    TicketComponent
+    TicketComponent,
+    TicketAddComponent
   ],
   imports: [
     CommonModule,

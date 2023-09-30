@@ -13,6 +13,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { SharedModule } from 'primeng/api';
 import { MySharedModule } from './shared/shared/MySharedModule.module';
 import { TicketModule } from './ticket/ticket.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TicketModule } from './ticket/ticket.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CoreModule,
     MySharedModule
   ],
