@@ -1,1 +1,117 @@
-<p>ticket-edit works! id: {{IdOfItems}}</p>
+<div class="row">
+    <div class="col">
+        <h3 >Ticket ID: {{IdOfItems}}</h3>
+    </div>
+</div>
+
+<div style="overflow-y: auto; overflow-x: hidden; height:800px;">
+<div class="row">
+    <div class="col-md-7">
+    <p-card styleClass="mt-3">
+    <div class="mx-3">
+        <div class="row">
+            <div class="col-4">
+                <b>Raised By</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="Alvin Maulana" />
+                </p>
+            </div>
+            <div class="col-4">
+                <b>Create Date</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="25 August 2023 23:11 PM" />
+                </p>
+            </div>
+            <div class="col-4">
+                <b>Assigned To</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="Alvin Maulana" />
+                </p>
+            </div>
+            
+            <div class="col-4">
+                <b>Product</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="eCommerce" />
+                </p>
+            </div>
+            <div class="col-4">
+                <b>Category</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="Network Issue" />
+                </p>
+            </div>
+            <div class="col-4">
+                <b>Status</b>
+                <p class="mt-1">
+                    <input type="text" pInputText [disabled]="true"  ngModel="New" />
+                </p>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-6">
+                <b>Summary</b>
+                <p class="mt-1">
+                    <input disabled style="width: 100%;" type="text" pInputText  />
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <b>Request Descriptions</b>
+                <p class="mt-1">
+                    <p-editor [readonly]="true" [style]="{ height: '200px' }"></p-editor>
+                </p>
+            </div>
+        </div>
+        <p-toast></p-toast>
+
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <b>Attachments</b>
+                <ul>
+                    <li><a href="#">Download Attachment 1</a></li>
+                    <li><a href="#">Download Attachment 1</a></li>
+                    <li><a href="#">Download Attachment 1</a></li>
+                    <li><a href="#">Download Attachment 1</a></li>
+                    <li><a href="#">Download Attachment 1</a></li>
+                </ul>
+                <p class="mt-1">
+                    <p-fileUpload name="myfile[]" [multiple]="true"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
+                        <ng-template let-file pTemplate="file">
+                            <li>{{ file.name }}</li>
+                        </ng-template>
+                    </p-fileUpload>
+                </p>
+            </div>
+        </div>
+        </div>
+    </p-card>   
+    </div>
+    <div class="col-md-5">
+        <p-card styleClass="mt-3">
+            <div class="mx-3">
+                <div class="row">
+                    <div class="col-4">
+                        <b>Discussion</b>
+                    </div>
+                    <div class="col">
+                        <p-button icon="pi pi-refresh" styleClass="p-button-rounded float-end"></p-button>
+                    </div>
+                </div>
+                <div class="mt-4" style="height: 400px;display: block;background-color:blanchedalmond;">
+                </div>
+                <div class="mt-4" style="height: 50px;display: block;background-color:blanchedalmond;">
+                </div>
+            </div>
+        </p-card>
+        <div class="m-3">
+            <p-button label="Save Changes" icon="pi pi-save" styleClass="p-button-success float-end"></p-button>
+            <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list" styleClass="p-button-secondary float-end mx-3"></p-button>
+        </div>
+    </div>
+</div>
+
+</div>
