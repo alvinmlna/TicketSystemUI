@@ -30,7 +30,6 @@ export class TicketAddComponent {
   cities: City[] = [];
 
   products!: Product[];
-
   selectedCity: City | undefined;
   uploadedFiles: any[] = [];
 
@@ -47,6 +46,7 @@ export class TicketAddComponent {
 
       this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
+
 
   dealWithFiles(event: UploadEvent) {
     for(let file of event.files) {

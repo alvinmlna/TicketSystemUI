@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 interface City {
@@ -22,14 +23,18 @@ export interface Product {
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
-  styleUrls: ['./ticket.component.scss']
+  styleUrls: ['./ticket.component.scss'],
+  providers: [MessageService]
 })
 export class TicketComponent implements OnInit {
   cities: City[] = [];
 
   products!: Product[];
 
+  selectedProduct!: Product;
   selectedCity: City | undefined;
+
+  constructor(private messageService: MessageService) {}
 
   ngOnInit() {
       this.cities = [
@@ -55,7 +60,7 @@ export class TicketComponent implements OnInit {
         },
         {
             id: '1000',
-            code: 'f230fh0g3',
+            code: '123455',
             name: 'Bamboo Watch',
             description: 'Product Description',
             image: 'bamboo-watch.jpg',
@@ -574,5 +579,13 @@ export class TicketComponent implements OnInit {
 
   clear(table: Table) {
       table.clear();
+  }
+
+  onRowSelect(event: any) {
+    this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name });
+  }
+
+  onRowUnselect(event: any) {
+      this.messageService.add({ severity: 'info', summary: 'Product Unselected', detail: event.data.name });
   }
 }
