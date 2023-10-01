@@ -9,7 +9,7 @@ const routes: Routes = [
     pathMatch : 'full',
     redirectTo: '/dashboard'
   },
-  {path: 'dashboard' , component: DashboardComponent},
+  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   {path: 'ticket', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule) }
 ];
 

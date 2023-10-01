@@ -15,7 +15,6 @@ export class TicketComponent implements OnInit {
   cities: City[] = [];
 
   products!: Product[];
-
   selectedProduct!: Product;
   selectedCity: City | undefined;
 
