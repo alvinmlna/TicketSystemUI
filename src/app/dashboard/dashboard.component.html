@@ -1,1 +1,91 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div class="col">
+        <h3>Dashboard</h3>
+    </div>
+</div>
+
+<div class="row  mt-3">
+    <div class="col-6">
+        <div class="flex-container">
+            <div class="counter-panel">
+                <div class="counter-panel-body">
+                    <div class="counter-panel-icon" style="background-color: #BDC3C7;">
+                    </div>
+                    <div class="row">
+                        <div class="col offset-md-2">
+                            <div>
+                                <span class="counter-panel-text">New <br><span style="font-size: 24px;">99999</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="counter-panel">
+                <div class="counter-panel-body">
+                    <div class="counter-panel-icon" style="background-color: #2ECC71;">
+                    </div>
+                    <div class="row">
+                        <div class="col offset-md-2">
+                            <div>
+                                <span class="counter-panel-text">Open <br><span style="font-size: 24px;">99999</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="counter-panel">
+                <div class="counter-panel-body">
+                    <div class="counter-panel-icon" style="background-color: #C0392B;">
+                    </div>
+                    <div class="row">
+                        <div class="col offset-md-2">
+                            <div>
+                                <span class="counter-panel-text">Closed <br><span style="font-size: 24px;">99999</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="counter-panel">
+                <div class="counter-panel-body">
+                    <div class="counter-panel-icon" style="background-color: #F39C12;">
+                    </div>
+                    <div class="row">
+                        <div class="col offset-md-2">
+                            <div>
+                                <span class="counter-panel-text">Total <br><span style="font-size: 24px;">99999</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-3">
+            <div class="panel">
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="row">
+                <div class="col-4">
+                    <p-chart type="pie" [data]="data" [options]="options"></p-chart>
+                </div>
+                <div class="col-4">
+                    <p-chart type="pie" [data]="data" [options]="options"></p-chart>
+                </div>
+                <div class="col-4">
+                    <p-chart type="pie" [data]="data" [options]="options"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-3">
+</div>
