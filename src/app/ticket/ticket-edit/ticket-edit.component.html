@@ -5,7 +5,7 @@
 </div>
 
 <div style="overflow-y: auto; overflow-x: hidden; height:800px;">
-<div class="row">
+<div *ngIf="ticket" class="row">
     <div class="col-md-7">
     <p-card styleClass="mt-3">
     <div class="mx-3">
@@ -13,38 +13,38 @@
             <div class="col-4">
                 <b>Raised By</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="Alvin Maulana" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.userId}}" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Create Date</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="25 August 2023 23:11 PM" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.userId}}" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Assigned To</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="Alvin Maulana" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.assignedTo}}" />
                 </p>
             </div>
             
             <div class="col-4">
                 <b>Product</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="eCommerce" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.product.productName}}" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Category</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="Network Issue" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.category.categoryName}}" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Status</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="New" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.status.name}}" />
                 </p>
             </div>
         </div>
@@ -53,7 +53,8 @@
             <div class="col-6">
                 <b>Summary</b>
                 <p class="mt-1">
-                    <input disabled style="width: 100%;" type="text" pInputText  />
+                    
+                    <input disabled style="width: 100%;" type="text" pInputText ngModel="{{ticket.summary}}"  />
                 </p>
             </div>
         </div>
@@ -61,7 +62,7 @@
             <div class="col-12">
                 <b>Request Descriptions</b>
                 <p class="mt-1">
-                    <p-editor [readonly]="true" [style]="{ height: '200px' }"></p-editor>
+                    <p-editor  ngModel="{{ticket.description}}" [readonly]="true" [style]="{ height: '200px' }"></p-editor>
                 </p>
             </div>
         </div>
@@ -71,12 +72,8 @@
         <div class="row mt-4">
             <div class="col-12">
                 <b>Attachments</b>
-                <ul>
-                    <li><a href="#">Download Attachment 1</a></li>
-                    <li><a href="#">Download Attachment 1</a></li>
-                    <li><a href="#">Download Attachment 1</a></li>
-                    <li><a href="#">Download Attachment 1</a></li>
-                    <li><a href="#">Download Attachment 1</a></li>
+                <ul *ngFor="let attachment of ticket.attachmentViews">
+                    <li><a href="#">{{attachment.filename}}</a></li>
                 </ul>
                 <p class="mt-1">
                     <p-fileUpload name="myfile[]" [multiple]="true"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">

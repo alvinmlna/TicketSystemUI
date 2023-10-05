@@ -4,6 +4,8 @@ import { MessageService } from 'primeng/api';
 import { UploadEvent } from 'src/app/shared/shared/models/UploadEvent';
 import { City } from 'src/app/shared/shared/models/city';
 import { Product } from 'src/app/shared/shared/models/product';
+import { TicketService } from '../ticket.service';
+import { ticket } from 'src/app/shared/shared/models/ticket';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -13,6 +15,10 @@ import { Product } from 'src/app/shared/shared/models/product';
 })
 export class TicketEditComponent implements OnInit {
   IdOfItems!: string | null;
+  ticket!: ticket;
+
+
+
   cities: City[] = [];
 
   products!: Product[];
@@ -21,11 +27,22 @@ export class TicketEditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private ticketService: TicketService
     ) {}
 
   ngOnInit(): void {
     this.IdOfItems = this.activatedRoute.snapshot.paramMap.get('id');
+    
+    if(this.IdOfItems) {
+      this.ticketService.getTicketById(+this.IdOfItems).subscribe({
+        next: response => {
+          this.ticket = response
+        }
+      })
+    }
+
+
     this.cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
