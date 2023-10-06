@@ -12,6 +12,7 @@ import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ChartModule } from 'primeng/chart';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,8 @@ import { ChartModule } from 'primeng/chart';
     EditorModule,
     FileUploadModule,
     ToastModule,
-    ChartModule
+    ChartModule,
+    MessagesModule
   ],
   exports: [
     DropdownModule,
@@ -44,7 +46,8 @@ import { ChartModule } from 'primeng/chart';
     EditorModule,
     FileUploadModule,
     ToastModule,
-    ChartModule
+    ChartModule,
+    MessagesModule
   ]
 })
 export class MySharedModule { }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { UploadEvent } from 'src/app/shared/shared/models/UploadEvent';
 import { City } from 'src/app/shared/shared/models/city';
 import { Product } from 'src/app/shared/shared/models/product';
 import { TicketService } from '../ticket.service';
-import { ticket } from 'src/app/shared/shared/models/ticket';
+import { AttachmentView, ticket } from 'src/app/shared/shared/models/ticket';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
 
@@ -19,6 +19,9 @@ export class TicketEditComponent implements OnInit {
 
   IdOfItems!: string | null;
   ticket!: ticket;
+  ticketFound!: boolean;
+  attachments! : AttachmentView[];
+  ticketNotFoundMessage!: Message[] ;
 
   ticketForm = this.fb.group({
     ticketInfoForm: this.fb.group({
@@ -36,10 +39,8 @@ export class TicketEditComponent implements OnInit {
       priorityId : new FormControl<number>(0, {nonNullable: true}),
       statusId : new FormControl<number>(0, {nonNullable: true}),
     }),
-    attachmentForm: this.fb.group({
-      attachment: ['']
-    })
   })
+  uploadedFiles: any[] = [];
 
   onSubmit(){
     console.log(this.ticketForm.value);
@@ -49,7 +50,6 @@ export class TicketEditComponent implements OnInit {
 
   products!: Product[];
   selectedCity: City | undefined;
-  uploadedFiles: any[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,17 +59,28 @@ export class TicketEditComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.IdOfItems = this.activatedRoute.snapshot.paramMap.get('id');
+    this.ticketNotFoundMessage = [{ severity: 'error', summary: 'ERROR', detail: 'Ticket Not Found' }];
 
-    if(this.IdOfItems) {
-      this.ticketService.getTicketById(+this.IdOfItems).subscribe({
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if(id) {
+      this.ticketService.getTicketById(+id).subscribe({
         next: response => {
-          this.ticket = response;
+          console.log(response);
+          if(!response){
+            //result not exist
+            this.ticketNotFound()
+          }
+          this.IdOfItems = response.ticketIdView;
+          this.attachments = response.attachmentViews;
+
           this.ticketForm.get('ticketInfoForm')?.patchValue(response);
           this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'yyyy-MM-dd', 'en'));
-        }
-      })
-    }
+        },
+        error: error => this.ticketNotFound()
+      }
+      )
+    } 
 
 
     this.cities = [
@@ -79,6 +90,10 @@ export class TicketEditComponent implements OnInit {
         { name: 'Istanbul', code: 'IST' },
         { name: 'Paris', code: 'PRS' }
     ];
+  }
+
+  ticketNotFound() {
+
   }
 
   uploadfun(event: UploadEvent) {

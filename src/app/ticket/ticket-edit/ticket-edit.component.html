@@ -1,12 +1,18 @@
-<div *ngIf="ticket" class="row">
-    <div class="col">
-        <h3 >Ticket ID: {{ticket.ticketIdView}}</h3>
-    </div>
+<div *ngIf="!IdOfItems">
+    <p-messages [(value)]="ticketNotFoundMessage" [enableService]="false" [closable]="false"></p-messages>
 </div>
 
 
+<div *ngIf="IdOfItems" class="row">
+    <div class="col">
+        <h3 >Ticket ID: {{IdOfItems}}</h3>
+    </div>
+</div>
+
+<p-toast position="bottom-center" key="bc"></p-toast>
+
 <div style="overflow-y: auto; overflow-x: hidden; height:800px;">
-<div [formGroup]="ticketForm" *ngIf="ticket" class="row">
+<div [formGroup]="ticketForm" *ngIf="IdOfItems" class="row">
     <div class="col-md-7">
     <p-card styleClass="mt-3">
         <div class="mx-3">
@@ -66,14 +72,10 @@
                 </p>
             </div>
         </div>
-        
-        <p-toast></p-toast>
-
-        
             <div class="row mt-4">
                 <div class="col-12">
                     <b>Attachments</b>
-                    <ul *ngFor="let attachment of ticket.attachmentViews">
+                    <ul *ngFor="let attachment of attachments">
                         <li><a href="#">{{attachment.filename}}</a></li>
                     </ul>
                     <p class="mt-1">
