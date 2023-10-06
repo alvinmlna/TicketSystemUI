@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category, Product2, Status, User } from '../models/ticket';
+import { Category, Priority, Product2, Status, User } from '../models/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,9 @@ export class ComponentService {
 
   getAllAdmins() {
     return this.http.get<User[]>(this.baseUrl + 'user/admin');
+  }
+
+  getPriority() {
+    return this.http.get<Priority[]>(this.baseUrl + 'priority');
   }
 }

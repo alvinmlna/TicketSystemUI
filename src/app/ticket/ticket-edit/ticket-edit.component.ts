@@ -17,7 +17,7 @@ import { observable } from 'rxjs';
   providers: [MessageService]
 })
 export class TicketEditComponent implements OnInit {
-
+  isTicketExist : boolean;
   IdOfItems!: string | null;
   ticket!: ticket;
   ticketFound!: boolean;
@@ -58,7 +58,9 @@ export class TicketEditComponent implements OnInit {
     private messageService: MessageService,
     private ticketService: TicketService,
     private fb : FormBuilder
-    ) {}
+    ) {
+      this.isTicketExist = true;
+    }
 
   ngOnInit(): void {
     this.ticketNotFoundMessage = [{ severity: 'error', summary: 'ERROR', detail: 'Ticket Not Found' }];
@@ -77,12 +79,14 @@ export class TicketEditComponent implements OnInit {
           this.attachments = response.attachmentViews;
 
           this.ticketForm.get('ticketInfoForm')?.patchValue(response);
-          this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'yyyy-MM-dd', 'en'));
+          this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'dd MMMM yyyy HH:mm a', 'en'));
         },
         error: error => this.ticketNotFound()
       }
       )
-    } 
+    }  else {
+      this.isTicketExist = false;
+    }
 
 
     this.cities = [
@@ -95,7 +99,7 @@ export class TicketEditComponent implements OnInit {
   }
 
   ticketNotFound() {
-
+    this.isTicketExist = false;
   }
 
   uploadfun(event: UploadEvent) {

@@ -1,4 +1,4 @@
-<div *ngIf="!IdOfItems">
+<div *ngIf="!isTicketExist">
     <p-messages [(value)]="ticketNotFoundMessage" [enableService]="false" [closable]="false"></p-messages>
 </div>
 
@@ -22,22 +22,17 @@
             <div class="col-4">
                 <b>Raised By</b>
                 <p class="mt-1">
-                    <input type="text" pInputText formControlName="raisedBy"  />
+                    <input  class="w-100" type="text" pInputText formControlName="raisedBy"  />
                 </p>
             </div>
             <div class="col-4">
                 <b>Create Date</b>
                 <p class="mt-1">
-                    <input type="text" pInputText formControlName="raisedDate" />
+                    <input class="w-100" type="text" pInputText formControlName="raisedDate" />
                 </p>
             </div>
-            <div class="col-4">
-                <b>Assigned To</b>
-                <p class="mt-1">
-                    <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="assignedToId"></app-assigneddropdown>
-                </p>
-            </div>
-            
+        </div>
+        <div class="row">
             <div class="col-4">
                 <b>Product</b>
                 <p class="mt-1">
@@ -51,6 +46,20 @@
                 </p>
             </div>
             <div class="col-4">
+                <b>Assigned To</b>
+                <p class="mt-1">
+                    <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="assignedToId"></app-assigneddropdown>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <b>Priority</b>
+                <p class="mt-1">
+                    <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="priorityId"></app-prioritydropdown>
+                </p>
+            </div>
+            <div class="col-4">
                 <b>Status</b>
                 <p class="mt-1">
                     <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="statusId"></app-statusdropdown>
@@ -58,7 +67,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-6">
+            <div class="col12">
                 <b>Summary</b>
                 <p class="mt-1">
                     <input style="width: 100%;" type="text" pInputText formControlName="summary" />

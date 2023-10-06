@@ -17,13 +17,15 @@ import { ProductdropdownComponent } from './components/productdropdown/productdr
 import { CategorydropdownComponent } from './components/categorydropdown/categorydropdown.component';
 import { StatusdropdownComponent } from './components/statusdropdown/statusdropdown.component';
 import { AssigneddropdownComponent } from './components/assigneddropdown/assigneddropdown.component';
+import { PrioritydropdownComponent } from './components/prioritydropdown/prioritydropdown.component';
 
 @NgModule({
   declarations: [
     ProductdropdownComponent,
     CategorydropdownComponent,
     StatusdropdownComponent,
-    AssigneddropdownComponent
+    AssigneddropdownComponent,
+    PrioritydropdownComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { AssigneddropdownComponent } from './components/assigneddropdown/assigne
     ProductdropdownComponent,
     CategorydropdownComponent,
     StatusdropdownComponent,
-    AssigneddropdownComponent
+    AssigneddropdownComponent,
+    PrioritydropdownComponent
   ]
 })
 export class MySharedModule { }
