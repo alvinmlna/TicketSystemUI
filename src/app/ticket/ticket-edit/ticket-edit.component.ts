@@ -6,6 +6,8 @@ import { City } from 'src/app/shared/shared/models/city';
 import { Product } from 'src/app/shared/shared/models/product';
 import { TicketService } from '../ticket.service';
 import { ticket } from 'src/app/shared/shared/models/ticket';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -14,10 +16,34 @@ import { ticket } from 'src/app/shared/shared/models/ticket';
   providers: [MessageService]
 })
 export class TicketEditComponent implements OnInit {
+
   IdOfItems!: string | null;
   ticket!: ticket;
 
+  ticketForm = this.fb.group({
+    ticketInfoForm: this.fb.group({
+      ticketId : new FormControl<number>(0, {nonNullable: true}),
+      ticketIdView : new FormControl<string>(''),
+      summary : new FormControl<string>({value: '',disabled: true}),
+      description : new FormControl<string>({value: '',disabled: true}),
+      assignedTo : [''],
+      raisedDate : new FormControl<string>({value: '',disabled: true}),
+      expectedDate : new FormControl<string>({value: '',disabled: true}),
+      userId : new FormControl<number>(0, {nonNullable: true}),
+      raisedBy : new FormControl<string>({value: '',disabled: true}),
+      productId : new FormControl<number>(0, {nonNullable: true}),
+      categoryId : new FormControl<number>(0, {nonNullable: true}),
+      priorityId : new FormControl<number>(0, {nonNullable: true}),
+      statusId : new FormControl<number>(0, {nonNullable: true}),
+    }),
+    attachmentForm: this.fb.group({
+      attachment: ['']
+    })
+  })
 
+  onSubmit(){
+    console.log(this.ticketForm.value);
+  }
 
   cities: City[] = [];
 
@@ -28,16 +54,19 @@ export class TicketEditComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private fb : FormBuilder
     ) {}
 
   ngOnInit(): void {
     this.IdOfItems = this.activatedRoute.snapshot.paramMap.get('id');
-    
+
     if(this.IdOfItems) {
       this.ticketService.getTicketById(+this.IdOfItems).subscribe({
         next: response => {
-          this.ticket = response
+          this.ticket = response;
+          this.ticketForm.get('ticketInfoForm')?.patchValue(response);
+          this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'yyyy-MM-dd', 'en'));
         }
       })
     }

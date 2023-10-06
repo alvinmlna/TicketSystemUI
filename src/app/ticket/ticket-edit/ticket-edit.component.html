@@ -4,57 +4,57 @@
     </div>
 </div>
 
+
 <div style="overflow-y: auto; overflow-x: hidden; height:800px;">
-<div *ngIf="ticket" class="row">
+<div [formGroup]="ticketForm" *ngIf="ticket" class="row">
     <div class="col-md-7">
     <p-card styleClass="mt-3">
-    <div class="mx-3">
+        <div class="mx-3">
+        <div formGroupName="ticketInfoForm" >
         <div class="row">
             <div class="col-4">
                 <b>Raised By</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.raisedBy}}" />
+                    <input type="text" pInputText formControlName="raisedBy"  />
                 </p>
             </div>
             <div class="col-4">
                 <b>Create Date</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.raisedDate | date}}" />
+                    <input type="text" pInputText formControlName="raisedDate" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Assigned To</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.assignedTo}}" />
+                    <input type="text" pInputText formControlName="assignedTo"/>
                 </p>
             </div>
             
             <div class="col-4">
                 <b>Product</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.product.productName}}" />
+                    <input type="text" pInputText formControlName="productId" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Category</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.category.categoryName}}" />
+                    <input type="text" pInputText formControlName="categoryId" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Status</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.status.name}}" />
+                    <input type="text" pInputText formControlName="statusId"/>
                 </p>
             </div>
         </div>
-        
         <div class="row mt-4">
             <div class="col-6">
                 <b>Summary</b>
                 <p class="mt-1">
-                    
-                    <input disabled style="width: 100%;" type="text" pInputText ngModel="{{ticket.summary}}"  />
+                    <input style="width: 100%;" type="text" pInputText formControlName="summary" />
                 </p>
             </div>
         </div>
@@ -62,26 +62,28 @@
             <div class="col-12">
                 <b>Request Descriptions</b>
                 <p class="mt-1">
-                    <p-editor  ngModel="{{ticket.description}}" [readonly]="true" [style]="{ height: '200px' }"></p-editor>
+                    <p-editor  formControlName="description" [readonly]="true" [style]="{ height: '200px' }"></p-editor>
                 </p>
             </div>
         </div>
+        
         <p-toast></p-toast>
 
         
-        <div class="row mt-4">
-            <div class="col-12">
-                <b>Attachments</b>
-                <ul *ngFor="let attachment of ticket.attachmentViews">
-                    <li><a href="#">{{attachment.filename}}</a></li>
-                </ul>
-                <p class="mt-1">
-                    <p-fileUpload name="myfile[]" [multiple]="true"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
-                        <ng-template let-file pTemplate="file">
-                            <li>{{ file.name }}</li>
-                        </ng-template>
-                    </p-fileUpload>
-                </p>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <b>Attachments</b>
+                    <ul *ngFor="let attachment of ticket.attachmentViews">
+                        <li><a href="#">{{attachment.filename}}</a></li>
+                    </ul>
+                    <p class="mt-1">
+                        <p-fileUpload name="myfile[]" [multiple]="true"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
+                            <ng-template let-file pTemplate="file">
+                                <li>{{ file.name }}</li>
+                            </ng-template>
+                        </p-fileUpload>
+                    </p>
+                </div>
             </div>
         </div>
         </div>

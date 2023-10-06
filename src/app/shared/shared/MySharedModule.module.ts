@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -18,6 +18,7 @@ import { ChartModule } from 'primeng/chart';
   imports: [
     CommonModule,
     DropdownModule,
+    ReactiveFormsModule,
     FormsModule,
     InputTextModule,
     ModalModule.forRoot(),
@@ -34,6 +35,7 @@ import { ChartModule } from 'primeng/chart';
     DropdownModule,
     InputTextModule,
     ModalModule,
+    ReactiveFormsModule,
     FormsModule,
     ButtonModule,
     BadgeModule,
