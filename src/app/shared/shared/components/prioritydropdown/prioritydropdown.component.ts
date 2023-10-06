@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SkipSelf, ViewChild } from '@angular/core';
 import { Category, Priority, Product2 } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
+import { dropdownModel } from '../../models/components/dropdownModel';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class PrioritydropdownComponent implements OnInit {
 
   control!: FormControl;
   
-  priority: Priority[] = [];
-  selectedPriority: Priority | undefined;
+  values: dropdownModel[] = [];
+  selectedValue: dropdownModel | undefined;
   
   constructor (private componentService : ComponentService){}
 
@@ -31,7 +32,7 @@ export class PrioritydropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getPriority().subscribe({
       next: response => {
-        this.priority = response
+        this.values = response
       }
     });
   }

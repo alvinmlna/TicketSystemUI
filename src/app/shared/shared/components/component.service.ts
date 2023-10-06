@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Category, Priority, Product2, Status, User } from '../models/ticket';
+import { dropdownModel } from '../models/components/dropdownModel';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,17 @@ export class ComponentService {
     return this.http.get<User[]>(this.baseUrl + 'user/admin');
   }
 
-  getPriority() {
-    return this.http.get<Priority[]>(this.baseUrl + 'priority');
+  getPriority() : Observable<dropdownModel[]> {
+    return this.http.get<Priority[]>(this.baseUrl + 'priority').pipe(
+      map (
+      response => {
+        const model = response.map(o => ( {
+          id : o.priorityId,
+          name: o.priorityName
+        }));
+        return model;
+      }
+      )
+    );
   }
 }
