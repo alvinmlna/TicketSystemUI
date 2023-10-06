@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SkipSelf } from '@angular/core';
 import { Product2, Status } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
+import { dropdownModel } from '../../models/components/dropdownModel';
 
 @Component({
   selector: 'app-statusdropdown',
@@ -20,8 +21,8 @@ export class StatusdropdownComponent implements OnInit {
   @Input() controlName!: string;
 
   control!: FormControl;
-  status: Status[] = [];
-  selectedStatus!: Status | undefined;
+  status: dropdownModel[] = [];
+  selectedStatus!: dropdownModel | undefined;
   
   constructor (private componentService : ComponentService){}
 

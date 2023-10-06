@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SkipSelf, ViewChild } from '@angular/core';
 import { Category, Product2 } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
+import { dropdownModel } from '../../models/components/dropdownModel';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class CategorydropdownComponent implements OnInit {
 
   control!: FormControl;
   
-  category: Category[] = [];
-  selectedCategory: Category | undefined;
+  category: dropdownModel[] = [];
+  selectedCategory: dropdownModel | undefined;
   
   constructor (private componentService : ComponentService){}
 
@@ -31,7 +32,7 @@ export class CategorydropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getCategory().subscribe({
       next: response => {
-        this.category = response
+        this.category = [{id:0, name: 'Select Category'}, ...response]
       }
     });
   }

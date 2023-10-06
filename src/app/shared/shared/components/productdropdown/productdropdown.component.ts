@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SkipSelf } from '@angular/core';
 import { Product2 } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
+import { dropdownModel } from '../../models/components/dropdownModel';
 
 @Component({
   selector: 'app-productdropdown',
@@ -20,8 +21,8 @@ export class ProductdropdownComponent implements OnInit {
   @Input() controlName!: string;
 
   control!: FormControl;
-  products: Product2[] = [];
-  selectedProduct: Product2 | undefined;
+  products: dropdownModel[] = [];
+  selectedProduct: dropdownModel | undefined;
   
   constructor (private componentService : ComponentService){}
 
@@ -29,7 +30,7 @@ export class ProductdropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getProducts().subscribe({
       next: response => {
-        this.products = response
+        this.products = [{id:0, name: 'Select Product'}, ...response]
       }
     });
   }
