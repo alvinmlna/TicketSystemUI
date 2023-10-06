@@ -8,6 +8,7 @@ import { TicketService } from '../ticket.service';
 import { AttachmentView, ticket } from 'src/app/shared/shared/models/ticket';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -116,6 +117,19 @@ export class TicketEditComponent implements OnInit {
     }
       // Deal with your files
       // e.g  assign it to a variable, and on submit add the variable to your form data
+  }
+
+  downloadFile(filename : string){
+    this.ticketService.downloadFile(filename).subscribe(
+      response => {
+        let filename = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
+        let blob:Blob = response.body as Blob;
+        let a = document.createElement('a');
+        a.download = filename!;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+      }
+    )
   }
 
 }

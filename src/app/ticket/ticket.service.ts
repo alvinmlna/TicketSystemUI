@@ -14,4 +14,10 @@ export class TicketService {
   getTicketById(id: number){
     return this.http.get<ticket>(this.baseUrl + 'ticket/' + id);
   }
+
+
+  public downloadFile(filename: string) {
+    return this.http.get(this.baseUrl + 'file/' + filename, 
+    {observe: 'response', responseType: 'blob'});
+  }
 }
