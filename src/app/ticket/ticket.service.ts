@@ -14,14 +14,4 @@ export class TicketService {
   getTicketById(id: number){
     return this.http.get<ticket>(this.baseUrl + 'ticket/' + id);
   }
-
-  getAllProducts() {
-    let emp : Product2[] = [
-      {productId : 3, productName : "TradeNet"},
-      {productId : 2, productName : "TradeNet 2"},
-      {productId : 1, productName : "TradeNet 3"},
-    ]
-
-    return emp;
-  }
 }

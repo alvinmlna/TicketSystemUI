@@ -1,12 +1,12 @@
 import { Component, Input, OnInit, SkipSelf } from '@angular/core';
-import { Product2 } from '../../models/ticket';
+import { Product2, Status } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
 
 @Component({
-  selector: 'app-productdropdown',
-  templateUrl: './productdropdown.component.html',
-  styleUrls: ['./productdropdown.component.scss'],
+  selector: 'app-statusdropdown',
+  templateUrl: './statusdropdown.component.html',
+  styleUrls: ['./statusdropdown.component.scss'],
   viewProviders: [
     {
       provide: ControlContainer,
@@ -15,19 +15,18 @@ import { ComponentService } from '../component.service';
     }
   ]
 })
-export class ProductdropdownComponent implements OnInit {
+export class StatusdropdownComponent implements OnInit {
   @Input() formGroupParent!: FormGroup | any;
   @Input() controlName!: string;
 
   control!: FormControl;
-  products: Product2[] = [];
-  selectedProduct: Product2 | undefined;
+  status: Status[] = [];
+  selectedStatus!: Status | undefined;
   
   constructor (private componentService : ComponentService){}
 
   ngOnInit(): void {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
-    this.products = this.componentService.getProducts();
+    this.status = this.componentService.getStatus();
   }
-
 }

@@ -47,13 +47,13 @@
             <div class="col-4">
                 <b>Category</b>
                 <p class="mt-1">
-                    <input type="text" pInputText formControlName="categoryId" />
+                    <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="categoryId"></app-categorydropdown>
                 </p>
             </div>
             <div class="col-4">
                 <b>Status</b>
                 <p class="mt-1">
-                    <input type="text" pInputText formControlName="statusId"/>
+                    <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="statusId"></app-statusdropdown>
                 </p>
             </div>
         </div>

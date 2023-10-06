@@ -14,10 +14,14 @@ import { ToastModule } from 'primeng/toast';
 import { ChartModule } from 'primeng/chart';
 import { MessagesModule } from 'primeng/messages';
 import { ProductdropdownComponent } from './components/productdropdown/productdropdown.component';
+import { CategorydropdownComponent } from './components/categorydropdown/categorydropdown.component';
+import { StatusdropdownComponent } from './components/statusdropdown/statusdropdown.component';
 
 @NgModule({
   declarations: [
-    ProductdropdownComponent
+    ProductdropdownComponent,
+    CategorydropdownComponent,
+    StatusdropdownComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +55,9 @@ import { ProductdropdownComponent } from './components/productdropdown/productdr
     ToastModule,
     ChartModule,
     MessagesModule,
-    ProductdropdownComponent
+    ProductdropdownComponent,
+    CategorydropdownComponent,
+    StatusdropdownComponent
   ]
 })
 export class MySharedModule { }
