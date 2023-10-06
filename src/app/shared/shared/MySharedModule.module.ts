@@ -13,9 +13,12 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ChartModule } from 'primeng/chart';
 import { MessagesModule } from 'primeng/messages';
+import { ProductdropdownComponent } from './components/productdropdown/productdropdown.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ProductdropdownComponent
+  ],
   imports: [
     CommonModule,
     DropdownModule,
@@ -47,7 +50,8 @@ import { MessagesModule } from 'primeng/messages';
     FileUploadModule,
     ToastModule,
     ChartModule,
-    MessagesModule
+    MessagesModule,
+    ProductdropdownComponent
   ]
 })
 export class MySharedModule { }

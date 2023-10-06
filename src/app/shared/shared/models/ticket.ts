@@ -9,7 +9,7 @@ export interface ticket {
     userId: number
     raisedBy: string
     productId: number
-    product: Product
+    product: Product2
     categoryId: number
     category: Category
     priorityId: number
@@ -20,7 +20,7 @@ export interface ticket {
     attachmentViews: AttachmentView[]
   }
   
-  export interface Product {
+  export interface Product2 {
     productId: number
     productName: string
   }
