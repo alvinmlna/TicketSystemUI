@@ -3,6 +3,7 @@ export interface ticket {
     ticketIdView: string
     summary: string
     description: string
+    assignedToId: number
     assignedTo: string
     raisedDate: string
     expectedDate: string
@@ -49,3 +50,10 @@ export interface ticket {
     ticketId: number
   }
   
+  export interface User {
+    userId: number
+    name: string
+    Email: string
+    password: string
+    roleid: string
+  }

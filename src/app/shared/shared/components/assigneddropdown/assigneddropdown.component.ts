@@ -1,12 +1,13 @@
-import { Component, Input, OnInit, SkipSelf } from '@angular/core';
-import { Product2 } from '../../models/ticket';
+import { Component, Input, OnInit, SkipSelf, ViewChild } from '@angular/core';
+import { Category, Product2, User } from '../../models/ticket';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 import { ComponentService } from '../component.service';
 
+
 @Component({
-  selector: 'app-productdropdown',
-  templateUrl: './productdropdown.component.html',
-  styleUrls: ['./productdropdown.component.scss'],
+  selector: 'app-assigneddropdown',
+  templateUrl: './assigneddropdown.component.html',
+  styleUrls: ['./assigneddropdown.component.scss'],
   viewProviders: [
     {
       provide: ControlContainer,
@@ -15,23 +16,24 @@ import { ComponentService } from '../component.service';
     }
   ]
 })
-export class ProductdropdownComponent implements OnInit {
+export class AssigneddropdownComponent implements OnInit {
   @Input() formGroupParent!: FormGroup | any;
   @Input() controlName!: string;
 
   control!: FormControl;
-  products: Product2[] = [];
-  selectedProduct: Product2 | undefined;
+  
+  admins: User[] = [];
+  selectedAdmin: User | undefined;
   
   constructor (private componentService : ComponentService){}
 
   ngOnInit(): void {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
-    this.componentService.getProducts().subscribe({
+    this.componentService.getAllAdmins().subscribe({
       next: response => {
-        this.products = response
+        this.admins = [{userId:0, name: 'All', Email: '', password: '', roleid: '0'}, ...response]
+        console.log(response);
       }
     });
   }
-
 }

@@ -34,7 +34,7 @@
             <div class="col-4">
                 <b>Assigned To</b>
                 <p class="mt-1">
-                    <input type="text" pInputText formControlName="assignedTo"/>
+                    <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])" controlName="assignedToId"></app-assigneddropdown>
                 </p>
             </div>
             

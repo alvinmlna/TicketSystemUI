@@ -29,6 +29,10 @@ export class CategorydropdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
-    this.category = this.componentService.getCategory();
+    this.componentService.getCategory().subscribe({
+      next: response => {
+        this.category = response
+      }
+    });
   }
 }

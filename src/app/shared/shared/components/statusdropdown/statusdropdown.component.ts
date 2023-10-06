@@ -27,6 +27,10 @@ export class StatusdropdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
-    this.status = this.componentService.getStatus();
+    this.componentService.getStatus().subscribe({
+      next: response => {
+        this.status = response
+      }
+    });
   }
 }

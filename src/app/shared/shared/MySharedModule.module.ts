@@ -16,12 +16,14 @@ import { MessagesModule } from 'primeng/messages';
 import { ProductdropdownComponent } from './components/productdropdown/productdropdown.component';
 import { CategorydropdownComponent } from './components/categorydropdown/categorydropdown.component';
 import { StatusdropdownComponent } from './components/statusdropdown/statusdropdown.component';
+import { AssigneddropdownComponent } from './components/assigneddropdown/assigneddropdown.component';
 
 @NgModule({
   declarations: [
     ProductdropdownComponent,
     CategorydropdownComponent,
-    StatusdropdownComponent
+    StatusdropdownComponent,
+    AssigneddropdownComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { StatusdropdownComponent } from './components/statusdropdown/statusdropd
     MessagesModule,
     ProductdropdownComponent,
     CategorydropdownComponent,
-    StatusdropdownComponent
+    StatusdropdownComponent,
+    AssigneddropdownComponent
   ]
 })
 export class MySharedModule { }
