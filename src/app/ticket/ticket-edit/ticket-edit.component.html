@@ -1,6 +1,6 @@
-<div class="row">
+<div *ngIf="ticket" class="row">
     <div class="col">
-        <h3 >Ticket ID: {{IdOfItems}}</h3>
+        <h3 >Ticket ID: {{ticket.ticketIdView}}</h3>
     </div>
 </div>
 
@@ -13,13 +13,13 @@
             <div class="col-4">
                 <b>Raised By</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.userId}}" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.raisedBy}}" />
                 </p>
             </div>
             <div class="col-4">
                 <b>Create Date</b>
                 <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.userId}}" />
+                    <input type="text" pInputText [disabled]="true"  ngModel="{{ticket.raisedDate | date}}" />
                 </p>
             </div>
             <div class="col-4">

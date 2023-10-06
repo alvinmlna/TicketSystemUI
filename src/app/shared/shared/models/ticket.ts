@@ -1,8 +1,13 @@
-  export interface ticket {
+export interface ticket {
+    ticketId: number
+    ticketIdView: string
     summary: string
     description: string
     assignedTo: string
+    raisedDate: string
+    expectedDate: string
     userId: number
+    raisedBy: string
     productId: number
     product: Product
     categoryId: number
