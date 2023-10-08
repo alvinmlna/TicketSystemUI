@@ -98,8 +98,12 @@ export class TicketEditComponent implements OnInit {
     };
 
     this.ticketService.editTicket(ticket).subscribe((res) => {
-      this.showAlert(1);
-    });
+      this.messageService.add({ key: 'bc', severity: 'success', summary: 'SUCCESS', detail: 'Action Successfull!' });
+    },
+    err => {
+      this.messageService.add({ key: 'bc', severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
+    }
+    );
   }
 
   ticketNotFound() {

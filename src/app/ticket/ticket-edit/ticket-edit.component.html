@@ -10,13 +10,12 @@
 </div>
 
 
-<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast position="bottom-left" key="bc"></p-toast>
 
 <div style="overflow-y: auto; overflow-x: hidden; height:800px;">
 <div  *ngIf="IdOfItems" class="row">
     <div class="col-md-7">
     <p-card styleClass="mt-3">
-        <p-messages [value]="submitAlertMessage" [closable]="true"></p-messages>
         <div class="mx-3">
             <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
             <div formGroupName="ticketInfoForm" >
