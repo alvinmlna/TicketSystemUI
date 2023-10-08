@@ -13,11 +13,13 @@
 <p-toast position="bottom-center" key="bc"></p-toast>
 
 <div style="overflow-y: auto; overflow-x: hidden; height:800px;">
-<div [formGroup]="ticketForm" *ngIf="IdOfItems" class="row">
+<div  *ngIf="IdOfItems" class="row">
     <div class="col-md-7">
     <p-card styleClass="mt-3">
+        <p-messages [value]="submitAlertMessage" [closable]="true"></p-messages>
         <div class="mx-3">
-        <div formGroupName="ticketInfoForm" >
+            <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+            <div formGroupName="ticketInfoForm" >
         <div class="row">
             <div class="col-4">
                 <b>Raised By</b>
@@ -102,6 +104,8 @@
                 </div>
             </div>
         </div>
+        <p-button type="submit" label="Save Changes" icon="pi pi-save" styleClass="p-button-success float-end"></p-button>
+    </form>
         </div>
     </p-card>   
     </div>
