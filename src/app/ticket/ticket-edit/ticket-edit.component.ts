@@ -30,7 +30,7 @@ export class TicketEditComponent implements OnInit {
     ticketInfoForm: this.fb.group({
       ticketId : new FormControl<number>(0, {nonNullable: true}),
       ticketIdView : new FormControl<string>(''),
-      summary : new FormControl<string>(''),
+      summary : new FormControl<string>({value: '',disabled: true}),
       description : new FormControl<string>({value: '',disabled: true}),
       assignedTo : [''],
       userId : new FormControl<number>(0, {nonNullable: true}),

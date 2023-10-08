@@ -18,6 +18,7 @@ import { CategorydropdownComponent } from './components/categorydropdown/categor
 import { StatusdropdownComponent } from './components/statusdropdown/statusdropdown.component';
 import { AssigneddropdownComponent } from './components/assigneddropdown/assigneddropdown.component';
 import { PrioritydropdownComponent } from './components/prioritydropdown/prioritydropdown.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PrioritydropdownComponent } from './components/prioritydropdown/priorit
     FileUploadModule,
     ToastModule,
     ChartModule,
-    MessagesModule
+    MessagesModule,
+    InputTextareaModule 
   ],
   exports: [
     DropdownModule,
@@ -59,6 +61,7 @@ import { PrioritydropdownComponent } from './components/prioritydropdown/priorit
     ToastModule,
     ChartModule,
     MessagesModule,
+    InputTextareaModule,
     ProductdropdownComponent,
     CategorydropdownComponent,
     StatusdropdownComponent,
