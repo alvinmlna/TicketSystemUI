@@ -21,7 +21,7 @@ export class TicketEditComponent implements OnInit {
   ticket!: ticket;
   ticketFound!: boolean;
   attachments! : AttachmentView[];
-  ticketNotFoundMessage!: Message[] ;
+  ticketNotFoundMessage: Message[] = [{ severity: 'error', summary: 'ERROR', detail: 'Ticket Not Found' }] ;
 
   //UI
   submitAlertMessage!: Message[];
@@ -57,11 +57,7 @@ export class TicketEditComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.showAlert(0);
-
-    this.ticketNotFoundMessage = [{ severity: 'error', summary: 'ERROR', detail: 'Ticket Not Found' }];
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-
     if(id) {
       this.getTicketById(id);
     }  else {
@@ -142,38 +138,5 @@ export class TicketEditComponent implements OnInit {
         a.click();
       }
     )
-  }
-
-  editTicket(){
-    try {
-      // const _ticket = this.getTickettoEdit();
-      // const resullt = firstValueFrom(this.ticketService.addTicket(_ticket))
-
-    } catch (error : any) {
-      console.log(error);
-    } finally {
-    }
-  }
-
-  // getTickettoEdit() : ticket {
-  //   return new this.ticket()
-  // }
-
-
-  showAlert(type : number){
-    switch (type) {
-      case 1: {
-        this.submitAlertMessage = [{ severity: 'success', summary: 'Success', detail: 'Ticket updated successfully!' }];
-        break; 
-      }
-      case 2: {
-        this.submitAlertMessage = [{ severity: 'error', summary: 'Failed!', detail: 'Update ticket Failed!' }];
-        break; 
-      }
-      default : {
-        this.submitAlertMessage = [];
-      }
-
-    }
   }
 }
