@@ -5,7 +5,7 @@
 
 <div *ngIf="IdOfItems" class="row">
     <div class="col">
-        <h3>Ticket ID: {{IdOfItems}}</h3>
+        <h3>Ticket ID: {{IdOfItemsView}}</h3>
     </div>
 </div>
 
@@ -90,15 +90,14 @@
                             <div class="row mt-4">
                                 <div class="col-12">
                                     <b>Attachments</b>
-                                    <ul *ngFor="let attachment of attachments">
-                                        <li>
+                                    <ul >
+                                        <li *ngFor="let attachment of attachments">
                                             <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
                                                 [routerLink]="[]">{{attachment.filename}}</a>
                                         </li>
                                     </ul>
                                     <p class="mt-1">
-                                        <p-fileUpload name="myfile[]" [multiple]="true" [showUploadButton]="false"
-                                            (onSelect)="dealWithFiles($event)">
+                                        <p-fileUpload  #fileUpload name="myfile[]" [multiple]="true" (uploadHandler)="onUpload($event)"  [customUpload]="true" >
                                             <ng-template let-file pTemplate="file">
                                                 <li>{{ file.name }}</li>
                                             </ng-template>

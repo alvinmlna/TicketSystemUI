@@ -14,11 +14,15 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   getTicketById(id: number){
-    return this.http.get<ticket>(this.baseUrl + 'ticket/' + id);
+    return this.http.get<ticket>(this.baseUrl + 'ticket/' + id).pipe(retry(1), catchError(this.errorHandl));
   }
 
   editTicket(ticket: editticketrequest){
     return this.http.put<ticket>(this.baseUrl + 'ticket', ticket).pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  uploadFileById(formData : FormData, ticketid : any){
+    return this.http.post(this.baseUrl + 'upload/' + ticketid, formData, {reportProgress: true, observe: 'events'}).pipe(retry(1), catchError(this.errorHandl));
   }
 
   public downloadFile(filename: string) {

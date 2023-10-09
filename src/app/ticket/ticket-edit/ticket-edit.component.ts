@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
 import { UploadEvent } from 'src/app/shared/shared/models/UploadEvent';
@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { editticketrequest } from 'src/app/shared/shared/models/editticketrequest';
+import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -17,7 +18,8 @@ import { editticketrequest } from 'src/app/shared/shared/models/editticketreques
 })
 export class TicketEditComponent implements OnInit {
   isTicketExist : boolean;
-  IdOfItems!: string | null;
+  IdOfItems!: number | null;
+  IdOfItemsView!: string | null;
   ticket!: ticket;
   ticketFound!: boolean;
   attachments! : AttachmentView[];
@@ -25,6 +27,8 @@ export class TicketEditComponent implements OnInit {
 
   //UI
   submitAlertMessage!: Message[];
+  progress!: number;
+  @ViewChild('fileUpload') fileUpload: any;
 
   ticketForm = this.fb.group({
     ticketInfoForm: this.fb.group({
@@ -73,7 +77,8 @@ export class TicketEditComponent implements OnInit {
           //result not exist
           this.ticketNotFound()
         }
-        this.IdOfItems = response.ticketIdView;
+        this.IdOfItems = response.ticketId;
+        this.IdOfItemsView = response.ticketIdView;
         this.attachments = response.attachmentViews;
 
         this.ticketForm.get('ticketInfoForm')?.patchValue(response);
@@ -81,6 +86,16 @@ export class TicketEditComponent implements OnInit {
       },
       error: error => this.ticketNotFound()
     })
+  }
+
+  refreshAttachmentView(){
+    if(this.IdOfItems){
+      this.ticketService.getTicketById(+this.IdOfItems).subscribe({
+        next: response => {
+          this.attachments = response.attachmentViews;
+        }
+      })
+    }
   }
 
   onSubmit(){
@@ -110,21 +125,53 @@ export class TicketEditComponent implements OnInit {
     console.log(event);
   }
 
-  onUpload(event: UploadEvent) {
-    for(let file of event.files) {
+  onUpload(_uploadEvent: UploadEvent) {
+    for(let file of _uploadEvent.files) {
         this.uploadedFiles.push(file);
     }
 
-      this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    if (this.uploadedFiles.length === 0) {
+      this.messageService.add({ severity: 'error', summary: 'ERROR', detail: 'No file to upload!' });
+      return;
+    }
+
+    const formData = new FormData();
+    this.uploadedFiles.forEach((file) => { formData.append('files[]', file); });
+    
+      this.ticketService.uploadFileById(formData, this.IdOfItems).subscribe({
+      next: (event) => {
+        if (event.type === HttpEventType.UploadProgress)
+        {
+          this.progress = Math.round(100 * event.loaded / event.total!);
+          console.log(this.progress);
+        }
+        else if (event.type === HttpEventType.Response) {
+          this.uploadedFiles = [];
+          this.fileUpload.clear();
+          this.progress = 0;
+          this.refreshAttachmentView();
+          this.messageService.add({ key: 'bc', severity: 'success', summary: 'SUCCESS', detail: 'Upload Success!' });
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+        this.uploadedFiles = [];
+        this.fileUpload.clear();
+        this.progress = 0;
+        this.messageService.add({ key: 'bc', severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
+      }
+    });
+
+
   }
 
   dealWithFiles(event: UploadEvent) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-        console.log(this.uploadedFiles);
-    }
-      // Deal with your files
-      // e.g  assign it to a variable, and on submit add the variable to your form data
+    // for(let file of event.files) {
+    //     this.uploadedFiles.push(file);
+    //     console.log(this.uploadedFiles);
+    // }
+    //   // Deal with your files
+    //   // e.g  assign it to a variable, and on submit add the variable to your form data
   }
 
   downloadFile(filename : string){
