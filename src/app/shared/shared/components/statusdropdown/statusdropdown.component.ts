@@ -30,7 +30,9 @@ export class StatusdropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getStatus().subscribe({
       next: response => {
-        this.status = response
+        this.status = response.map((x) => {
+          return {id : x.statusId, name : x.name};
+        })
       }
     });
   }

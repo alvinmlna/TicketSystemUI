@@ -19,6 +19,7 @@ import { StatusdropdownComponent } from './components/statusdropdown/statusdropd
 import { AssigneddropdownComponent } from './components/assigneddropdown/assigneddropdown.component';
 import { PrioritydropdownComponent } from './components/prioritydropdown/prioritydropdown.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ToastModule,
     ChartModule,
     MessagesModule,
-    InputTextareaModule 
+    InputTextareaModule,
+    MultiSelectModule
   ],
   exports: [
     DropdownModule,
@@ -66,7 +68,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     CategorydropdownComponent,
     StatusdropdownComponent,
     AssigneddropdownComponent,
-    PrioritydropdownComponent
+    PrioritydropdownComponent,
+    MultiSelectModule
   ]
 })
 export class MySharedModule { }

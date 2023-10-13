@@ -13,72 +13,22 @@ export class ComponentService {
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get<Product2[]>(this.baseUrl + 'product').pipe(
-      map (
-      response => {
-        const model = response.map(o => ( {
-          id : o.productId,
-          name: o.productName
-        }));
-        return model;
-      }
-      )
-    );;
+    return this.http.get<Product2[]>(this.baseUrl + 'product');
   }
 
   getCategory() {
-    return this.http.get<Category[]>(this.baseUrl + 'category').pipe(
-      map (
-      response => {
-        const model = response.map(o => ( {
-          id : o.categoryId,
-          name: o.categoryName
-        }));
-        return model;
-      }
-      )
-    );;
+    return this.http.get<Category[]>(this.baseUrl + 'category');
   }
 
   getStatus() {
-    return this.http.get<Status[]>(this.baseUrl + 'status').pipe(
-      map (
-      response => {
-        const model = response.map(o => ( {
-          id : o.statusId,
-          name: o.name
-        }));
-        return model;
-      }
-      )
-    );;
+    return this.http.get<Status[]>(this.baseUrl + 'status');
   }
 
   getAllAdmins() {
-    return this.http.get<User[]>(this.baseUrl + 'user/admin').pipe(
-      map (
-      response => {
-        const model = response.map(o => ( {
-          id : o.userId,
-          name: o.name
-        }));
-        return model;
-      }
-      )
-    );;
+    return this.http.get<User[]>(this.baseUrl + 'user/admin');
   }
 
-  getPriority() : Observable<dropdownModel[]> {
-    return this.http.get<Priority[]>(this.baseUrl + 'priority').pipe(
-      map (
-      response => {
-        const model = response.map(o => ( {
-          id : o.priorityId,
-          name: o.priorityName
-        }));
-        return model;
-      }
-      )
-    );
+  getPriority() {
+    return this.http.get<Priority[]>(this.baseUrl + 'priority');
   }
 }

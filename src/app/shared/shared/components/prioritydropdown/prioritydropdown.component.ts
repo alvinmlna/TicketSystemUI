@@ -32,7 +32,10 @@ export class PrioritydropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getPriority().subscribe({
       next: response => {
-        this.values = [{id:0, name: 'Select Priority'}, ...response]
+        var mappedResponse =  response.map((x) => {
+          return {id : x.priorityId, name : x.priorityName};
+        })
+        this.values = [{id:0, name: 'Select Priority'}, ...mappedResponse]
       }
     });
   }

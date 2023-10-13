@@ -1,22 +1,42 @@
-
 <h3 style="display: inline;">Ticket</h3>
-<p-button label="New 999" (onClick)="navigate()" styleClass="p-button-rounded p-button-success ms-3 p-button-status"></p-button>
+<p-button label="New 999" (onClick)="navigate()"
+    styleClass="p-button-rounded p-button-success ms-3 p-button-status"></p-button>
 <p-button label="Open 999" styleClass="p-button-rounded p-button-warning ms-2 p-button-status"></p-button>
 <p-button label="Expired 999" styleClass="p-button-rounded p-button-danger ms-2 p-button-status"></p-button>
 
 <div class="mt-4">
-    
-    <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" pInputText/>
-    </span>
-    <p-dropdown class="ms-2" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-    <p-dropdown class="ms-2" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-    <p-dropdown class="ms-2" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-    <p-dropdown class="ms-2" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-    <p-dropdown class="ms-2" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-    <p-button  class="ms-2" label="Show"></p-button>
-    <p-button styleClass="p-button-secondary"   class="ms-2" label="Reset"></p-button>
+
+    <table>
+        <tr>
+            <td>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input type="text" pInputText />
+                </span>
+            </td>
+            <td>
+                <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Product" [options]="products" optionValue="productId" [filter]="false" optionLabel="productName"></p-multiSelect>
+            </td>
+            <td>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Category"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+            </td>
+            <td>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Priority"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+            </td>
+            <td>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Status"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+            </td>
+            <td>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Raised By"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+            </td>
+            <td>
+                <p-button class="ms-2" label="Show"></p-button>
+            </td>
+            <td>
+                <p-button styleClass="p-button-secondary" class="ms-2" label="Reset"></p-button>
+            </td>
+        </tr>
+    </table>
 </div>
 
 
@@ -24,7 +44,7 @@
 
 </div>
 <p-toast></p-toast>
-<p-table [value]="products" selectionMode="single" scrollHeight="720px"  [(selection)]="selectedProduct" dataKey="code"
+<p-table [value]="productTable" selectionMode="single" scrollHeight="720px" [(selection)]="selectedProductTable" dataKey="code"
     (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>

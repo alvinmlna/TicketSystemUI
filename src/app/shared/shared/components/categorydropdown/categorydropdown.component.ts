@@ -32,7 +32,10 @@ export class CategorydropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getCategory().subscribe({
       next: response => {
-        this.category = [{id:0, name: 'Select Category'}, ...response]
+        var mappedResponse =  response.map((x) => {
+          return {id : x.categoryId, name : x.categoryName};
+        })
+        this.category = [{id:0, name: 'Select Product'}, ...mappedResponse]
       }
     });
   }

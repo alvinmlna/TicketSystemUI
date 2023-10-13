@@ -30,7 +30,10 @@ export class ProductdropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getProducts().subscribe({
       next: response => {
-        this.products = [{id:0, name: 'Select Product'}, ...response]
+        var mappedResponse =  response.map((x) => {
+          return {id : x.productId, name : x.productName};
+        })
+        this.products = [{id:0, name: 'Select Product'}, ...mappedResponse]
       }
     });
   }

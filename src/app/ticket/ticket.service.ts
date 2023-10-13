@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product2, ticket } from '../shared/shared/models/ticket';
 import { editticketrequest } from '../shared/shared/models/editticketrequest';
 import { catchError, retry, throwError } from 'rxjs';
+import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class TicketService {
 
   uploadFileById(formData : FormData, ticketid : any){
     return this.http.post(this.baseUrl + 'upload/' + ticketid, formData, {reportProgress: true, observe: 'events'}).pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  getTickets(request : ListTicketRequest) {
+    const params: HttpParams = new HttpParams().set('filters', JSON.stringify(request));
+    return this.http.get(this.baseUrl + 'ticket', {params} );
   }
 
   public downloadFile(filename: string) {
