@@ -15,19 +15,19 @@
                 </span>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Product" [options]="products" optionValue="productId" [filter]="false" optionLabel="productName"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Product" [options]="products" [filter]="false" optionValue="productId" optionLabel="productName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Category"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Category"  [options]="categories" [filter]="false" optionValue="categoryId" optionLabel="categoryName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Priority"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Priority"  [options]="priorities" [filter]="false" optionValue="priorityId" optionLabel="priorityName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Status"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Status"  [options]="statuses" [filter]="false" optionValue="statusId" optionLabel="name"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Raised By"  [options]="cities" [filter]="false" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Raised By"  [options]="raisedBy" [filter]="false" optionValue="userId" optionLabel="name"></p-multiSelect>
             </td>
             <td>
                 <p-button class="ms-2" label="Show"></p-button>

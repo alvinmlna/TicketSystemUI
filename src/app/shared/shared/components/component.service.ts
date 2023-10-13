@@ -31,4 +31,8 @@ export class ComponentService {
   getPriority() {
     return this.http.get<Priority[]>(this.baseUrl + 'priority');
   }
+
+  getUsers() {
+    return this.http.get<User[]>(this.baseUrl + 'user');
+  }
 }

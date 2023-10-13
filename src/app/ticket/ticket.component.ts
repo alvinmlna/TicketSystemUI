@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Product } from '../shared/shared/models/product';
 import { City } from '../shared/shared/models/city';
 import { TicketService } from './ticket.service';
-import { Product2 } from '../shared/shared/models/ticket';
+import { Category, Priority, Product2, Status, User } from '../shared/shared/models/ticket';
 import { ComponentService } from '../shared/shared/components/component.service';
 
 @Component({
@@ -18,8 +18,11 @@ export class TicketComponent implements OnInit {
   cities: City[] = [];
 
   products: Product2[] = [];
+  categories: Category[] = [];
+  priorities: Priority[] = [];
+  statuses: Status[] = [];
+  raisedBy: User[] = [];
 
-  //
   productTable: Product2[] = [];
   selectedProductTable! : Product2;
 
@@ -30,7 +33,7 @@ export class TicketComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-
+      this.initializeMultiSelect();
 
       this.cities = [
           { name: 'New York', code: 'NY' },
@@ -63,6 +66,30 @@ export class TicketComponent implements OnInit {
     ({
       next : response => {
           this.products  = response;
+      }
+    });
+
+    this.componentService.getCategory().subscribe({
+      next : response => {
+          this.categories  = response;
+      }
+    });
+
+    this.componentService.getPriority().subscribe({
+      next : response => {
+          this.priorities  = response;
+      }
+    });
+
+    this.componentService.getStatus().subscribe({
+      next : response => {
+          this.statuses  = response;
+      }
+    });
+
+    this.componentService.getUsers().subscribe({
+      next : response => {
+          this.raisedBy = response;
       }
     });
   }
