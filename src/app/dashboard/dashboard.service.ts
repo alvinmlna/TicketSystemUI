@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
 import { catchError, retry, throwError } from 'rxjs';
+import { last12monthchart } from '../shared/shared/models/responses/last12monthchart';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class DashboardService {
 
   getStatusSummary(){
     return this.http.get<statussummary[]>(this.baseUrl + 'ticket/statussummary').pipe(retry(1), catchError(this.errorHandl));
+  }
+
+  getLast12MonthChart(){
+    return this.http.get<last12monthchart>(this.baseUrl + 'dashboard/last12month').pipe(retry(1), catchError(this.errorHandl));
   }
 
   errorHandl(error : any) {
