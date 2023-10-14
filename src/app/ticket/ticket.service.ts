@@ -5,6 +5,7 @@ import { editticketrequest } from '../shared/shared/models/editticketrequest';
 import { catchError, retry, throwError } from 'rxjs';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
+import { addticketrequest } from '../shared/shared/models/request/addticketrequest';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class TicketService {
 
   getTicketById(id: number){
     return this.http.get<ticket>(this.baseUrl + 'ticket/' + id).pipe(retry(1), catchError(this.errorHandl));
+  }
+  
+  addTicket(ticket: addticketrequest){
+    return this.http.post<ticket>(this.baseUrl + 'ticket', ticket).pipe(retry(1), catchError(this.errorHandl));
   }
 
   editTicket(ticket: editticketrequest){

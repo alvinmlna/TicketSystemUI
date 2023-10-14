@@ -1,56 +1,89 @@
 <div class="row">
     <div class="col">
-        <h3 >Create new ticket</h3>
+        <div *ngIf="IdOfticketView">
+            <h3>Ticket ID: {{IdOfticketView}}</h3>
+        </div>
+        <div *ngIf="!IdOfticketView">
+            <h3>Create new ticket</h3>
+        </div>
     </div>
 </div>
 
 <div style="overflow-y: auto; height:800px;">
-    
-<p-card styleClass="mt-3">
-    <div class="mx-3">
-        <div class="row">
-            <div class="col-2">
-                <b>Raised By</b>
-                <p class="mt-1">
-                    <input type="text" pInputText [disabled]="true"  ngModel="Alvin Maulana" />
-                </p>
+
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+        <p-card styleClass="mt-3">
+            <div class="mx-3" formGroupName="ticketInfoForm">
+                <div class="row">
+                    <div class="col-2">
+                        <b>Raised By</b>
+                        <p class="mt-1">
+                            <input type="text" formControlName="userId" />
+                            <input type="text" pInputText formControlName="raisedBy" />
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <b>Product</b>
+                        <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="productId"></app-productdropdown>
+                    </div>
+                    <div class="col-2">
+                        <b>Category</b>
+                        <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="categoryId"></app-categorydropdown>
+                    </div>
+                    <div class="col-2">
+                        <b>Priority</b>
+                        <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="priorityId"></app-prioritydropdown>
+                    </div>
+
+
+                    <div class="col">
+                        <p-button type="submit" label="Save Changes" icon="pi pi-save"
+                            styleClass="p-button-success float-end"></p-button>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <b>Summary</b>
+                        <p class="mt-1">
+                            <input style="width: 100%;" type="text" pInputText formControlName="summary" />
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <b>Request Descriptions</b>
+                        <p class="mt-1">
+                            <p-editor formControlName="description" [style]="{ height: '200px' }"></p-editor>
+                        </p>
+                    </div>
+                </div>
+                <p-toast></p-toast>
+
+                <div *ngIf="ticketid" class="row mt-4">
+                    <div class="col-12">
+                        <b>Attachments</b>
+                        <ul>
+                            <li *ngFor="let attachment of attachments">
+                                <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
+                                    [routerLink]="[]">{{attachment.filename}}</a>
+                            </li>
+                        </ul>
+                        <p class="mt-1">
+                            <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
+                                (uploadHandler)="onUpload($event)" [customUpload]="true">
+                                <ng-template let-file pTemplate="file">
+                                    <li>{{ file.name }}</li>
+                                </ng-template>
+                            </p-fileUpload>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="col-2">
-                <b>Product</b>
-                <p class="mt-1"><p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown></p>
-            </div>
-            <div class="col-2">
-                <b>Category</b>
-                <p class="mt-1"><p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown></p>
-            </div>
-            <div class="col">
-                <p-button label="Save Changes" icon="pi pi-save" styleClass="p-button-success float-end"></p-button>
-            </div>
-        </div>
-        
-        <div class="row mt-4">
-            <div class="col-6">
-                <b>Summary</b>
-                <p class="mt-1">
-                    <input style="width: 100%;" type="text" pInputText  />
-                </p>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <b>Request Descriptions</b>
-                <p class="mt-1">
-                    <p-editor [style]="{ height: '200px' }"></p-editor>
-                </p>
-            </div>
-        </div>
-        <p-toast></p-toast>
-        <p-fileUpload name="myfile[]" [multiple]="true"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
-            <ng-template let-file pTemplate="file">
-                <li>{{ file.name }}</li>
-            </ng-template>
-        </p-fileUpload>
-        </div>
-</p-card>
+        </p-card>
+    </form>
 
 </div>
