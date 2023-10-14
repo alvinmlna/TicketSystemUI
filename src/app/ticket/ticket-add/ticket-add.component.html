@@ -18,7 +18,7 @@
                     <div class="col-2">
                         <b>Raised By</b>
                         <p class="mt-1">
-                            <input type="text" formControlName="userId" />
+                            <input type="hidden" formControlName="userId" />
                             <input type="text" pInputText formControlName="raisedBy" />
                         </p>
                     </div>
@@ -38,10 +38,9 @@
                             controlName="priorityId"></app-prioritydropdown>
                     </div>
 
-
                     <div class="col">
                         <p-button type="submit" label="Save Changes" icon="pi pi-save"
-                            styleClass="p-button-success float-end"></p-button>
+                            styleClass="p-button-success float-end" style="display: block;"></p-button>
                     </div>
                 </div>
 

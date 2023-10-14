@@ -91,6 +91,7 @@ export class TicketComponent implements OnInit {
     this.selectedpriorities = [];
     this.selectedstatuses = [];
     this.selectedraisedBy = [];
+    this.onFilterPressed();
   }
 
   initializeStatusSummary(){
