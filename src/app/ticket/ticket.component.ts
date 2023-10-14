@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Product } from '../shared/shared/models/product';
 import { City } from '../shared/shared/models/city';
 import { TicketService } from './ticket.service';
-import { Category, Priority, Product2, Status, User } from '../shared/shared/models/ticket';
+import { Category, Priority, Product2, Status, User, ticket } from '../shared/shared/models/ticket';
 import { ComponentService } from '../shared/shared/components/component.service';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 
@@ -18,6 +18,7 @@ import { ListTicketRequest } from '../shared/shared/models/request/listticketreq
 export class TicketComponent implements OnInit {
   cities: City[] = [];
 
+  summary : string = '';
   products: Product2[] = [];
   categories: Category[] = [];
   priorities: Priority[] = [];
@@ -30,8 +31,8 @@ export class TicketComponent implements OnInit {
   selectedstatuses: number[] = [];
   selectedraisedBy: number[] = [];
 
-  productTable: Product2[] = [];
-  selectedProductTable! : Product2;
+  tickets: ticket[] = [];
+  selectedticket! : ticket;
 
   constructor(
     private messageService: MessageService, 
@@ -42,6 +43,7 @@ export class TicketComponent implements OnInit {
 
   ngOnInit() {
       this.initializeMultiSelect();
+      this.onFilterPressed();
 
       this.cities = [
           { name: 'New York', code: 'NY' },
@@ -61,7 +63,7 @@ export class TicketComponent implements OnInit {
   }
 
   onRowSelect(event: any) {
-    this.router.navigateByUrl("/ticket/" + event.data.code);
+    this.router.navigateByUrl("/ticket/" + event.data.ticketId);
     //this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.name });
   }
 
@@ -71,7 +73,7 @@ export class TicketComponent implements OnInit {
 
   onFilterPressed(){
     var value : ListTicketRequest = {
-      summary: '',
+      summary: this.summary,
       productId : this.selectedproducts,
       categoryId : this.selectedcategories,
       priorityId : this.selectedpriorities,
@@ -82,8 +84,18 @@ export class TicketComponent implements OnInit {
      this.ticketService.getTickets(value).subscribe({
       next : response => {
         console.log(response);
+        this.tickets = response;
       }
      });
+  }
+
+  resetSelection() {
+    this.summary = '';
+    this.selectedproducts = [];
+    this.selectedcategories = [];
+    this.selectedpriorities = [];
+    this.selectedstatuses = [];
+    this.selectedraisedBy = [];
   }
 
   initializeMultiSelect() {

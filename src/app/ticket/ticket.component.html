@@ -11,7 +11,7 @@
             <td>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input type="text" pInputText />
+                    <input type="text" [(ngModel)]="summary" pInputText />
                 </span>
             </td>
             <td>
@@ -31,9 +31,7 @@
             </td>
             <td>
                 <p-button (onClick)="onFilterPressed()" class="ms-2" label="Show"></p-button>
-            </td>
-            <td>
-                <p-button styleClass="p-button-secondary" class="ms-2" label="Reset"></p-button>
+                <p-button (onClick)="resetSelection()" styleClass="p-button-secondary" class="ms-2" label="Reset"></p-button>
             </td>
         </tr>
     </table>
@@ -44,7 +42,7 @@
 
 </div>
 <p-toast></p-toast>
-<p-table [value]="productTable" selectionMode="single" scrollHeight="720px" [(selection)]="selectedProductTable" dataKey="code"
+<p-table [value]="tickets" selectionMode="single" scrollHeight="720px" [(selection)]="selectedticket" dataKey="ticketId"
     (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -59,17 +57,17 @@
             <th>Expected Date</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr [pSelectableRow]="product">
-            <td>dasdad</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.code }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.quantity }}</td>
+    <ng-template pTemplate="body" let-ticket>
+        <tr [pSelectableRow]="ticket">
+            <td>{{ticket.ticketIdView}}</td>
+            <td>{{ ticket.summary }}</td>
+            <td>{{ ticket.product }}</td>
+            <td>{{ ticket.category }}</td>
+            <td>{{ ticket.priority }}</td>
+            <td>{{ ticket.summary }}</td>
+            <td>{{ ticket.raisedDate | date }}</td>
+            <td>{{ ticket.raisedBy }}</td>
+            <td>{{ ticket.expectedDate | date}}</td>
         </tr>
     </ng-template>
 </p-table>

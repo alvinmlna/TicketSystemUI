@@ -46,7 +46,7 @@ export class TicketService {
       params = params.append('statusId', element);
     });
 
-    return this.http.get(this.baseUrl + 'ticket', {params} );
+    return this.http.get<ticket[]>(this.baseUrl + 'ticket', {params} );
   }
 
   public downloadFile(filename: string) {
