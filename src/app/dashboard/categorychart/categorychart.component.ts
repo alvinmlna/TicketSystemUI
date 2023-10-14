@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-categorychart',
@@ -7,39 +8,125 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategorychartComponent implements OnInit {
   data: any;
-  options: any;
+
+  product: any;
+  productOptions: any;
+  category: any;
+  categoryOptions: any;
+  priority: any;
+  priorityOptions: any;
+
+  documentStyle : any;
+  textColor : any;
   
+  
+  constructor (private dashboardService : DashboardService){}
   
   ngOnInit(): void {    
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+    this.documentStyle = getComputedStyle(document.documentElement);
+    this.textColor = this.documentStyle.getPropertyValue('--text-color');
 
-    this.data = {
-        labels: ['A', 'B', 'C'],
-        datasets: [
-            {
-                label: 'Numbers of tickets',
-                data: [540, 325, 702],
-                backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-            }
-        ]
-    };
+    this.setProductChart();
+    this.setCategoryChart();
+    this.setPriorityChart();
+  }
 
-    this.options = {
+  setProductChart(){
+    this.dashboardService.getByCategory('product').subscribe({
+      next : res => {
+        this.product = {
+          labels: res.category,
+          datasets: [
+              {
+                  data: res.count,
+                  backgroundColor: [this.documentStyle.getPropertyValue('--blue-500'), this.documentStyle.getPropertyValue('--yellow-500'), this.documentStyle.getPropertyValue('--green-500')],
+                  hoverBackgroundColor: [this.documentStyle.getPropertyValue('--blue-400'), this.documentStyle.getPropertyValue('--yellow-400'), this.documentStyle.getPropertyValue('--green-400')]
+              }
+          ]
+        };
+      }
+    })
+
+    this.productOptions = {
         plugins: {
             legend: {
                 display: false,
                 labels: {
                     usePointStyle: true,
-                    color: textColor,
+                    color: this.textColor,
+                }
+            },
+              title: {
+                display: true,
+                text: 'Products',
+                fontSize: 16
+            }
+        }
+    };
+  }
+  
+  setCategoryChart(){
+    this.dashboardService.getByCategory('category').subscribe({
+      next : res => {
+        this.category = {
+          labels: res.category,
+          datasets: [
+              {
+                  data: res.count,
+                  backgroundColor: [this.documentStyle.getPropertyValue('--blue-500'), this.documentStyle.getPropertyValue('--yellow-500'), this.documentStyle.getPropertyValue('--green-500')],
+                  hoverBackgroundColor: [this.documentStyle.getPropertyValue('--blue-400'), this.documentStyle.getPropertyValue('--yellow-400'), this.documentStyle.getPropertyValue('--green-400')]
+              }
+          ]
+        };
+      }
+    })
+
+    this.categoryOptions = {
+        plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    usePointStyle: true,
+                    color: this.textColor,
                 }
             },
               title: {
                 display: true,
                 text: 'Category',
+                fontSize: 16
+            }
+        }
+    };
+  }
+
+  setPriorityChart(){
+    this.dashboardService.getByCategory('priority').subscribe({
+      next : res => {
+        this.priority = {
+          labels: res.category,
+          datasets: [
+              {
+                  data: res.count,
+                  backgroundColor: [this.documentStyle.getPropertyValue('--blue-500'), this.documentStyle.getPropertyValue('--yellow-500'), this.documentStyle.getPropertyValue('--green-500')],
+                  hoverBackgroundColor: [this.documentStyle.getPropertyValue('--blue-400'), this.documentStyle.getPropertyValue('--yellow-400'), this.documentStyle.getPropertyValue('--green-400')]
+              }
+          ]
+        };
+      }
+    })
+
+    this.priorityOptions = {
+        plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    usePointStyle: true,
+                    color: this.textColor,
+                }
+            },
+              title: {
+                display: true,
+                text: 'Priority',
                 fontSize: 16
             }
         }

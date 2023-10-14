@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
 import { catchError, retry, throwError } from 'rxjs';
 import { last12monthchart } from '../shared/shared/models/responses/last12monthchart';
+import { categorychart } from '../shared/shared/models/responses/categorychart';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class DashboardService {
 
   getLast12MonthChart(){
     return this.http.get<last12monthchart>(this.baseUrl + 'dashboard/last12month').pipe(retry(1), catchError(this.errorHandl));
+  }
+  
+  getByCategory(type : string){
+    return this.http.get<categorychart>(this.baseUrl + 'dashboard/category/' + type).pipe(retry(1), catchError(this.errorHandl));
   }
 
   errorHandl(error : any) {
