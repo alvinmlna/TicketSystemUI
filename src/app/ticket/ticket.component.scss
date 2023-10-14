@@ -9,3 +9,9 @@ table, th, td {
   p-multiselect {
     display: block;
   }
+
+  .expired {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+  }

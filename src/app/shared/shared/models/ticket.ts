@@ -19,6 +19,7 @@ export interface ticket {
     status: Status
     attachments: any
     attachmentViews: AttachmentView[]
+    isExpired : boolean | null
   }
   
   export interface Product2 {
