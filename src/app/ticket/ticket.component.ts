@@ -8,6 +8,7 @@ import { TicketService } from './ticket.service';
 import { Category, Priority, Product2, Status, User, ticket } from '../shared/shared/models/ticket';
 import { ComponentService } from '../shared/shared/components/component.service';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
+import { statussummary } from '../shared/shared/models/responses/statussummary';
 
 @Component({
   selector: 'app-ticket',
@@ -16,7 +17,8 @@ import { ListTicketRequest } from '../shared/shared/models/request/listticketreq
   providers: [MessageService]
 })
 export class TicketComponent implements OnInit {
-  cities: City[] = [];
+
+  statusSummary : string[] = [];
 
   summary : string = '';
   products: Product2[] = [];
@@ -44,14 +46,7 @@ export class TicketComponent implements OnInit {
   ngOnInit() {
       this.initializeMultiSelect();
       this.onFilterPressed();
-
-      this.cities = [
-          { name: 'New York', code: 'NY' },
-          { name: 'Rome', code: 'RM' },
-          { name: 'London', code: 'LDN' },
-          { name: 'Istanbul', code: 'IST' },
-          { name: 'Paris', code: 'PRS' }
-      ];
+      this.initializeStatusSummary();
   }
 
   clear(table: Table) {
@@ -96,6 +91,16 @@ export class TicketComponent implements OnInit {
     this.selectedpriorities = [];
     this.selectedstatuses = [];
     this.selectedraisedBy = [];
+  }
+
+  initializeStatusSummary(){
+    this.ticketService.getStatusSummary().subscribe({
+      next: response => {
+        this.statusSummary = response.map(x => {
+          return x.status + ' ' + x.count;
+        })
+      }
+    })
   }
 
   initializeMultiSelect() {

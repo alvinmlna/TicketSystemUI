@@ -4,6 +4,7 @@ import { Product2, ticket } from '../shared/shared/models/ticket';
 import { editticketrequest } from '../shared/shared/models/editticketrequest';
 import { catchError, retry, throwError } from 'rxjs';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
+import { statussummary } from '../shared/shared/models/responses/statussummary';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class TicketService {
   ticket : ticket | any;
 
   constructor(private http: HttpClient) { }
+
+  getStatusSummary(){
+    return this.http.get<statussummary[]>(this.baseUrl + 'ticket/statussummary').pipe(retry(1), catchError(this.errorHandl));
+  }
 
   getTicketById(id: number){
     return this.http.get<ticket>(this.baseUrl + 'ticket/' + id).pipe(retry(1), catchError(this.errorHandl));
