@@ -7,6 +7,7 @@ import { City } from '../shared/shared/models/city';
 import { TicketService } from './ticket.service';
 import { Category, Priority, Product2, Status, User } from '../shared/shared/models/ticket';
 import { ComponentService } from '../shared/shared/components/component.service';
+import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 
 @Component({
   selector: 'app-ticket',
@@ -23,13 +24,20 @@ export class TicketComponent implements OnInit {
   statuses: Status[] = [];
   raisedBy: User[] = [];
 
+  selectedproducts: number[] = [];
+  selectedcategories: number[] = [];
+  selectedpriorities: number[] = [];
+  selectedstatuses: number[] = [];
+  selectedraisedBy: number[] = [];
+
   productTable: Product2[] = [];
   selectedProductTable! : Product2;
 
   constructor(
     private messageService: MessageService, 
     private router: Router,
-    private componentService : ComponentService
+    private componentService : ComponentService,
+    private ticketService : TicketService
     ) {}
 
   ngOnInit() {
@@ -59,6 +67,23 @@ export class TicketComponent implements OnInit {
 
   onRowUnselect(event: any) {
       this.messageService.add({ severity: 'info', summary: 'Product Unselected', detail: event.data.name });
+  }
+
+  onFilterPressed(){
+    var value : ListTicketRequest = {
+      summary: '',
+      productId : this.selectedproducts,
+      categoryId : this.selectedcategories,
+      priorityId : this.selectedpriorities,
+      statusId : this.selectedstatuses,
+      raisedBy : this.selectedraisedBy
+     };
+
+     this.ticketService.getTickets(value).subscribe({
+      next : response => {
+        console.log(response);
+      }
+     });
   }
 
   initializeMultiSelect() {

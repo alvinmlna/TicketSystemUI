@@ -27,7 +27,25 @@ export class TicketService {
   }
 
   getTickets(request : ListTicketRequest) {
-    const params: HttpParams = new HttpParams().set('filters', JSON.stringify(request));
+    let params: HttpParams = new HttpParams()
+        .set('summary', request.summary);
+
+    request.productId.forEach(element => {
+      params = params.append('productid', element);
+    });
+    
+    request.categoryId.forEach(element => {
+      params = params.append('categoryId', element);
+    });
+
+    request.priorityId.forEach(element => {
+      params = params.append('priorityId', element);
+    });
+    
+    request.statusId.forEach(element => {
+      params = params.append('statusId', element);
+    });
+
     return this.http.get(this.baseUrl + 'ticket', {params} );
   }
 

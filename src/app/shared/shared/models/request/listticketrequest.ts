@@ -4,5 +4,5 @@ export interface ListTicketRequest {
     categoryId: number[];
     priorityId: number[];
     statusId: number[];
-    raisedBy: number | null;
+    raisedBy: number[];
 }

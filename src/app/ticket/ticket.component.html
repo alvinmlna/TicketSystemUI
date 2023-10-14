@@ -15,22 +15,22 @@
                 </span>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Product" [options]="products" [filter]="false" optionValue="productId" optionLabel="productName"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Product"  [(ngModel)]="selectedproducts" [options]="products" [filter]="false" optionValue="productId" optionLabel="productName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Category"  [options]="categories" [filter]="false" optionValue="categoryId" optionLabel="categoryName"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Category" [(ngModel)]="selectedcategories"  [options]="categories" [filter]="false" optionValue="categoryId" optionLabel="categoryName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Priority"  [options]="priorities" [filter]="false" optionValue="priorityId" optionLabel="priorityName"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Priority" [(ngModel)]="selectedpriorities"  [options]="priorities" [filter]="false" optionValue="priorityId" optionLabel="priorityName"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Status"  [options]="statuses" [filter]="false" optionValue="statusId" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Status" [(ngModel)]="selectedstatuses"  [options]="statuses" [filter]="false" optionValue="statusId" optionLabel="name"></p-multiSelect>
             </td>
             <td>
-                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Raised By"  [options]="raisedBy" [filter]="false" optionValue="userId" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [style]="{'width':'160px'}"  defaultLabel="Raised By" [(ngModel)]="selectedraisedBy"  [options]="raisedBy" [filter]="false" optionValue="userId" optionLabel="name"></p-multiSelect>
             </td>
             <td>
-                <p-button class="ms-2" label="Show"></p-button>
+                <p-button (onClick)="onFilterPressed()" class="ms-2" label="Show"></p-button>
             </td>
             <td>
                 <p-button styleClass="p-button-secondary" class="ms-2" label="Reset"></p-button>
