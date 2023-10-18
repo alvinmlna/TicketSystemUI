@@ -41,12 +41,7 @@ export class NumberofticketchartComponent implements OnInit {
         plugins: {
             legend: {
                 display: false,
-            },
-            title: {
-              display: true,
-              text: 'Last 12 Month Tickets',
-              fontSize: 16
-          }
+            }
         },
         scales: {
             y: {

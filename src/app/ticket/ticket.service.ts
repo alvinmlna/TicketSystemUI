@@ -59,6 +59,9 @@ export class TicketService {
     return this.http.get<ticket[]>(this.baseUrl + 'ticket', {params} );
   }
 
+  getMyTickets() {
+    return this.http.get<ticket[]>(this.baseUrl + 'ticket/myticket');
+  }
   public downloadFile(filename: string) {
     return this.http.get(this.baseUrl + 'file/' + filename, 
     {observe: 'response', responseType: 'blob'});

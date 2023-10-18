@@ -107,8 +107,14 @@ export class CategorychartComponent implements OnInit {
           datasets: [
               {
                   data: res.count,
-                  backgroundColor: [this.documentStyle.getPropertyValue('--blue-500'), this.documentStyle.getPropertyValue('--yellow-500'), this.documentStyle.getPropertyValue('--green-500')],
-                  hoverBackgroundColor: [this.documentStyle.getPropertyValue('--blue-400'), this.documentStyle.getPropertyValue('--yellow-400'), this.documentStyle.getPropertyValue('--green-400')]
+                  backgroundColor: [
+                    this.documentStyle.getPropertyValue('--red-500'), 
+                    this.documentStyle.getPropertyValue('--green-500'), 
+                    this.documentStyle.getPropertyValue('--blue-500')],
+                  hoverBackgroundColor: [
+                  this.documentStyle.getPropertyValue('--red-400'), 
+                  this.documentStyle.getPropertyValue('--green-400'), 
+                  this.documentStyle.getPropertyValue('--blue-400')]
               }
           ]
         };

@@ -25,9 +25,18 @@
     height: 46px;
     border-radius: 10px;
 }
+
 .flex-container {
     display: flex;
     gap: 20px;
     justify-content: space-between;
     /* Set the desired spacing between flex items */
+}
+
+.counter-panel-icon div {
+    display: flex; 
+    justify-content: start;
+    align-items:center;
+    height: 100%;
+    padding-left: 13px;
 }
