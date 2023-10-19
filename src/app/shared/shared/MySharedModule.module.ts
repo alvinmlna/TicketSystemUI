@@ -20,6 +20,7 @@ import { AssigneddropdownComponent } from './components/assigneddropdown/assigne
 import { PrioritydropdownComponent } from './components/prioritydropdown/prioritydropdown.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     CategorydropdownComponent,
     StatusdropdownComponent,
     AssigneddropdownComponent,
-    PrioritydropdownComponent
+    PrioritydropdownComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     StatusdropdownComponent,
     AssigneddropdownComponent,
     PrioritydropdownComponent,
+    TextInputComponent,
     MultiSelectModule
   ]
 })
