@@ -1,5 +1,6 @@
-import { Component, TemplateRef} from '@angular/core';
+import { Component, OnInit, TemplateRef} from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
+import { AccountService } from './account/account.service';
 
 
 @Component({
@@ -7,14 +8,24 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'TicketSystemUI';
 
   modalRef?: BsModalRef;
 
-  constructor(private modalService: BsModalService){}
+  constructor(private modalService: BsModalService, private accountService: AccountService){}
+
+  ngOnInit(): void {
+    this.loadCurrentUser();
+  }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  
+  loadCurrentUser(){
+    const token = localStorage.getItem('token');
+    console.log("load user!" + token);
+    this.accountService.loadCurrentUser(token).subscribe();
   }
 }

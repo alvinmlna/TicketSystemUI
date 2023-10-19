@@ -8,12 +8,14 @@ import { MySharedModule } from './shared/shared/MySharedModule.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SiteLayoutComponent,
-    SidebarComponent
+    SidebarComponent,
+    PublicDashboardComponent
   ],
   imports: [
     BrowserModule,

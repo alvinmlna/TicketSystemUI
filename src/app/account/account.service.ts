@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject, catchError, map, retry, throwError } from 'rxjs';
+import { ReplaySubject, catchError, map, of, retry, throwError } from 'rxjs';
 import { CurrentUser } from '../shared/shared/models/user';
 import { Router } from '@angular/router';
 
@@ -19,7 +19,6 @@ export class AccountService {
     return this.http.post<CurrentUser>(this.baseUrl + 'auth/login', values)
     .pipe(
       map(user => {
-        console.log(user);
         localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
       })
@@ -30,5 +29,27 @@ export class AccountService {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/account/login');
+  }
+  
+  loadCurrentUser(token: string | null){
+    if (token === null) {
+      this.currentUserSource.next(null);
+      return of(null);
+    } 
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<CurrentUser>(this.baseUrl + 'auth', {headers}).pipe(
+      map(user => {
+        if (user) {
+          localStorage.setItem('token', token);
+          this.currentUserSource.next(user);
+          return user;
+        } else {
+          return null;
+        }
+      })
+    )
   }
 }

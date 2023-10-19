@@ -32,7 +32,6 @@ export class LoginComponent {
     this.accountService.login(this.loginForm.value).subscribe({
       next: () => this.router.navigateByUrl(this.returnUrl),
       error: err => {
-        console.log(err);
         this.messageService.add({ severity: 'error', summary: 'ERROR', detail: err.error });
       }
     })

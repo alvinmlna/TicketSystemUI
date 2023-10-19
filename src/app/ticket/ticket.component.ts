@@ -78,7 +78,6 @@ export class TicketComponent implements OnInit {
 
      this.ticketService.getTickets(value).subscribe({
       next : response => {
-        console.log(response);
         this.tickets = response;
       }
      });
