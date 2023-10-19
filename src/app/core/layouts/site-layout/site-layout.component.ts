@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from 'src/app/account/account.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./site-layout.component.scss']
 })
 export class SiteLayoutComponent {
+  
+  constructor(public accountService: AccountService){}
 
 }
