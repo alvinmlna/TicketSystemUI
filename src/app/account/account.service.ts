@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, catchError, map, of, retry, throwError } from 'rxjs';
 import { CurrentUser } from '../shared/shared/models/user';
 import { Router } from '@angular/router';
+import { defaultresponse } from '../shared/shared/models/responses/defaultresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AccountService {
 
   private currentUserSource = new ReplaySubject<CurrentUser | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  
+
   constructor(private http : HttpClient, private router: Router) { }
 
   login (values: any){
@@ -40,13 +41,16 @@ export class AccountService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<CurrentUser>(this.baseUrl + 'auth', {headers}).pipe(
-      map(user => {
-        if (user) {
-          localStorage.setItem('token', token);
-          user.token = token;
-          this.currentUserSource.next(user);
-          return user;
+    return this.http.get<defaultresponse>(this.baseUrl + 'auth', {headers}).pipe(
+      map(auth => {
+        if (auth) {
+          if(auth.isSuccess){
+            //Good
+          } else {
+            localStorage.removeItem('token');
+            this.currentUserSource.next(null);
+          }
+          return auth;
         } else {
           return null;
         }
