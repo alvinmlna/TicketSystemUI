@@ -9,6 +9,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { PublicDashboardComponent } from './core/layouts/public-dashboard/public
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MySharedModule
+    MySharedModule,
+    NgxSpinnerModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

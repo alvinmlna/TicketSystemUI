@@ -13,12 +13,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-    console.log("AUUUT");
-    this.accountService.currentUser$.subscribe(event => console.log(event));
-
     return this.accountService.currentUser$.pipe(
       map(auth => {
-        console.log("AUUUT 2");
         if(auth) return true;
         else {
           this.router.navigate(['/account/login']);

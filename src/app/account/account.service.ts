@@ -44,6 +44,7 @@ export class AccountService {
       map(user => {
         if (user) {
           localStorage.setItem('token', token);
+          user.token = token;
           this.currentUserSource.next(user);
           return user;
         } else {
