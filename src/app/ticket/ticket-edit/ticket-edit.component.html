@@ -110,22 +110,7 @@
             </p-card>
         </div>
         <div class="col-md-5">
-            <p-card styleClass="mt-3">
-                <div class="mx-3">
-                    <div class="row">
-                        <div class="col-4">
-                            <b>Discussion</b>
-                        </div>
-                        <div class="col">
-                            <p-button icon="pi pi-refresh" styleClass="p-button-rounded float-end"></p-button>
-                        </div>
-                    </div>
-                    <div class="mt-4" style="height: 400px;display: block;background-color:blanchedalmond;">
-                    </div>
-                    <div class="mt-4" style="height: 50px;display: block;background-color:blanchedalmond;">
-                    </div>
-                </div>
-            </p-card>
+            <app-discussion-panel></app-discussion-panel>
             <div class="mt-3">
                 <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list" styleClass="p-button-secondary me-3"></p-button>
                 <p-button type="submit"  label="Save Changes" icon="pi pi-save" styleClass="p-button-success"></p-button>

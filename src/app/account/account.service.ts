@@ -44,13 +44,16 @@ export class AccountService {
     return this.http.get<defaultresponse>(this.baseUrl + 'auth', {headers}).pipe(
       map(auth => {
         if (auth) {
+          console.log(auth);
           if(auth.isSuccess){
             //Good
+            const user : CurrentUser = {email : "", displayName : "", token : token};
+            this.currentUserSource.next(user);
           } else {
             localStorage.removeItem('token');
             this.currentUserSource.next(null);
           }
-          return auth;
+          return auth.isSuccess;
         } else {
           return null;
         }
