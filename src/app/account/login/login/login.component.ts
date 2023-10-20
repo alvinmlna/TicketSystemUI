@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../account.service';
 import { MessageService } from 'primeng/api';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -22,18 +23,24 @@ export class LoginComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private accountService : AccountService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private spinnerService: NgxSpinnerService
     )
     {
       this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/dashboard';
     }
 
   onSubmit(){
+    this.spinnerService.show();
     this.accountService.login(this.loginForm.value).subscribe({
-      next: () => this.router.navigateByUrl(this.returnUrl),
+      next: () => {
+        this.spinnerService.hide();
+        this.router.navigateByUrl(this.returnUrl);
+      },
       error: err => {
+        this.spinnerService.hide();
         this.messageService.add({ severity: 'error', summary: 'ERROR', detail: err.error });
-      }
-    })
+      },
+      })
   }
 }
