@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef} from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
 import { AccountService } from './account/account.service';
+import { CurrentUserService } from './core/services/current-user.service';
 
 
 @Component({
@@ -13,7 +14,11 @@ export class AppComponent implements OnInit {
 
   modalRef?: BsModalRef;
 
-  constructor(private modalService: BsModalService, private accountService: AccountService){}
+  constructor(
+    private modalService: BsModalService, 
+    private accountService: AccountService,
+    private currentUserService: CurrentUserService
+    ){}
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -24,7 +29,9 @@ export class AppComponent implements OnInit {
   }
   
   loadCurrentUser(){
-    const token = localStorage.getItem('token');
-    this.accountService.loadCurrentUser(token).subscribe();
+    const user = this.currentUserService.getUser();
+    if(user){
+      this.accountService.loadCurrentUser(user.token).subscribe();
+    }
   }
 }

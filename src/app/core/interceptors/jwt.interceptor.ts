@@ -7,17 +7,18 @@ import {
 } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
+import { CurrentUserService } from '../services/current-user.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   token?: string | null;
 
-  constructor() {}
+  constructor(private currentUserService: CurrentUserService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = localStorage.getItem('token');
-    console.log("Token:" + token)
-    this.token = token;
+    const user = this.currentUserService.getUser();
+    console.log("Token:" + user?.token)
+    this.token = user?.token;
     if (this.token) {
       request = request.clone({
         setHeaders: {
