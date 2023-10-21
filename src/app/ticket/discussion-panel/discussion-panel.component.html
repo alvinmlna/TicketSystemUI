@@ -12,7 +12,7 @@
             <div *ngIf="discussions">
                 <div class="chat-panel" *ngFor="let discussion of discussions">
                     <div class="chat-header">
-                        <strong>{{discussion.userId}}</strong> <span style="font-size: .8rem;"> at {{discussion.dateSending | date: "dd MMMM yyyy HH:mm a"}}</span>
+                        <strong>{{discussion.name}}</strong> <span style="font-size: .8rem;"> at {{discussion.dateSending | date: "dd MMMM yyyy HH:mm a"}}</span>
                     </div>
                     <div class="chat-body">
                         {{discussion.message}}

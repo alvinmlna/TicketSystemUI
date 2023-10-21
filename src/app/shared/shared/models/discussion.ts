@@ -3,6 +3,7 @@ export interface discussion {
     dateSending: string | null
     message: string
     userId: number
-    ticketId: number
+    ticketId: number,
+    name : string | null
   }
   

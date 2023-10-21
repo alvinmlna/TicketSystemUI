@@ -1,5 +1,6 @@
 export interface CurrentUser {
-    email: string;
-    displayName : string;
+    userId :  number | null;
+    email: string | null;
+    displayName : | null;
     token : string;
 }

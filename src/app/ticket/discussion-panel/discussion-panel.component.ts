@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DiscussionService } from '../discussion.service';
 import { discussion } from 'src/app/shared/shared/models/discussion';
 import { MessageService } from 'primeng/api';
+import { CurrentUserService } from 'src/app/core/services/current-user.service';
 
 @Component({
   selector: 'app-discussion-panel',
@@ -13,14 +14,21 @@ export class DiscussionPanelComponent implements OnInit {
   @Input() ticketId! : number;
   discussions! : discussion[];
   message!: string;
+  currentUserId! : number;
 
   constructor(
     private discussionService: DiscussionService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private currentUserService: CurrentUserService
     ){}
   
   ngOnInit(): void {
     this.loadDiscussion();
+
+    var currentUser = this.currentUserService.getUser();
+    if(currentUser){
+      this.currentUserId = currentUser.userId!;
+    }
   }
 
   loadDiscussion() {
@@ -37,10 +45,11 @@ export class DiscussionPanelComponent implements OnInit {
   submitMessage(){
     const myMessage : discussion = {
       ticketId : this.ticketId,
-      userId : 1,
+      userId : this.currentUserId,
       message : this.message,
       discussionId : null,
-      dateSending : null
+      dateSending : null,
+      name : null
     };
     this.message = '';
     this.discussionService.addDiscussion(myMessage).subscribe({

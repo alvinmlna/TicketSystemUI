@@ -51,7 +51,7 @@ export class AccountService {
           console.log(auth);
           if(auth.isSuccess){
             //Good
-            const user : CurrentUser = {email : "", displayName : "", token : token};
+            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token};
             this.currentUserSource.next(user);
           } else {
             this.currentUserService.removeUser();
