@@ -17,7 +17,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const user = this.currentUserService.getUser();
-    console.log("Token:" + user?.token)
     this.token = user?.token;
     if (this.token) {
       request = request.clone({

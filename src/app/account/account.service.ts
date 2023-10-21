@@ -48,7 +48,6 @@ export class AccountService {
     return this.http.get<defaultresponse>(this.baseUrl + 'auth', {headers}).pipe(
       map(auth => {
         if (auth) {
-          console.log(auth);
           if(auth.isSuccess){
             //Good
             const user : CurrentUser = {email : null, displayName : null, userId : null , token : token};

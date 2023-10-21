@@ -72,7 +72,6 @@ export class TicketEditComponent implements OnInit {
   getTicketById(id : string) {
     this.ticketService.getTicketById(+id).subscribe({
       next: response => {
-        console.log(response);
         if(!response){
           //result not exist
           this.ticketNotFound()

@@ -32,10 +32,11 @@ export class AssigneddropdownComponent implements OnInit {
     this.control = <FormControl>this.formGroupParent.get(this.controlName);
     this.componentService.getAllAdmins().subscribe({
       next: response => {
+        console.log(response);
         var mappedResponse =  response.map((x) => {
           return {id : x.userId, name : x.name};
         })
-        this.admins = [{id:0, name: 'Select PIC'}, ...mappedResponse]
+        this.admins = [{id:null, name: 'Select PIC'}, ...mappedResponse]
       }
     });
   }
