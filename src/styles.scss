@@ -9,21 +9,12 @@
 @import "primeicons/primeicons.css";
 
   
-  body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-  }
+  // body {
+  //   min-height: 100vh;
+  //   min-height: -webkit-fill-available;
+  // }
   
-  
-  main {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    max-height: 100vh;
-    overflow-x: auto;
-    overflow-y: hidden;
-    background-color: #ECF0F6;
-  }
+
 
   .p-button-status {
     padding: 2px 6px !important;
@@ -60,6 +51,16 @@ html {
   height: -webkit-fill-available;
   font-size: 16px;
   color: #262a2e;
+}
+
+main {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #ECF0F6;
 }
 
 .bg-white {

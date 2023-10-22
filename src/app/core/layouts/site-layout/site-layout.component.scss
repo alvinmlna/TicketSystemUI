@@ -1,47 +1,83 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: var(--white);
-    overflow: hidden;
-    width: 100%;
-    box-shadow: 0px 2cap 9px -2px rgba(0,0,0,0.2);
-    -webkit-box-shadow: 0px 2px 9px -2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 2px 9px -2px rgba(0,0,0,0.2);
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    color: var(--black);
-    text-align: center;
-    padding: 5px 12px;
-    text-decoration: none;
-    font-size: 14px;
-    border: 1px solid var(--darkblue);
-    margin: 10px;
-    border-radius: 6px;
-  }
+  display: flex;
+  background-color: white;
+  height: 69.5px;
+  width: 100%;
+  border-bottom: 1px solid var(--linecolor);
 
-  .left-navitem {
-    float: left;
-  }
+}
+
+.navtitle {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  padding-left: 15px;
+
+  align-items:center;
+  justify-content:flex-start;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.navuseroptions {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  align-items:center;
+  justify-content:flex-end;
+  padding-right: 15px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
   
 
-  .right-navitem {
-    float: right;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
 
-  .myNav
-  {
-    width: 100%;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  background: url(https://boys-cry.com/wp-content/uploads/2022/04/bc_logo_black.png);
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;   
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  vertical-align:middle;
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #00000000;
+  min-width: 200px;
+  z-index: 1;
+  margin-top: 20px;
+}
+
+.dropdown-content a {
+  color: black;
+  font-family: helvetica;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+hr.solid {
+  border-left: none;
+  border-right: none;
+  border-top: 1px solid #000000;
+  border-bottom: none;
+}
+
+.show {
+  display: block;
+}

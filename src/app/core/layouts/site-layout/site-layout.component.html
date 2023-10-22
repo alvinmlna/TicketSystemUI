@@ -1,9 +1,29 @@
 <main>
     <app-sidebar></app-sidebar>
-    <div class="myNav">
-        <div class="topnav">
-            <p-button routerLink="/ticket/add" class="left-navitem" label="Create Ticket"  styleClass="p-button-outlined p-button-secondary m-3" icon="pi pi-send"></p-button>
-            <p-button class="right-navitem" (onClick)="accountService.logout()" label="Logout"  styleClass="p-button-outlined p-button-secondary m-3" ></p-button>
+
+    <div class="container-fluid p-0">
+        <div class="topnav" style="vertical-align: center;">
+            <div class="navtitle">
+                Page Title
+            </div>
+            <div class="navuseroptions">
+
+                <div class="dropdown">
+                    <button id="drop" (click)="showUserInfo()" class="dropbtn">Dropdown</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <hr class="solid">
+                      <a href="#">WE</a>
+                      <hr class="solid">
+                      <a href="#">CLIENTS</a>
+                      <hr class="solid">
+                      <a href="mailto:info@boys-cry.com">GET IN TOUCH</a>
+                      <hr class="solid">
+                    </div>
+                  </div>
+
+            </div>
+            <!-- <p-button routerLink="/ticket/add" class="left-navitem" label="Create Ticket"  styleClass="p-button-outlined p-button-secondary m-3" icon="pi pi-send"></p-button> -->
+            <!-- <p-button class="right-navitem" (onClick)="accountService.logout()" label="Logout"  styleClass="p-button-outlined p-button-secondary m-3" ></p-button> -->
         </div>
         <div class="m-3">
             <router-outlet></router-outlet>
