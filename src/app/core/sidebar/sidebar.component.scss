@@ -1,0 +1,18 @@
+.nav-link {
+    border-radius: 0;
+    color: var(--black) !important;
+    background-color: white;
+    margin: 3px 10px;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: var(--lightgreen);
+        color: var(--tosca) !important;
+    }
+  }
+
+
+  .nav-link.active {
+    background-color: var(--lightgreen) !important;
+    color: var(--tosca) !important;
+  }

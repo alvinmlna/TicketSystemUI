@@ -8,22 +8,12 @@
 
 @import "primeicons/primeicons.css";
 
-:root {
-    --darkblue: #162029;
-    --lightblue: #1A8FDD;
-    --red: #C0392B;
-    --white: #ffffff;
-  }
   
   body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
   }
   
-  html {
-    height: -webkit-fill-available;
-    font-size: 14px;
-  }
   
   main {
     display: flex;
@@ -48,3 +38,30 @@
   margin-bottom: 1rem;
 }
   
+
+//New CSS
+:root {
+  --tosca: #007D88;
+  --green: #25CBA1;
+  --lightgreen: #D9ECED;
+  --blue: #298DFF;
+  --yellow: #ffc400;
+  --red: #ff0000;
+  --black: #262a2e;
+  --orange: #ff9100;
+  --pink: #e92990;
+  --purple: #7429f8;
+  --lightblue: #18ddef;
+  --whitesmoke: #f2f2f2;
+  --linecolor: #eaeaea;
+}
+
+html {
+  height: -webkit-fill-available;
+  font-size: 16px;
+  color: #262a2e;
+}
+
+.bg-white {
+  background-color: var(--linecolor);
+}

@@ -11,6 +11,8 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTachometerAlt, faTicketAlt } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     MySharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
@@ -33,4 +36,13 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(library: FaIconLibrary){
+    library.addIcons(
+      faTachometerAlt,
+      faTicketAlt
+    )
+  }
+
+ }
