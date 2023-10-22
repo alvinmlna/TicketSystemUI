@@ -95,19 +95,18 @@
 
     
 <div class="sidebar d-flex flex-column flex-shrink-0 bg-white" style="width: 4.5rem;height: 100%;">
-  <a href="/" class="d-block p-3 link-dark text-decoration-none" title="Icon-only" data-bs-toggle="tooltip" data-bs-placement="right">
-    <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-    <span class="visually-hidden">Icon-only</span>
+  <a href="/" class="d-block p-3 link-dark text-decoration-none text-center" style="font-size: 32px;color:#007D88 !important;">
+    <fa-icon [icon]="['fas', 'hands-helping']" style="size: 5rem;"></fa-icon>
   </a>
   <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
     
-    <li class="nav-item">
-      <a href="#" class="nav-link" routerLink="/dashboard" routerLinkActive="active"    aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+    <li class="nav-item"  pTooltip="Dashboard">
+      <a href="#" class="nav-link" routerLink="/dashboard" routerLinkActive="active"   aria-current="page">
         <fa-icon [icon]="['fas', 'tachometer-alt']" style="size: 1.5rem;"></fa-icon>
       </a>
     </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link" routerLink="/ticket" routerLinkActive="active"    aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+    <li class="nav-item"  pTooltip="Tickets">
+      <a href="#" class="nav-link" routerLink="/ticket" routerLinkActive="active" aria-current="page">
         <fa-icon [icon]="['fas', 'ticket-alt']" style="size: 1.5rem;"></fa-icon>
       </a>
     </li>
