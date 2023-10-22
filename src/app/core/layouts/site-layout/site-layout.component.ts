@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AccountService } from 'src/app/account/account.service';
 
 @Component({
@@ -6,18 +6,29 @@ import { AccountService } from 'src/app/account/account.service';
   templateUrl: './site-layout.component.html',
   styleUrls: ['./site-layout.component.scss']
 })
-export class SiteLayoutComponent implements AfterViewInit {
+export class SiteLayoutComponent  {
   
-  constructor(public accountService: AccountService, private elementRef:ElementRef){}
+  @ViewChild('toggleButton') toggleButton!: ElementRef;
 
-  ngAfterViewInit(): void {
-    this.elementRef.nativeElement.querySelector('my-element')
-                                .addEventListener('click', this.showUserInfo.bind(this))
+  isMenuOpen = true;
+
+  constructor(
+    public accountService: AccountService,
+    private renderer: Renderer2) {
+    /**
+     * This events get called by all clicks on the page
+     */
+    this.renderer.listen('window', 'click',(e:Event)=>{
+        if(e.target !== this.toggleButton.nativeElement ){
+            let targetElement = e.target as Element;
+            if (!targetElement.matches('.media-element')) { //if clicked element doesn't have class '.navi-start'
+              this.isMenuOpen=false;
+            }
+        }
+    });
   }
 
-
   showUserInfo(){
-    const element = <HTMLElement> document.getElementById('myDropdown');
-    element.classList.toggle("show");
+    this.isMenuOpen= !this.isMenuOpen;
   }
 }

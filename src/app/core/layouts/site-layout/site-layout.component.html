@@ -9,25 +9,32 @@
             <div class="navuseroptions">
 
                 <div class="dropdown">
-                    <button id="drop" (click)="showUserInfo()" class="dropbtn">Dropdown</button>
-                    <div id="myDropdown" class="dropdown-content">
-                      <hr class="solid">
-                      <a href="#">WE</a>
-                      <hr class="solid">
-                      <a href="#">CLIENTS</a>
-                      <hr class="solid">
-                      <a href="mailto:info@boys-cry.com">GET IN TOUCH</a>
-                      <hr class="solid">
+                    <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn"></button>
+                    <div id="myDropdown" [ngClass]="isMenuOpen ? 'dropdown-content show' : 'dropdown-content' ">
+                        <div class="media media-element">
+                            <div class="media-head me-2">
+                                <div class="avatar">
+                                    <img class="media-element"  src="https://boys-cry.com/wp-content/uploads/2022/04/bc_logo_black.png" >
+                                </div>
+                            </div>
+                            <div class="media-body  mt-2  me-2">
+                                <div class="media-element" style="font-size: 0.9rem;">
+                                    Alvin Maulana
+                                </div>
+                                <div class="media-element" style="font-size: 0.75rem;color: var(--textcolor2);">contact@hencework.com</div>
+                                <a  class="media-element media-sign-out p-0" href="#" (onClick)="accountService.logout()" >
+                                    <span>
+                                        Sign Out
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
+                </div>
             </div>
-            <!-- <p-button routerLink="/ticket/add" class="left-navitem" label="Create Ticket"  styleClass="p-button-outlined p-button-secondary m-3" icon="pi pi-send"></p-button> -->
-            <!-- <p-button class="right-navitem" (onClick)="accountService.logout()" label="Logout"  styleClass="p-button-outlined p-button-secondary m-3" ></p-button> -->
         </div>
         <div class="m-3">
             <router-outlet></router-outlet>
         </div>
     </div>
 </main>
-  

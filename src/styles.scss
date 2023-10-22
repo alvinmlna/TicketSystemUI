@@ -8,7 +8,11 @@
 
 @import "primeicons/primeicons.css";
 
-  
+
+@import "@fontsource/dm-sans"; // Defaults to weight 400
+@import "@fontsource/dm-sans/400.css"; // Specify weight
+@import "@fontsource/dm-sans/400-italic.css"; // Specify weight and style
+
   // body {
   //   min-height: 100vh;
   //   min-height: -webkit-fill-available;
@@ -45,12 +49,18 @@
   --lightblue: #18ddef;
   --whitesmoke: #f2f2f2;
   --linecolor: #eaeaea;
+  --textcolor2: #6f6f6f;
 }
 
 html {
   height: -webkit-fill-available;
   font-size: 16px;
+  font-weight: 400;
   color: #262a2e;
+}
+
+html, body, main {
+  font-family: "DM Sans";
 }
 
 main {
