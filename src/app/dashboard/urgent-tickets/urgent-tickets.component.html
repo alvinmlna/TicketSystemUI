@@ -1,26 +1,29 @@
+<div class="dashboard-status">    
+    <div class="header">
+        <div class="title">My Tickets</div>
+    </div>
+    <div class="body">
+        <p-table [value]="tickets" selectionMode="single" scrollHeight="520px"  [(selection)]="selectedticket" dataKey="code"
+            (onRowSelect)="onRowSelect($event)" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Summary</th>
+                    <th>Project</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-ticket>
+                <tr [pSelectableRow]="ticket">
+                    <td>{{ ticket.summary }}</td>
+                    <td>{{ ticket.product }}</td>
+                    <td>{{ ticket.category }}</td>
+                    <td>{{ ticket.priority }}</td>
+                    <td [ngClass]="{'expired': ticket.isExpired === true}" >{{ ticket.status }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div> 
 
-<div class="panel">
-<h5>My Tickets</h5>
-
-<p-table [value]="tickets" selectionMode="single" scrollHeight="520px"  [(selection)]="selectedticket" dataKey="code"
-    (onRowSelect)="onRowSelect($event)" [tableStyle]="{'min-width': '50rem'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Summary</th>
-            <th>Project</th>
-            <th>Category</th>
-            <th>Priority</th>
-            <th>Status</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-ticket>
-        <tr [pSelectableRow]="ticket">
-            <td>{{ ticket.summary }}</td>
-            <td>{{ ticket.product }}</td>
-            <td>{{ ticket.category }}</td>
-            <td>{{ ticket.priority }}</td>
-            <td [ngClass]="{'expired': ticket.isExpired === true}" >{{ ticket.status }}</td>
-        </tr>
-    </ng-template>
-</p-table>
-</div>

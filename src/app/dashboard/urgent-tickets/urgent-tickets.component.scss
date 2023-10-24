@@ -4,3 +4,20 @@
     color: white;
     font-weight: bold;
   }
+
+  
+.dashboard-status {
+  border: 1px solid var(--linecolor);
+  text-decoration: none;
+  color: var(--black);
+  border-radius: 5px;
+}
+
+.dashboard-status .header {
+  padding: 12px;
+  border-bottom: 1px solid var(--linecolor);
+}
+
+.dashboard-status .body {
+  padding: 12px;
+}
