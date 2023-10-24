@@ -18,6 +18,9 @@ export class CategorychartComponent implements OnInit {
 
   documentStyle : any;
   textColor : any;
+
+  chartType!: any[];
+  selectedChart : any;
   
   
   constructor (private dashboardService : DashboardService){}
@@ -25,6 +28,12 @@ export class CategorychartComponent implements OnInit {
   ngOnInit(): void {    
     this.documentStyle = getComputedStyle(document.documentElement);
     this.textColor = this.documentStyle.getPropertyValue('--text-color');
+
+    this.chartType = [
+      { name: 'Product', code: 'product' },
+      { name: 'Category', code: 'category' },
+      { name: 'Priority', code: 'priority' },
+  ];
 
     this.setProductChart();
     this.setCategoryChart();
@@ -39,8 +48,11 @@ export class CategorychartComponent implements OnInit {
           datasets: [
               {
                   data: res.count,
-                  backgroundColor: [this.documentStyle.getPropertyValue('--blue-500'), this.documentStyle.getPropertyValue('--yellow-500'), this.documentStyle.getPropertyValue('--green-500')],
-                  hoverBackgroundColor: [this.documentStyle.getPropertyValue('--blue-400'), this.documentStyle.getPropertyValue('--yellow-400'), this.documentStyle.getPropertyValue('--green-400')]
+                  backgroundColor: [
+                    this.documentStyle.getPropertyValue('--tosca'), 
+                    this.documentStyle.getPropertyValue('--green'),
+                    this.documentStyle.getPropertyValue('--yellow')  
+                  ]
               }
           ]
         };
@@ -108,13 +120,11 @@ export class CategorychartComponent implements OnInit {
               {
                   data: res.count,
                   backgroundColor: [
-                    this.documentStyle.getPropertyValue('--red-500'), 
-                    this.documentStyle.getPropertyValue('--green-500'), 
-                    this.documentStyle.getPropertyValue('--blue-500')],
-                  hoverBackgroundColor: [
-                  this.documentStyle.getPropertyValue('--red-400'), 
-                  this.documentStyle.getPropertyValue('--green-400'), 
-                  this.documentStyle.getPropertyValue('--blue-400')]
+                    this.documentStyle.getPropertyValue('--tosca'), 
+                    this.documentStyle.getPropertyValue('--green'), 
+                    this.documentStyle.getPropertyValue('--yellow'), 
+                    this.documentStyle.getPropertyValue('--orange'), 
+                    this.documentStyle.getPropertyValue('--blue')]
               }
           ]
         };
