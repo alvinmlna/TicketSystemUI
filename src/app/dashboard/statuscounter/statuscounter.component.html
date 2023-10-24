@@ -1,70 +1,25 @@
    
-        <div class="flex-container">
-   <div class="counter-panel">
-        <div class="counter-panel-body">
-            <div class="counter-panel-icon" style="background-color: #BDC3C7;">
-                <div>
-                    <i class="pi pi-ticket" style="font-size: 1.5rem"></i>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col offset-md-2">
-                    <div>
-                        <span class="counter-panel-text">New <br><span style="font-size: 24px;">{{new}}</span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="counter-panel">
-        <div class="counter-panel-body">
-            <div class="counter-panel-icon" style="background-color: #28C763;">
-                <div>
-                    <i class="pi pi-ticket" style="font-size: 1.5rem"></i>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col offset-md-2">
-                    <div>
-                        <span class="counter-panel-text">Open <br><span style="font-size: 24px;">{{open}}</span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="counter-panel">
-        <div class="counter-panel-body">
-            <div class="counter-panel-icon" style="background-color: #FF6057;">
-                <div>
-                    <i class="pi pi-ticket" style="font-size: 1.5rem"></i>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col offset-md-2">
-                    <div>
-                        <span class="counter-panel-text">Closed <br><span style="font-size: 24px;">{{closed}}</span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="counter-panel">
-        <div class="counter-panel-body">
-            <div class="counter-panel-icon" style="background-color: #EAB308;">
-                <div>
-                    <i class="pi pi-ticket" style="font-size: 1.5rem"></i>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col offset-md-2">
-                    <div>
-                        <span class="counter-panel-text">Total <br><span style="font-size: 24px;">{{total}}</span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid">
+    <div class="row">
+        <a href="google.com" class="col m-2 dashboard-status">
+            <div class="title">New</div>
+            <div class="counter">{{new}}</div>
+        </a>
+        <a href="google.com" class="col m-2 dashboard-status">
+            <div class="title">Open</div>
+            <div class="counter">{{open}}</div>
+        </a>
+        <a href="google.com" class="col m-2 dashboard-status">
+            <div class="title">Overdue</div>
+            <div class="counter">{{closed}}</div>
+        </a>
+        <a href="google.com" class="col m-2 dashboard-status">
+            <div class="title">Due Today</div>
+            <div class="counter">{{closed}}</div>
+        </a>
+        <a href="google.com" class="col m-2 dashboard-status">
+            <div class="title">This Month</div>
+            <div class="counter">{{total}}</div>
+        </a>
     </div>
 </div>

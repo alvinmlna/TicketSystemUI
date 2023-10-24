@@ -1,42 +1,17 @@
-.counter-panel {
-    background-color: white;
-    border-radius: 10px;
-    width: 180px;height: 75px;
-    // display: block; width: 180px;height: 75px;background-color: white;border-radius: 10px;
+.dashboard-status {
+    border: 1px solid var(--linecolor);
+    padding: 20px;
+    text-decoration: none;
+    color: var(--black);
+    border-radius: 5px;
 }
 
-.counter-panel-body {
-    display: flex; 
-    justify-content: start;
-    align-items:center;
-    height: 100%;
-    padding-left: 10px;
+.dashboard-status .title {
+    font-size: 1rem;
+    color: var(--textcolor2);
 }
 
-.counter-panel-text {
-    font-size: 15px;
-    font-weight: bold;
-    line-height: 25px;
-}
-
-.counter-panel-icon {
-    display: block;
-    width: 46px;
-    height: 46px;
-    border-radius: 10px;
-}
-
-.flex-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    /* Set the desired spacing between flex items */
-}
-
-.counter-panel-icon div {
-    display: flex; 
-    justify-content: start;
-    align-items:center;
-    height: 100%;
-    padding-left: 13px;
+.dashboard-status .counter {
+    font-size: 1.5rem;
+    font-weight: 400;
 }
