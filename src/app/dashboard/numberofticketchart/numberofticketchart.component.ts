@@ -26,9 +26,11 @@ export class NumberofticketchartComponent implements OnInit {
               {
                   label: 'Numbers of tickets',
                   data: res.count,
-                  backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                  borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
-                  borderWidth: 1
+                  fill: true,
+                  tension: 0.4,
+                  borderColor: ['rgba(0, 125, 136, 1)'],
+                  borderWidth: 1,
+                 backgroundColor: 'rgba(0, 125, 136,0.2)'
               }
           ]
       };
