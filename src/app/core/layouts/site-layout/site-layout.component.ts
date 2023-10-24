@@ -10,7 +10,7 @@ export class SiteLayoutComponent  {
   
   @ViewChild('toggleButton') toggleButton!: ElementRef;
 
-  isMenuOpen = true;
+  isMenuOpen = false;
 
   constructor(
     public accountService: AccountService,
