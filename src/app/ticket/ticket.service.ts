@@ -1,11 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Product2, ticket } from '../shared/shared/models/ticket';
 import { editticketrequest } from '../shared/shared/models/editticketrequest';
 import { catchError, retry, throwError } from 'rxjs';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
 import { addticketrequest } from '../shared/shared/models/request/addticketrequest';
+import { LayoutServiceService } from '../core/services/layout-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class TicketService {
   baseUrl = "https://localhost:7047/api/";
   ticket : ticket | any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private layoutService: LayoutServiceService ){ }
 
   getStatusSummary(){
     return this.http.get<statussummary[]>(this.baseUrl + 'ticket/statussummary').pipe(retry(1), catchError(this.errorHandl));

@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AccountService } from 'src/app/account/account.service';
+import { LayoutServiceService } from '../../services/layout-service.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-site-layout',
@@ -10,11 +12,15 @@ export class SiteLayoutComponent  {
   
   @ViewChild('toggleButton') toggleButton!: ElementRef;
 
+  pageTitle! : string;
+
   isMenuOpen = false;
 
   constructor(
     public accountService: AccountService,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private layoutService: LayoutServiceService
+    ) {
     /**
      * This events get called by all clicks on the page
      */
@@ -26,6 +32,16 @@ export class SiteLayoutComponent  {
             }
         }
     });
+
+    layoutService.currentPage$.subscribe(
+      {
+        next : res => {
+          this.pageTitle = res!;
+        }
+      }
+    )
+
+    
   }
 
   showUserInfo(){

@@ -9,6 +9,7 @@ import { Category, Priority, Product2, Status, User, ticket } from '../shared/sh
 import { ComponentService } from '../shared/shared/components/component.service';
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
+import { LayoutServiceService } from '../core/services/layout-service.service';
 
 @Component({
   selector: 'app-ticket',
@@ -40,15 +41,18 @@ export class TicketComponent implements OnInit {
     private messageService: MessageService, 
     private router: Router,
     private componentService : ComponentService,
-    private ticketService : TicketService
+    private ticketService : TicketService,
+    private layoutService : LayoutServiceService
     ) {}
 
   ngOnInit() {
       this.initializeMultiSelect();
       this.onFilterPressed();
       this.initializeStatusSummary();
+      this.layoutService.loadPageTitle("Tickets");
   }
 
+  
   clear(table: Table) {
       table.clear();
   }
