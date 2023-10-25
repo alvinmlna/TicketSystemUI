@@ -6,10 +6,14 @@
     border-radius: 5px;
 }
 
-.dashboard-status .title {
-}
-
 .dashboard-status .counter {
     font-size: 1.5rem;
     font-weight: 400;
+}
+
+.dashboard-status:hover {
+    color: var(--tosca) !important;
+    border: 1px solid var(--tosca);
+    transition: border-color 0.5s ease;
+    transition: color 0.5s ease;
 }

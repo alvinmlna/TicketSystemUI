@@ -2,12 +2,11 @@
     <app-sidebar></app-sidebar>
 
     <div class="container-fluid p-0">
-        <div class="topnav" style="vertical-align: center;position: fixed;margin-left: 72px;">
-            <div class="navtitle">
+        <div class="topnav" style="vertical-align: center;position: fixed;">
+            <div class="navtitle" style="margin-left: 72px;">
                 {{pageTitle}}
             </div>
             <div class="navuseroptions">
-
                 <div class="dropdown">
                     <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn"></button>
                     <div id="myDropdown" [ngClass]="isMenuOpen ? 'dropdown-content show' : 'dropdown-content' ">
