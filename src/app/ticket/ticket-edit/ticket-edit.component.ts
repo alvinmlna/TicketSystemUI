@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { editticketrequest } from 'src/app/shared/shared/models/editticketrequest';
 import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -55,7 +56,8 @@ export class TicketEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private ticketService: TicketService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private layoutService : LayoutServiceService
     ) {
       this.isTicketExist = true;
     }
@@ -79,6 +81,7 @@ export class TicketEditComponent implements OnInit {
         this.IdOfItems = response.ticketId;
         this.IdOfItemsView = response.ticketIdView;
         this.attachments = response.attachmentViews;
+        this.layoutService.loadPageTitle("Ticket ID: " + this.IdOfItemsView);
 
         this.ticketForm.get('ticketInfoForm')?.patchValue(response);
         this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'dd MMMM yyyy HH:mm a', 'en'));

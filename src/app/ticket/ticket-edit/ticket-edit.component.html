@@ -2,120 +2,128 @@
     <p-messages [(value)]="ticketNotFoundMessage" [enableService]="false" [closable]="false"></p-messages>
 </div>
 
+<div style="margin-left: 70px;">
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+        <div class="row me-0" formGroupName="ticketInfoForm">
+            <div class="col-10">
+                <div class="mx-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="title my-2">
+                                Summary
+                            </div>
+                            <p class="mt-1">
+                                <input style="width: 100%;" type="text" pInputText formControlName="summary" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="title my-2">
+                                Request Descriptions
+                            </div>
+                            <p class="mt-1">
+                                <textarea rows="5" pInputTextarea formControlName="description"></textarea>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="title my-2">
+                                Attachments
+                            </div>
+                            <ul>
+                                <li *ngFor="let attachment of attachments">
+                                    <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
+                                        [routerLink]="[]">{{attachment.filename}}</a>
+                                </li>
+                            </ul>
+                            <p class="mt-1">
+                                <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
+                                    (uploadHandler)="onUpload($event)" [customUpload]="true">
+                                    <ng-template let-file pTemplate="file">
+                                        <li>{{ file.name }}</li>
+                                    </ng-template>
+                                </p-fileUpload>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 information-panel">
+                <div class="row mt-4">
 
-<div *ngIf="IdOfItems" class="row">
-    <div class="col">
-        <h3>Ticket ID: {{IdOfItemsView}}</h3>
-    </div>
+                    <div class="col-12">
+                        <p-button type="submit" label="Update Ticket" icon="pi pi-save" iconPos="right"
+                            styleClass="p-button-default w-100" style="width: 100%;" ></p-button>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list"  iconPos="right"
+                            styleClass="p-button-secondary w-100"></p-button>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Raised By
+                        </div>
+                        <input class="w-100" type="text" pInputText formControlName="raisedBy" />
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Create Date
+                        </div>
+                        <input class="w-100" type="text" pInputText formControlName="raisedDate" />
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Product
+                        </div>
+                        <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="productId"></app-productdropdown>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Category
+                        </div>
+                        <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="categoryId"></app-categorydropdown>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Assigned To
+                        </div>
+                        <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="assignedToId"></app-assigneddropdown>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Priority
+                        </div>
+                        <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="priorityId"></app-prioritydropdown>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Status
+                        </div>
+                        <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="statusId"></app-statusdropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <p-toast position="bottom-left" key="bc"></p-toast>
 
-<div style="overflow-y: auto; overflow-x: hidden; height:800px;">
-    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="IdOfItems" class="row">
-        <div class="col-md-7">
-            <p-card styleClass="mt-3">
-                <div class="mx-3">
-                        <div formGroupName="ticketInfoForm">
-                            <div class="row">
-                                <div class="col-4">
-                                    <b>Raised By</b>
-                                    <p class="mt-1">
-                                        <input class="w-100" type="text" pInputText formControlName="raisedBy" />
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <b>Create Date</b>
-                                    <p class="mt-1">
-                                        <input class="w-100" type="text" pInputText formControlName="raisedDate" />
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <b>Product</b>
-                                    <p class="mt-1">
-                                        <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                            controlName="productId"></app-productdropdown>
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <b>Category</b>
-                                    <p class="mt-1">
-                                        <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                            controlName="categoryId"></app-categorydropdown>
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <b>Assigned To</b>
-                                    <p class="mt-1">
-                                        <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                            controlName="assignedToId"></app-assigneddropdown>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <b>Priority</b>
-                                    <p class="mt-1">
-                                        <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                            controlName="priorityId"></app-prioritydropdown>
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <b>Status</b>
-                                    <p class="mt-1">
-                                        <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                            controlName="statusId"></app-statusdropdown>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col12">
-                                    <b>Summary</b>
-                                    <p class="mt-1">
-                                        <input style="width: 100%;" type="text" pInputText formControlName="summary" />
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-12">
-                                    <b>Request Descriptions</b>
-                                    <p class="mt-1">
-                                        <textarea rows="5" pInputTextarea formControlName="description"></textarea>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-12">
-                                    <b>Attachments</b>
-                                    <ul >
-                                        <li *ngFor="let attachment of attachments">
-                                            <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
-                                                [routerLink]="[]">{{attachment.filename}}</a>
-                                        </li>
-                                    </ul>
-                                    <p class="mt-1">
-                                        <p-fileUpload  #fileUpload name="myfile[]" [multiple]="true" (uploadHandler)="onUpload($event)"  [customUpload]="true" >
-                                            <ng-template let-file pTemplate="file">
-                                                <li>{{ file.name }}</li>
-                                            </ng-template>
-                                        </p-fileUpload>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </p-card>
-        </div>
-        <div class="col-md-5">
-            <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
-            <div class="mt-3">
-                <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list" styleClass="p-button-secondary me-3"></p-button>
-                <p-button type="submit"  label="Save Changes" icon="pi pi-save" styleClass="p-button-success"></p-button>
-            </div>
-        </div>
-    </div>
-    </form>
+<div *ngIf="IdOfItems">
+    <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
 </div>

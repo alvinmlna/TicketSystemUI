@@ -1,13 +1,23 @@
-::ng-deep .ql-toolbar.ql-snow {
-    padding: 0px;
-    border: none;
+// ::ng-deep .ql-toolbar.ql-snow {
+//     padding: 0px;
+//     border: none;
+// }
+
+// ::ng-deep .ql-container.ql-snow {
+//     border-top: 1px solid #ccc;
+//     height: 320px; //pls change height as per your need.
+// }
+
+// textarea {
+//     width: 100%;
+// }
+
+
+.information-panel 
+{
+    border-left: 1px solid var(--linecolor);  
 }
 
-::ng-deep .ql-container.ql-snow {
-    border-top: 1px solid #ccc;
-    height: 320px; //pls change height as per your need.
-}
-
-textarea {
-    width: 100%;
+.title {
+    color: var(--textcolor) !important;
 }
