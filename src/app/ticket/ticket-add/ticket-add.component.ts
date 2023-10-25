@@ -10,6 +10,7 @@ import { tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { AttachmentView } from 'src/app/shared/shared/models/ticket';
+import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
 
 
 @Component({
@@ -50,8 +51,11 @@ export class TicketAddComponent {
   constructor(private messageService: MessageService,
     private fb : FormBuilder,
     private ticketService : TicketService,
-    private route : Router
-    ) {}
+    private route : Router,
+    private layoutService : LayoutServiceService
+    ) {
+      this.layoutService.loadPageTitle("Create new ticket");
+    }
 
   uploadfun(event: UploadEvent) {
     console.log(event);
