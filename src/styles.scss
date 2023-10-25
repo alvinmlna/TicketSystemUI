@@ -37,6 +37,7 @@
 //New CSS
 :root {
   --tosca: #007D88;
+  --toscadarker: #016f79;
   --green: #25CBA1;
   --lightgreen: #D9ECED;
   --blue: #298DFF;
@@ -81,3 +82,35 @@ main {
   font-size: 1rem;
   color: var(--textcolor2);
 }
+
+.p-button {
+  padding: 0.5rem 1rem !important;
+}
+
+.p-button-default:hover {
+  background-color: var(--toscadarker) !important;
+}
+
+.p-button-default {
+  background-color: var(--tosca) !important;
+  border: 1px solid var(--tosca) !important;
+} 
+
+
+.p-button-label {
+  font-weight: 500 !important;
+}
+.p-inputtext {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2.5rem !important;
+}
+
+.p-multiselect 
+.p-multiselect-label 
+{
+  padding: 0.5rem 0.5rem 0.5rem !important;
+}
+
