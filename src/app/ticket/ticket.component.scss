@@ -1,17 +1,37 @@
 
 table, th, td {
-    border-collapse: collapse;
-  }
-  th, td {
-    padding-right: 15px;
-  }
+  border-collapse: collapse;
+}
+th, td {
+  padding-right: 15px;
+}
 
-  p-multiselect {
-    display: block;
-  }
+p-multiselect {
+  display: block;
+}
 
-  .expired {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-  }
+.expired {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+/////////////////////////
+
+.filter {
+  position: relative;
+  background-color: var(--lightgreen);
+  width: 100%;
+}
+
+.filter div {
+  display: block;
+  padding: 10px;
+}
+
+.table-content {
+  width: 100%;
+  height: 750px;
+  padding: 0 ;
+  overflow: auto;
+}
