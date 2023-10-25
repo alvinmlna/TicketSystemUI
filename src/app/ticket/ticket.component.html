@@ -1,5 +1,5 @@
 <div style="margin-left: 70px;" >
-    <div class="filter" style="overflow:hidden;">
+    <div class="filter" >
         <div>
             <table>
                 <tr>
@@ -83,6 +83,9 @@
     [tableStyle]="{ 'min-width': '50rem' }"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [rowsPerPageOptions]="[10, 25, 50]"
+
+    selectionMode="single" [(selection)]="selectedticket" dataKey="ticketId"
+    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
 >
     <ng-template pTemplate="header">
         <tr>
@@ -98,7 +101,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-ticket>
-        <tr>
+        <tr [pSelectableRow]="ticket">
             <td>{{ticket.ticketIdView}}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.product }}</td>
