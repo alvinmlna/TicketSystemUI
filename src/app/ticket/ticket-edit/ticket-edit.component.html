@@ -3,123 +3,262 @@
 </div>
 
 <div style="margin-left: 70px;">
-    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-        <div class="row me-0" formGroupName="ticketInfoForm">
-            <div class="col-10">
-                <div class="mx-3">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="title my-2">
-                                Summary
-                            </div>
-                            <p class="mt-1">
-                                <input style="width: 100%;" type="text" pInputText formControlName="summary" />
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="title my-2">
-                                Request Descriptions
-                            </div>
-                            <p class="mt-1">
-                                <textarea rows="5" pInputTextarea formControlName="description"></textarea>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="title my-2">
-                                Attachments
-                            </div>
-                            <ul>
-                                <li *ngFor="let attachment of attachments">
-                                    <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
-                                        [routerLink]="[]">{{attachment.filename}}</a>
-                                </li>
-                            </ul>
-                            <p class="mt-1">
-                                <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
-                                    (uploadHandler)="onUpload($event)" [customUpload]="true">
-                                    <ng-template let-file pTemplate="file">
-                                        <li>{{ file.name }}</li>
-                                    </ng-template>
-                                </p-fileUpload>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2 information-panel">
-                <div class="row mt-4">
+    <div class="filter">
+        <div>
+            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Reply
+                    </span>
+                </ng-template>
+            </p-button>
+            
+            <p-button type="button" label="Close" iconPos="right" styleClass="p-button-default me-2">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'check-circle']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Close
+                    </span>
+                </ng-template>
+            </p-button>
 
-                    <div class="col-12">
-                        <p-button type="submit" label="Update Ticket" icon="pi pi-save" iconPos="right"
-                            styleClass="p-button-default w-100" style="width: 100%;" ></p-button>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list"  iconPos="right"
-                            styleClass="p-button-secondary w-100"></p-button>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Raised By
-                        </div>
-                        <input class="w-100" type="text" pInputText formControlName="raisedBy" />
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Create Date
-                        </div>
-                        <input class="w-100" type="text" pInputText formControlName="raisedDate" />
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Product
-                        </div>
-                        <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                            controlName="productId"></app-productdropdown>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Category
-                        </div>
-                        <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                            controlName="categoryId"></app-categorydropdown>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Assigned To
-                        </div>
-                        <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                            controlName="assignedToId"></app-assigneddropdown>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Priority
-                        </div>
-                        <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                            controlName="priorityId"></app-prioritydropdown>
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <div class="title my-2">
-                            Status
-                        </div>
-                        <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                            controlName="statusId"></app-statusdropdown>
-                    </div>
-                </div>
-            </div>
+            
+            <p-button type="button" label="Archive" iconPos="right" styleClass="p-button-default me-2">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'archive']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Archive
+                    </span>
+                </ng-template>
+            </p-button>
         </div>
-    </form>
+    </div>
+    <div>
+
+        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+            <div class="row me-0" formGroupName="ticketInfoForm">
+                <div class="col-10">
+                    <div class="mx-3 mt-3">
+                        <div class="ticket-content">
+                            <h5>
+                                SUMMARY SUMMARY SUMMARY
+                            </h5>
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <div class="samplePhoto">
+                                            sa
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title ms-3">
+                                            Alvin Maulana <br>
+                                            <span class="child">
+                                                Wed, 22 Oct 2023 at 1:38 PM
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="title ms-3">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="mt-3">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                been the industry's
+                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                                scrambled it to make a type specimen book.
+                                It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged.
+                                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                                passages, and more recently with desktop
+                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>
+                            <div class="mt-3">
+                                <a href="google.com" class="text-decoration-none">
+                                    <div class="attachment">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="samplePhoto">
+                                                        sa
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="ms-3">
+                                                    <div class="filename">Sample instalation files.pdf</div>
+                                                    <div class="size">900 kb</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-12">
+                                    <div class="title my-2">
+                                        Summary
+                                    </div>
+                                    <p class="mt-1">
+                                        <input style="width: 100%;" type="text" pInputText formControlName="summary" />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="title my-2">
+                                        Request Descriptions
+                                    </div>
+                                    <p class="mt-1">
+                                        <textarea rows="5" pInputTextarea formControlName="description"></textarea>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="title my-2">
+                                        Attachments
+                                    </div>
+                                    <ul>
+                                        <li *ngFor="let attachment of attachments">
+                                            <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
+                                                [routerLink]="[]">{{attachment.filename}}</a>
+                                        </li>
+                                    </ul>
+                                    <p class="mt-1">
+                                        <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
+                                            (uploadHandler)="onUpload($event)" [customUpload]="true">
+                                            <ng-template let-file pTemplate="file">
+                                                <li>{{ file.name }}</li>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="reply mt-4">
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <div class="samplePhoto">
+                                            sa
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="title ms-3">
+                                            Alvin Maulana <br>
+                                            <span class="child">
+                                                Wed, 22 Oct 2023 at 1:38 PM
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="title ms-3">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <div class="mt-3">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                                been the industry's
+                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                                scrambled it to make a type specimen book.
+                                It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged.
+                                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                                passages, and more recently with desktop
+                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            </div>
+                        </div>
+                        
+                        <div class="reply mt-4">
+                            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2">
+                                <ng-template pTemplate="buttonicon">
+                                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                                    <span class="ms-2">
+                                        Reply
+                                    </span>
+                                </ng-template>
+                            </p-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 information-panel">
+                    <div class="row mt-4">
+
+                        <div class="col-12">
+                            <p-button type="submit" label="Update Ticket" icon="pi pi-save" iconPos="right"
+                                styleClass="p-button-default w-100" style="width: 100%;"></p-button>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <p-button routerLink="/ticket" label="Back to list" icon="pi pi-list" iconPos="right"
+                                styleClass="p-button-secondary w-100"></p-button>
+                        </div>
+
+
+                        <input type="hidden" formControlName="raisedBy" />
+                        <input type="hidden" formControlName="raisedDate" />
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Expected Date
+                            </div>
+                            <input class="w-100" type="text" pInputText formControlName="raisedDate" />
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Product
+                            </div>
+                            <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                                controlName="productId"></app-productdropdown>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Category
+                            </div>
+                            <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                                controlName="categoryId"></app-categorydropdown>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Assigned To
+                            </div>
+                            <app-assigneddropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                                controlName="assignedToId"></app-assigneddropdown>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Priority
+                            </div>
+                            <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                                controlName="priorityId"></app-prioritydropdown>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="title my-2">
+                                Status
+                            </div>
+                            <app-statusdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                                controlName="statusId"></app-statusdropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <p-toast position="bottom-left" key="bc"></p-toast>
