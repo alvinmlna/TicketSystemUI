@@ -9,6 +9,10 @@ import { DashboardService } from '../dashboard.service';
 export class CategorychartComponent implements OnInit {
   data: any;
 
+
+  chartData: any;
+  chartOptions: any;
+
   product: any;
   productOptions: any;
   category: any;
@@ -34,16 +38,46 @@ export class CategorychartComponent implements OnInit {
       { name: 'Category', code: 'category' },
       { name: 'Priority', code: 'priority' },
   ];
-
     this.setProductChart();
-    this.setCategoryChart();
-    this.setPriorityChart();
+    this.chartOptions = {
+        plugins: {
+            legend: {
+                position: "bottom",
+                display: true,
+                labels: {
+                    usePointStyle: true,
+                    color: this.textColor,
+                }
+            }
+        }
+    };
+  }
+
+  changeChart(){
+    switch(this.selectedChart.code){
+      case "product": {
+        this.setProductChart();
+        break;
+      }
+      case "category": {
+        this.setCategoryChart();
+        break;
+      }
+      case "priority":{
+        this.setPriorityChart();
+        break;
+      }
+      default: {
+        break;
+      }
+
+    }
   }
 
   setProductChart(){
     this.dashboardService.getByCategory('product').subscribe({
       next : res => {
-        this.product = {
+        this.chartData = {
           labels: res.category,
           datasets: [
               {
@@ -58,29 +92,12 @@ export class CategorychartComponent implements OnInit {
         };
       }
     })
-
-    this.productOptions = {
-        plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    usePointStyle: true,
-                    color: this.textColor,
-                }
-            },
-              title: {
-                display: true,
-                text: 'Products',
-                fontSize: 16
-            }
-        }
-    };
   }
   
   setCategoryChart(){
     this.dashboardService.getByCategory('category').subscribe({
       next : res => {
-        this.category = {
+        this.chartData = {
           labels: res.category,
           datasets: [
               {
@@ -92,35 +109,18 @@ export class CategorychartComponent implements OnInit {
         };
       }
     })
-
-    this.categoryOptions = {
-        plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    usePointStyle: true,
-                    color: this.textColor,
-                }
-            },
-              title: {
-                display: true,
-                text: 'Category',
-                fontSize: 16
-            }
-        }
-    };
   }
 
   setPriorityChart(){
     this.dashboardService.getByCategory('priority').subscribe({
       next : res => {
-        this.priority = {
+        this.chartData = {
           labels: res.category,
           datasets: [
               {
                   data: res.count,
                   backgroundColor: [
-                    this.documentStyle.getPropertyValue('--tosca'), 
+                    this.documentStyle.getPropertyValue('--red'), 
                     this.documentStyle.getPropertyValue('--green'), 
                     this.documentStyle.getPropertyValue('--yellow'), 
                     this.documentStyle.getPropertyValue('--orange'), 
@@ -130,22 +130,5 @@ export class CategorychartComponent implements OnInit {
         };
       }
     })
-
-    this.priorityOptions = {
-        plugins: {
-            legend: {
-                display: false,
-                labels: {
-                    usePointStyle: true,
-                    color: this.textColor,
-                }
-            },
-              title: {
-                display: true,
-                text: 'Priority',
-                fontSize: 16
-            }
-        }
-    };
   }
 }

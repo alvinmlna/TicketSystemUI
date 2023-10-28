@@ -2,12 +2,12 @@
 <div class="dashboard-status">    
     <div class="header">
         <div class="title">
-            <p-dropdown [options]="chartType" [(ngModel)]="selectedChart" optionLabel="name" ></p-dropdown>
+            <p-dropdown [options]="chartType" (onChange)="changeChart()" [(ngModel)]="selectedChart" optionLabel="name" ></p-dropdown>
         </div>
         <div style="clear: both;"></div>
     </div>
     <div class="body">
-        <p-chart type="pie" [data]="product" [options]="productOptions"></p-chart>
+        <p-chart type="pie" [data]="chartData" [options]="chartOptions"></p-chart>
     </div>
 </div> 
 
