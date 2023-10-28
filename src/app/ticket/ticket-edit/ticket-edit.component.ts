@@ -31,7 +31,10 @@ export class TicketEditComponent implements OnInit {
   progress!: number;
   @ViewChild('fileUpload') fileUpload: any;
 
-  ticketForm = this.fb.group({
+  //conditions
+  isOverdue = false;
+
+  public ticketForm = this.fb.group({
     ticketInfoForm: this.fb.group({
       ticketId : new FormControl<number>(0, {nonNullable: true}),
       ticketIdView : new FormControl<string>(''),
@@ -85,6 +88,19 @@ export class TicketEditComponent implements OnInit {
 
         this.ticketForm.get('ticketInfoForm')?.patchValue(response);
         this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.setValue(formatDate(response.raisedDate, 'dd MMMM yyyy HH:mm a', 'en'));
+        
+        var today = new Date();
+        var expectedDate = new Date();
+        var expectedDateString = this.ticketForm.get('ticketInfoForm')?.get('expectedDate')?.value;
+
+        if(expectedDateString){
+          var expectedDate = new Date(expectedDateString);
+          if(expectedDate < today) {
+            this.isOverdue = true;
+          }
+        }
+        
+        this.ticketForm.get('ticketInfoForm')?.get('expectedDate')?.setValue(formatDate(response.expectedDate, 'dd MMMM yyyy HH:mm a', 'en'));
       },
       error: error => this.ticketNotFound()
     })

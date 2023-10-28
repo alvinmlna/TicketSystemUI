@@ -13,7 +13,6 @@
                     </span>
                 </ng-template>
             </p-button>
-
             
             <p-button type="button" label="Archive" iconPos="right" styleClass="p-button-default me-2">
                 <ng-template pTemplate="buttonicon">
@@ -26,14 +25,13 @@
         </div>
     </div>
     <div>
-
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
             <div class="row me-0" formGroupName="ticketInfoForm">
-                <div class="col-10">
+                <div class="col-10" style="max-height: 79vh;overflow-y: scroll;" >
                     <div class="mx-3 mt-3">
                         <div class="ticket-content">
                             <h5>
-                                SUMMARY SUMMARY SUMMARY
+                               {{this.ticketForm.get('ticketInfoForm')?.get('summary')?.value}}
                             </h5>
                             <table>
                                 <tr>
@@ -44,9 +42,10 @@
                                     </td>
                                     <td>
                                         <div class="title ms-3">
-                                            Alvin Maulana <br>
+                                            {{this.ticketForm.get('ticketInfoForm')?.get('raisedBy')?.value}}
+                                            <br>
                                             <span class="child">
-                                                Wed, 22 Oct 2023 at 1:38 PM
+                                                {{this.ticketForm.get('ticketInfoForm')?.get('raisedDate')?.value}}
                                             </span>
                                         </div>
                                     </td>
@@ -58,79 +57,31 @@
                                     </td>
                                 </tr>
                             </table>
-                            <div class="mt-3">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                            <div class="mt-3" [innerHTML]="this.ticketForm.get('ticketInfoForm')?.get('description')?.value">
                             </div>
-                            <div class="mt-3">
-                                <a href="google.com" class="text-decoration-none">
-                                    <div class="attachment">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <div class="samplePhoto">
-                                                        sa
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="ms-3">
-                                                    <div class="filename">Sample instalation files.pdf</div>
-                                                    <div class="size">900 kb</div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </a>
-                            </div>
-                            <!-- <div class="row">
-                                <div class="col-12">
-                                    <div class="title my-2">
-                                        Summary
-                                    </div>
-                                    <p class="mt-1">
-                                        <input style="width: 100%;" type="text" pInputText formControlName="summary" />
-                                    </p>
+                            <div class="mt-3 row">
+                                <div class="col-md-3" *ngFor="let attachment of attachments">
+                                    <a [routerLink]="[]" class="text-decoration-none" style="cursor: pointer;" (click)="downloadFile(attachment.filename)">
+                                        <div class="attachment">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="samplePhoto">
+                                                            sa
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ms-3">
+                                                        <div class="filename">{{attachment.filename}}</div>
+                                                        <div class="size">900 kb</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="title my-2">
-                                        Request Descriptions
-                                    </div>
-                                    <p class="mt-1">
-                                        <textarea rows="5" pInputTextarea formControlName="description"></textarea>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="title my-2">
-                                        Attachments
-                                    </div>
-                                    <ul>
-                                        <li *ngFor="let attachment of attachments">
-                                            <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
-                                                [routerLink]="[]">{{attachment.filename}}</a>
-                                        </li>
-                                    </ul>
-                                    <p class="mt-1">
-                                        <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
-                                            (uploadHandler)="onUpload($event)" [customUpload]="true">
-                                            <ng-template let-file pTemplate="file">
-                                                <li>{{ file.name }}</li>
-                                            </ng-template>
-                                        </p-fileUpload>
-                                    </p>
-                                </div>
-                            </div> -->
                         </div>
                         <div *ngIf="IdOfItems">
                             <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
@@ -139,6 +90,8 @@
                 </div>
                 <div class="col-2 information-panel">
                     <div class="row mt-4">
+                        <input type="hidden"  formControlName="summary" />
+                        <input type="hidden"  formControlName="description"/>
 
                         <div class="col-12">
                             <p-button type="submit" label="Update Ticket" icon="pi pi-save" iconPos="right"
@@ -157,8 +110,11 @@
                         <div class="col-12 mt-3">
                             <div class="title my-2">
                                 Expected Date
+                                <span *ngIf="isOverdue" class="badge bg-danger">
+                                    OVERDUE
+                                </span>
                             </div>
-                            <input class="w-100" type="text" pInputText formControlName="raisedDate" />
+                            <input class="w-100" type="text" pInputText formControlName="expectedDate" />
                         </div>
 
                         <div class="col-12 mt-3">
