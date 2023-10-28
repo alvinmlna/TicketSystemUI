@@ -1,7 +1,7 @@
-.chat-panel {
+.reply {
+    display: block;
     padding: 20px;
-    border-bottom: 1px solid;
-}
-
-.chat-header {
+    background-color: var(--whitegrey);
+    width: 100%;
+    border-radius:5px ;
 }

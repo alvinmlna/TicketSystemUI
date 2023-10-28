@@ -5,15 +5,6 @@
 <div style="margin-left: 70px;">
     <div class="filter">
         <div>
-            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2">
-                <ng-template pTemplate="buttonicon">
-                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
-                    <span class="ms-2">
-                        Reply
-                    </span>
-                </ng-template>
-            </p-button>
-            
             <p-button type="button" label="Close" iconPos="right" styleClass="p-button-default me-2">
                 <ng-template pTemplate="buttonicon">
                     <fa-icon [icon]="['fas', 'check-circle']" style="size: 1.5rem;"> </fa-icon>
@@ -141,53 +132,8 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="reply mt-4">
-                            <table>
-                                <tr>
-                                    <td rowspan="2">
-                                        <div class="samplePhoto">
-                                            sa
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="title ms-3">
-                                            Alvin Maulana <br>
-                                            <span class="child">
-                                                Wed, 22 Oct 2023 at 1:38 PM
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="title ms-3">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <div class="mt-3">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the industry's
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                                scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged.
-                                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            </div>
-                        </div>
-                        
-                        <div class="reply mt-4">
-                            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2">
-                                <ng-template pTemplate="buttonicon">
-                                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
-                                    <span class="ms-2">
-                                        Reply
-                                    </span>
-                                </ng-template>
-                            </p-button>
+                        <div *ngIf="IdOfItems">
+                            <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
                         </div>
                     </div>
                 </div>
@@ -263,6 +209,3 @@
 
 <p-toast position="bottom-left" key="bc"></p-toast>
 
-<div *ngIf="IdOfItems">
-    <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
-</div>

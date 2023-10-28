@@ -1,31 +1,48 @@
 
 
 <p-toast ></p-toast>
-<p-card styleClass="mt-3">
-    <div class="mx-3">
-        <div class="row mb-4">
-            <div class="col-4">
-                <b>Discussion</b>
-            </div>
-        </div>
-        <div style="height: 400px;display: block;background-color:whitesmoke;overflow-y: auto;">
-            <div *ngIf="discussions">
-                <div class="chat-panel" *ngFor="let discussion of discussions">
-                    <div class="chat-header">
-                        <strong>{{discussion.name}}</strong> <span style="font-size: .8rem;"> at {{discussion.dateSending | date: "dd MMMM yyyy HH:mm a"}}</span>
-                    </div>
-                    <div class="chat-body">
-                        {{discussion.message}}
-                    </div>
+
+<div class="reply mt-4" *ngFor="let discussion of discussions">
+    <table>
+        <tr>
+            <td rowspan="2">
+                <div class="samplePhoto">
+                    sa
                 </div>
-            </div>
-        </div>
-        <div class="mt-4">
-            <textarea style="width: 100%;" rows="3" cols="30" [(ngModel)]="message" pInputTextarea></textarea>
-            <div style="float:right;" class="mt-2">
-                <p-button label="Send" (onClick)="submitMessage()" icon="pi pi-send" iconPos="right"></p-button>
-            </div>
-            <div style="clear: both;"></div>
-        </div>
+            </td>
+            <td>
+                <div class="title ms-3">
+                    <strong>{{discussion.name}}</strong><br>
+                    <span class="child">
+                        {{discussion.dateSending | date: "dd MMMM yyyy HH:mm a"}}
+                    </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="title ms-3">
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="mt-3" [innerHTML]="discussion.message">
     </div>
-</p-card>
+</div>
+
+<div class="reply mt-4">
+    
+         <p-editor [(ngModel)]="message" [style]="{ height: '200px' }"></p-editor>
+        <div style="float:right;" class="mt-2">
+            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2"  (onClick)="submitMessage()">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Reply
+                    </span>
+                </ng-template>
+            </p-button>
+        </div>
+        <div style="clear: both;"></div>
+</div>
