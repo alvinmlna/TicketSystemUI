@@ -24,8 +24,16 @@
   }
 
 
-
-
+.attachment-icon {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-color: var(--lightgrey);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
 
 .attachment {
     border: 1px solid var(--linecolor);
