@@ -33,6 +33,7 @@ export class TicketEditComponent implements OnInit {
 
   //conditions
   isOverdue = false;
+  isStatusClose = false;
 
   public ticketForm = this.fb.group({
     ticketInfoForm: this.fb.group({
@@ -67,6 +68,8 @@ export class TicketEditComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const status = this.activatedRoute.snapshot.paramMap;
+    console.log(status);
     if(id) {
       this.getTicketById(id);
     }  else {
@@ -100,6 +103,11 @@ export class TicketEditComponent implements OnInit {
           }
         }
         
+        var statusId = this.ticketForm.get('ticketInfoForm')?.get('statusId')?.value;
+        if(statusId && statusId === 2) {
+          this.isStatusClose = true;
+        }
+
         this.ticketForm.get('ticketInfoForm')?.get('expectedDate')?.setValue(formatDate(response.expectedDate, 'dd MMMM yyyy HH:mm a', 'en'));
       },
       error: error => this.ticketNotFound()
@@ -203,5 +211,10 @@ export class TicketEditComponent implements OnInit {
         a.click();
       }
     )
+  }
+
+  closeTicket(){
+    this.ticketForm.get('ticketInfoForm')?.get('statusId')?.setValue(2);
+    this.onSubmit();
   }
 }

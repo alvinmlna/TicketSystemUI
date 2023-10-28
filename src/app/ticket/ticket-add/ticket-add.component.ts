@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { AttachmentView } from 'src/app/shared/shared/models/ticket';
 import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class TicketAddComponent {
   selectedCity: City | undefined;
   uploadedFiles: any[] = [];
 
-  
+  isRedirect = false;
+
   attachments! : AttachmentView[];
   progress!: number;
   @ViewChild('fileUpload') fileUpload: any;
@@ -52,7 +54,7 @@ export class TicketAddComponent {
     private fb : FormBuilder,
     private ticketService : TicketService,
     private route : Router,
-    private layoutService : LayoutServiceService
+    private layoutService : LayoutServiceService,
     ) {
       this.layoutService.loadPageTitle("Create new ticket");
     }
@@ -130,9 +132,16 @@ export class TicketAddComponent {
           this.ticketid = res.ticketId;
           this.IdOfticketView = res.ticketIdView;
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Ticket submitted successfully' });
-        }
-      }
-      );
+          
+          this.isRedirect = true;
+            setTimeout(() => {
+              this.route.navigateByUrl("/ticket/" + this.ticketid);
+            }, 2000);
+          },
+          error : err => {
+            this.messageService.add({ severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
+          }
+      });
     } else {
       console.log("NOT VALID");
     }
