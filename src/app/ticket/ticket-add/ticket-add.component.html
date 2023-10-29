@@ -1,125 +1,108 @@
 <div style="margin-left: 70px;">
-    <div *ngIf="!isRedirect">
-        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-            <div class="row me-0" formGroupName="ticketInfoForm">
-                <div class="col-10">
-                    <div class="mx-3">
-                        <div class="row mt-2">
-                            <div class="col-6">
-                                <div class="title my-2">
-                                    Summary
-                                </div>
-                                <p class="mt-1">
-                                    <input style="width: 100%;" type="text" pInputText formControlName="summary" />
-                                </p>
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="!isRedirect" class="row me-0" formGroupName="ticketInfoForm">
+            <div class="col-10">
+                <div class="mx-3">
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <div class="title my-2">
+                                Summary
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="title my-2">
-                                    Request Descriptions
-                                </div>
-                                <p class="mt-1">
-                                    <p-editor formControlName="description" [style]="{ height: '200px' }">
-                                        <ng-template pTemplate="header">
-                                            <select class="ql-size">
-                                                <option value="small"></option>
-                                                <option selected></option>
-                                                <option value="large"></option>
-                                                <option value="huge"></option>
-                                            </select>
-                                            <span class="ql-formats">
-                                                <button type="button" class="ql-bold" aria-label="Bold"></button>
-                                                <button type="button" class="ql-italic" aria-label="Italic"></button>
-                                                <button type="button" class="ql-underline"
-                                                    aria-label="Underline"></button>
-                                            </span>
-                                            <span class="ql-formats">
-                                                <select class="ql-color">
-                                                </select>
-                                            </span>
-                                            <span class="ql-formats">
-                                                <button type="button" value="ordered" class="ql-list" aria-label="Ordered List"></button>
-                                                <button type="button" value="bullet" class="ql-list" aria-label="Unordered List"></button>
-                                            </span>
-
-                                            <span class="ql-formats">
-                                                <button type="button" class="ql-code-block" aria-label="Bold"></button>
-                                                <button type="button" class="ql-blockquote" aria-label="Bold"></button>
-                                            </span>
-                                        </ng-template>
-                                    </p-editor>
-                                </p>
-                            </div>
-                        </div>
-                        <p-toast></p-toast>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="title my-2">
-                                    Attachments
-                                </div>
-                                <ul>
-                                    <li *ngFor="let attachment of attachments">
-                                        <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
-                                            [routerLink]="[]">
-                                            {{attachment.filename}}
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p class="mt-1">
-                                    <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
-                                        (onSelect)="onSelect($event)" (onClear)="onClear($event)" [customUpload]="true"
-                                        [showUploadButton]="false">
-                                        <ng-template let-file pTemplate="file">
-                                            <li>{{ file.name }}</li>
-                                        </ng-template>
-                                    </p-fileUpload>
-                                </p>
-                            </div>
+                            <p class="mt-1">
+                                <input style="width: 100%;" type="text" pInputText formControlName="summary" />
+                            </p>
                         </div>
                     </div>
-
-                </div>
-                <div class="col-2 information-panel">
-                    <div class="row mt-4">
-                        <input type="hidden" formControlName="userId" />
-                        <input type="hidden" formControlName="raisedBy" />
-
+                    <div class="row">
                         <div class="col-12">
-                            <p-button type="submit" label="Publish Ticket" icon="pi pi-save" iconPos="right"
-                                styleClass="p-button-default w-100" style="width: 100%;"></p-button>
-                        </div>
+                            <div class="title my-2">
+                                Request Descriptions
+                            </div>
+                            <p class="mt-1">
+                                <p-editor formControlName="description" [style]="{ height: '200px' }">
+                                    <ng-template pTemplate="header">
+                                        <select class="ql-size">
+                                            <option value="small"></option>
+                                            <option selected></option>
+                                            <option value="large"></option>
+                                            <option value="huge"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                            <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                            <button type="button" class="ql-underline"
+                                                aria-label="Underline"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color">
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button type="button" value="ordered" class="ql-list" aria-label="Ordered List"></button>
+                                            <button type="button" value="bullet" class="ql-list" aria-label="Unordered List"></button>
+                                        </span>
 
-                        <div class="col-12 mt-3">
-                            <div class="title my-2">
-                                Product
-                            </div>
-                            <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                controlName="productId"></app-productdropdown>
+                                        <span class="ql-formats">
+                                            <button type="button" class="ql-code-block" aria-label="Bold"></button>
+                                            <button type="button" class="ql-blockquote" aria-label="Bold"></button>
+                                        </span>
+                                    </ng-template>
+                                </p-editor>
+                            </p>
                         </div>
-                        <div class="col-12 mt-3">
-                            <div class="title my-2">
-                                Category
-                            </div>
-                            <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                controlName="categoryId"></app-categorydropdown>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <div class="title my-2">
-                                Priority
-                            </div>
-                            <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
-                                controlName="priorityId"></app-prioritydropdown>
-                        </div>
-
                     </div>
+                    <p-toast></p-toast>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="title my-2">
+                                Attachments
+                            </div>
+                            <div >
+                                <input class="form-control" (change)="onChange($event)" type="file" id="formFileMultiple" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-2 information-panel">
+                <div class="row mt-4">
+                    <input type="hidden" formControlName="userId" />
+                    <input type="hidden" formControlName="raisedBy" />
+
+                    <div class="col-12">
+                        <p-button type="submit" label="Publish Ticket" icon="pi pi-save" iconPos="right"
+                            styleClass="p-button-default w-100" style="width: 100%;"></p-button>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Product
+                        </div>
+                        <app-productdropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="productId"></app-productdropdown>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Category
+                        </div>
+                        <app-categorydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="categoryId"></app-categorydropdown>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <div class="title my-2">
+                            Priority
+                        </div>
+                        <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
+                            controlName="priorityId"></app-prioritydropdown>
+                    </div>
+
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 
     <div class="container-fluid mt-4 ms-4" *ngIf="isRedirect">
         Please wait <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
     </div>
-
 </div>

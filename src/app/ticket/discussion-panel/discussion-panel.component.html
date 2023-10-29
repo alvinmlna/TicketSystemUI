@@ -34,15 +34,20 @@
 <div class="reply mt-4">
     
          <p-editor [(ngModel)]="message" [style]="{ height: '200px' }"></p-editor>
-        <div style="float:right;" class="mt-2">
-            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2"  (onClick)="submitMessage()">
-                <ng-template pTemplate="buttonicon">
-                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
-                    <span class="ms-2">
-                        Reply
-                    </span>
-                </ng-template>
-            </p-button>
+         
+         <div class="d-flex justify-content-between mt-2">
+            <div >
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <div >
+                <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default"  (onClick)="submitMessage()">
+                    <ng-template pTemplate="buttonicon">
+                        <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                        <span class="ms-2">
+                            Reply
+                        </span>
+                    </ng-template>
+                </p-button>
+            </div>
         </div>
-        <div style="clear: both;"></div>
 </div>

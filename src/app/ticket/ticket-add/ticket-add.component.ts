@@ -8,10 +8,8 @@ import { TicketService } from '../ticket.service';
 import { addticketrequest } from 'src/app/shared/shared/models/request/addticketrequest';
 import { tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { AttachmentView } from 'src/app/shared/shared/models/ticket';
 import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -21,20 +19,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providers: [MessageService]
 })
 export class TicketAddComponent {
-  cities: City[] = [];
-
-  ticketid! : number;
-  IdOfticketView!: string | null;
-
-  products!: Product[];
-  selectedCity: City | undefined;
   uploadedFiles: any[] = [];
-
   isRedirect = false;
-
-  attachments! : AttachmentView[];
-  progress!: number;
-  @ViewChild('fileUpload') fileUpload: any;
 
   /////////////
 
@@ -59,31 +45,15 @@ export class TicketAddComponent {
       this.layoutService.loadPageTitle("Create new ticket");
     }
 
-  uploadfun(event: UploadEvent) {
-    console.log(event);
-  }
-
-  refreshAttachmentView(){
-    if(this.ticketid){
-      this.ticketService.getTicketById(+this.ticketid).subscribe({
-        next: response => {
-          this.attachments = response.attachmentViews;
-        }
-      })
-    }
-  }
-
-  onSelect(_uploadEvent: any) {
+    
+  onChange(event:any) {
     this.uploadedFiles = [];
-
-    for(let file of _uploadEvent.currentFiles) {
-      this.uploadedFiles.push(file);
+    if (event.target.files.length > 0) {
+      for(let file of event.target.files) {
+        this.uploadedFiles.push(file);
+      }
     }
-  }
-
-  onClear(_event: any){
-    this.uploadedFiles = [];
-  }
+  } 
 
   onSubmit(){
     if(this.ticketForm.valid) {
@@ -96,18 +66,15 @@ export class TicketAddComponent {
         description :  this.ticketForm.value.ticketInfoForm?.description as string,
         attachments : this.uploadedFiles
       };
-      console.log(ticket.attachments);
         
       this.ticketService.addTicket(ticket).subscribe({
         next : res => {
           console.log(res);
-          this.ticketid = res.ticketId;
-          this.IdOfticketView = res.ticketIdView;
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Ticket submitted successfully' });
           
           this.isRedirect = true;
             setTimeout(() => {
-              this.route.navigateByUrl("/ticket/" + this.ticketid);
+              this.route.navigateByUrl("/ticket/" + res.ticketId);
             }, 2000);
           },
           error : err => {
@@ -118,37 +85,5 @@ export class TicketAddComponent {
       console.log("NOT VALID");
     }
     console.log(this.ticketForm.value);
-  }
-
-  dealWithFiles(event: UploadEvent) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-        console.log(this.uploadedFiles);
-    }
-      // Deal with your files
-      // e.g  assign it to a variable, and on submit add the variable to your form data
-  }
-
-  downloadFile(filename : string){
-    this.ticketService.downloadFile(filename).subscribe(
-      response => {
-        let filename = response.headers.get('content-disposition')?.split(';')[1].split('=')[1];
-        let blob:Blob = response.body as Blob;
-        let a = document.createElement('a');
-        a.download = filename!;
-        a.href = window.URL.createObjectURL(blob);
-        a.click();
-      }
-    )
-  }
-
-  ngOnInit() {
-      this.cities = [
-          { name: 'New York', code: 'NY' },
-          { name: 'Rome', code: 'RM' },
-          { name: 'London', code: 'LDN' },
-          { name: 'Istanbul', code: 'IST' },
-          { name: 'Paris', code: 'PRS' }
-      ];
   }
 }
