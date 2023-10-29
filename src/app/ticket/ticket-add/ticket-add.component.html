@@ -1,5 +1,5 @@
-<div style="margin-left: 70px;"  >
-    <div  *ngIf="!isRedirect">
+<div style="margin-left: 70px;">
+    <div *ngIf="!isRedirect">
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
             <div class="row me-0" formGroupName="ticketInfoForm">
                 <div class="col-10">
@@ -20,25 +20,56 @@
                                     Request Descriptions
                                 </div>
                                 <p class="mt-1">
-                                    <p-editor formControlName="description" [style]="{ height: '200px' }"></p-editor>
+                                    <p-editor formControlName="description" [style]="{ height: '200px' }">
+                                        <ng-template pTemplate="header">
+                                            <select class="ql-size">
+                                                <option value="small"></option>
+                                                <option selected></option>
+                                                <option value="large"></option>
+                                                <option value="huge"></option>
+                                            </select>
+                                            <span class="ql-formats">
+                                                <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                                <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                                <button type="button" class="ql-underline"
+                                                    aria-label="Underline"></button>
+                                            </span>
+                                            <span class="ql-formats">
+                                                <select class="ql-color">
+                                                </select>
+                                            </span>
+                                            <span class="ql-formats">
+                                                <button type="button" value="ordered" class="ql-list" aria-label="Ordered List"></button>
+                                                <button type="button" value="bullet" class="ql-list" aria-label="Unordered List"></button>
+                                            </span>
+
+                                            <span class="ql-formats">
+                                                <button type="button" class="ql-code-block" aria-label="Bold"></button>
+                                                <button type="button" class="ql-blockquote" aria-label="Bold"></button>
+                                            </span>
+                                        </ng-template>
+                                    </p-editor>
                                 </p>
                             </div>
                         </div>
                         <p-toast></p-toast>
                         <div class="row">
                             <div class="col-12">
-                            <div class="title my-2">
-                                Attachments
-                            </div>
+                                <div class="title my-2">
+                                    Attachments
+                                </div>
                                 <ul>
                                     <li *ngFor="let attachment of attachments">
                                         <a style="cursor: pointer;" (click)="downloadFile(attachment.filename)"
-                                            [routerLink]="[]">{{attachment.filename}}</a>
+                                            [routerLink]="[]">
+                                            {{attachment.filename}}
+                                        </a>
                                     </li>
                                 </ul>
                                 <p class="mt-1">
                                     <p-fileUpload #fileUpload name="myfile[]" [multiple]="true"
-                                        (uploadHandler)="onUpload($event)" [customUpload]="true">
+                                        (onSelect)="onSelect($event)" (onClear)="onClear($event)" [customUpload]="true"
+                                        [showUploadButton]="false">
                                         <ng-template let-file pTemplate="file">
                                             <li>{{ file.name }}</li>
                                         </ng-template>
@@ -47,18 +78,18 @@
                             </div>
                         </div>
                     </div>
-    
+
                 </div>
                 <div class="col-2 information-panel">
                     <div class="row mt-4">
                         <input type="hidden" formControlName="userId" />
                         <input type="hidden" formControlName="raisedBy" />
-    
+
                         <div class="col-12">
                             <p-button type="submit" label="Publish Ticket" icon="pi pi-save" iconPos="right"
                                 styleClass="p-button-default w-100" style="width: 100%;"></p-button>
                         </div>
-    
+
                         <div class="col-12 mt-3">
                             <div class="title my-2">
                                 Product
@@ -80,15 +111,15 @@
                             <app-prioritydropdown [formGroupParent]="ticketForm.get(['ticketInfoForm'])"
                                 controlName="priorityId"></app-prioritydropdown>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="container-fluid mt-4 ms-4" *ngIf="isRedirect" >
-        Please wait <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i> 
+    <div class="container-fluid mt-4 ms-4" *ngIf="isRedirect">
+        Please wait <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
     </div>
 
 </div>

@@ -73,45 +73,16 @@ export class TicketAddComponent {
     }
   }
 
+  onSelect(_uploadEvent: any) {
+    this.uploadedFiles = [];
 
-  onUpload(_uploadEvent: UploadEvent) {
-    for(let file of _uploadEvent.files) {
-        this.uploadedFiles.push(file);
+    for(let file of _uploadEvent.currentFiles) {
+      this.uploadedFiles.push(file);
     }
+  }
 
-    if (this.uploadedFiles.length === 0) {
-      this.messageService.add({ severity: 'error', summary: 'ERROR', detail: 'No file to upload!' });
-      return;
-    }
-
-    const formData = new FormData();
-    this.uploadedFiles.forEach((file) => { formData.append('files[]', file); });
-    
-      this.ticketService.uploadFileById(formData, this.ticketid).subscribe({
-      next: (event) => {
-        if (event.type === HttpEventType.UploadProgress)
-        {
-          this.progress = Math.round(100 * event.loaded / event.total!);
-          console.log(this.progress);
-        }
-        else if (event.type === HttpEventType.Response) {
-          this.uploadedFiles = [];
-          this.fileUpload.clear();
-          this.progress = 0;
-          this.refreshAttachmentView();
-          this.messageService.add({ key: 'bc', severity: 'success', summary: 'SUCCESS', detail: 'Upload Success!' });
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-        this.uploadedFiles = [];
-        this.fileUpload.clear();
-        this.progress = 0;
-        this.messageService.add({ key: 'bc', severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
-      }
-    });
-
-
+  onClear(_event: any){
+    this.uploadedFiles = [];
   }
 
   onSubmit(){
@@ -123,8 +94,9 @@ export class TicketAddComponent {
         priorityId : this.ticketForm.value.ticketInfoForm?.priorityId as number,
         summary :  this.ticketForm.value.ticketInfoForm?.summary as string,
         description :  this.ticketForm.value.ticketInfoForm?.description as string,
+        attachments : this.uploadedFiles
       };
-      console.log(ticket);
+      console.log(ticket.attachments);
         
       this.ticketService.addTicket(ticket).subscribe({
         next : res => {

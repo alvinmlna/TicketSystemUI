@@ -7,6 +7,7 @@ import { ListTicketRequest } from '../shared/shared/models/request/listticketreq
 import { statussummary } from '../shared/shared/models/responses/statussummary';
 import { addticketrequest } from '../shared/shared/models/request/addticketrequest';
 import { LayoutServiceService } from '../core/services/layout-service.service';
+import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,19 @@ export class TicketService {
   }
   
   addTicket(ticket: addticketrequest){
-    return this.http.post<ticket>(this.baseUrl + 'ticket', ticket).pipe(retry(1), catchError(this.errorHandl));
+    const formData = new FormData();
+    formData.append('userId', ticket.userId.toString());
+    formData.append('productId', ticket.productId.toString());
+    formData.append('categoryId', ticket.categoryId.toString());
+    formData.append('priorityId', ticket.priorityId.toString());
+    formData.append('summary', ticket.summary.toString());
+    formData.append('description', ticket.description.toString());
+
+    if(ticket.attachments){
+      ticket.attachments.forEach((file) => { formData.append('attachments', file); });
+    }
+
+    return this.http.post<ticket>(this.baseUrl + 'ticket', formData).pipe(retry(1), catchError(this.errorHandl));
   }
 
   editTicket(ticket: editticketrequest){

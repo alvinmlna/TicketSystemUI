@@ -5,4 +5,5 @@ export interface addticketrequest {
     priorityId: number;
     summary: string;
     description: string;
+    attachments: any[];
 }
