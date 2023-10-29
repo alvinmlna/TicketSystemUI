@@ -11,7 +11,16 @@ export class DiscussionService {
   constructor(private http : HttpClient) { }
 
   addDiscussion(discussion : discussion){
-    return this.http.post<discussion>(this.baseUrl + "discussion", discussion);
+    const formData = new FormData();
+    formData.append('userId', discussion.userId.toString());
+    formData.append('message', discussion.message.toString());
+    formData.append('ticketId', discussion.ticketId.toString());
+
+    if(discussion.attachments){
+      discussion.attachments.forEach((file) => { formData.append('attachments', file); });
+    }
+
+    return this.http.post<discussion>(this.baseUrl + "discussion", formData);
   }
 
   editDiscussion(discussion : discussion){

@@ -135,3 +135,47 @@ main {
 }
 
 //END OF SAMPLES
+
+
+///Attachments
+
+.attachment-icon {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background-color: var(--lightgrey);
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.attachment {
+  border: 1px solid var(--linecolor);
+  width: 300px;
+  height: 100%;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--black);
+  border-radius: 5px;
+}
+
+.attachment .filename {
+  font-size: 0.9rem;
+  color: var(--textcolor) !important;
+}
+
+.attachment .size {
+  font-size: 0.9rem;
+  color: var(--textcolor2) !important;
+}
+
+.attachment:hover {
+  color: var(--tosca) !important;
+  border: 1px solid var(--tosca);
+  transition: border-color 0.5s ease;
+  transition: color 0.5s ease;
+}
+ 
+
+/// End of Attachments

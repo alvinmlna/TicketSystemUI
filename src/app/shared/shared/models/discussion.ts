@@ -4,6 +4,16 @@ export interface discussion {
     message: string
     userId: number
     ticketId: number,
-    name : string | null
+    name : string | null,
+    attachments: any[];
+    attachmentViews: DiscussionAttachmentView[] | null
   }
   
+  export interface DiscussionAttachmentView {
+    attachmentId: number;
+    filename: string;
+    serverFileName: string;
+    fileSize: number;
+    dateAdded: string;
+    discussionId: number;
+}

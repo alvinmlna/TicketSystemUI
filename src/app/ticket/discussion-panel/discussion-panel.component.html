@@ -29,15 +29,66 @@
     
     <div class="mt-3" [innerHTML]="discussion.message">
     </div>
+    
+    <div class="mt-3 row">
+        <div class="col-md-3" *ngFor="let attachment of discussion.attachmentViews">
+            <a [routerLink]="[]" class="text-decoration-none" style="cursor: pointer;" (click)="downloadFile(attachment.serverFileName)">
+                <div class="attachment">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="attachment-icon">
+                                    <i class="pi pi-download" style="font-size: 1.5rem" ></i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="ms-3">
+                                <div class="filename">{{attachment.filename}}</div>
+                                <div class="size">{{formatBytes(attachment.fileSize)}}</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 <div class="reply mt-4">
-    
-         <p-editor [(ngModel)]="message" [style]="{ height: '200px' }"></p-editor>
+         <p-editor [(ngModel)]="message" [style]="{ height: '200px' }">
+            <ng-template pTemplate="header">
+                <select class="ql-size">
+                    <option value="small"></option>
+                    <option selected></option>
+                    <option value="large"></option>
+                    <option value="huge"></option>
+                </select>
+                <span class="ql-formats">
+                    <button type="button" class="ql-bold" aria-label="Bold"></button>
+                    <button type="button" class="ql-italic" aria-label="Italic"></button>
+                    <button type="button" class="ql-underline"
+                        aria-label="Underline"></button>
+                </span>
+                <span class="ql-formats">
+                    <select class="ql-color">
+                    </select>
+                </span>
+                <span class="ql-formats">
+                    <button type="button" value="ordered" class="ql-list" aria-label="Ordered List"></button>
+                    <button type="button" value="bullet" class="ql-list" aria-label="Unordered List"></button>
+                </span>
+
+                <span class="ql-formats">
+                    <button type="button" class="ql-code-block" aria-label="Bold"></button>
+                    <button type="button" class="ql-blockquote" aria-label="Bold"></button>
+                </span>
+            </ng-template>
+        </p-editor>
          
          <div class="d-flex justify-content-between mt-2">
             <div >
-                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                <input class="form-control" (change)="onChange($event)" type="file" id="formFileMultiple" multiple>
             </div>
             <div >
                 <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default"  (onClick)="submitMessage()">
