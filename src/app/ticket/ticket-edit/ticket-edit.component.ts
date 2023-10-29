@@ -10,6 +10,7 @@ import { firstValueFrom } from 'rxjs';
 import { editticketrequest } from 'src/app/shared/shared/models/editticketrequest';
 import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
+import Utils from 'src/app/shared/shared/Helpers/utils';
 
 @Component({
   selector: 'app-ticket-edit',
@@ -191,15 +192,6 @@ export class TicketEditComponent implements OnInit {
 
   }
 
-  dealWithFiles(event: UploadEvent) {
-    // for(let file of event.files) {
-    //     this.uploadedFiles.push(file);
-    //     console.log(this.uploadedFiles);
-    // }
-    //   // Deal with your files
-    //   // e.g  assign it to a variable, and on submit add the variable to your form data
-  }
-
   downloadFile(filename : string){
     this.ticketService.downloadFile(filename).subscribe(
       response => {
@@ -213,6 +205,11 @@ export class TicketEditComponent implements OnInit {
     )
   }
 
+  
+  formatBytes(bytes : number) {
+    return Utils.formatBytes(bytes);
+  }
+  
   closeTicket(){
     this.ticketForm.get('ticketInfoForm')?.get('statusId')?.setValue(2);
     this.onSubmit();

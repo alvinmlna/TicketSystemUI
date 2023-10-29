@@ -47,6 +47,8 @@ export interface ticket {
   export interface AttachmentView {
     attachmentId: number
     filename: string
+    serverFileName: string;
+    fileSize: number;
     dateAdded: string
     ticketId: number
   }
