@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
-import { UploadEvent } from 'src/app/shared/shared/models/UploadEvent';
 import { TicketService } from '../ticket.service';
 import { AttachmentView, ticket } from 'src/app/shared/shared/models/ticket';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { editticketrequest } from 'src/app/shared/shared/models/editticketrequest';
-import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
 import Utils from 'src/app/shared/shared/Helpers/utils';
 
@@ -19,7 +17,6 @@ import Utils from 'src/app/shared/shared/Helpers/utils';
   providers: [MessageService]
 })
 export class TicketEditComponent implements OnInit {
-  isTicketExist : boolean;
   IdOfItems!: number | null;
   IdOfItemsView!: string | null;
   ticket!: ticket;
@@ -28,9 +25,9 @@ export class TicketEditComponent implements OnInit {
   ticketNotFoundMessage: Message[] = [{ severity: 'error', summary: 'ERROR', detail: 'Ticket Not Found' }] ;
 
   //UI
-  submitAlertMessage!: Message[];
-  progress!: number;
-  @ViewChild('fileUpload') fileUpload: any;
+  isTicketExist : boolean;
+  activateReply = false;
+  @ViewChild('editcontent', { static: false, read: ElementRef }) editContentElement!: ElementRef;
 
   //conditions
   isOverdue = false;
@@ -115,16 +112,6 @@ export class TicketEditComponent implements OnInit {
     })
   }
 
-  refreshAttachmentView(){
-    if(this.IdOfItems){
-      this.ticketService.getTicketById(+this.IdOfItems).subscribe({
-        next: response => {
-          this.attachments = response.attachmentViews;
-        }
-      })
-    }
-  }
-
   onSubmit(){
     let ticket : editticketrequest = {
       assignedToId : this.ticketForm.value.ticketInfoForm?.assignedToId as number,
@@ -148,50 +135,6 @@ export class TicketEditComponent implements OnInit {
     this.isTicketExist = false;
   }
 
-  uploadfun(event: UploadEvent) {
-    console.log(event);
-  }
-
-  onUpload(_uploadEvent: UploadEvent) {
-    for(let file of _uploadEvent.files) {
-        this.uploadedFiles.push(file);
-    }
-
-    if (this.uploadedFiles.length === 0) {
-      this.messageService.add({ severity: 'error', summary: 'ERROR', detail: 'No file to upload!' });
-      return;
-    }
-
-    const formData = new FormData();
-    this.uploadedFiles.forEach((file) => { formData.append('files[]', file); });
-    
-      this.ticketService.uploadFileById(formData, this.IdOfItems).subscribe({
-      next: (event) => {
-        if (event.type === HttpEventType.UploadProgress)
-        {
-          this.progress = Math.round(100 * event.loaded / event.total!);
-          console.log(this.progress);
-        }
-        else if (event.type === HttpEventType.Response) {
-          this.uploadedFiles = [];
-          this.fileUpload.clear();
-          this.progress = 0;
-          this.refreshAttachmentView();
-          this.messageService.add({ key: 'bc', severity: 'success', summary: 'SUCCESS', detail: 'Upload Success!' });
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-        this.uploadedFiles = [];
-        this.fileUpload.clear();
-        this.progress = 0;
-        this.messageService.add({ key: 'bc', severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
-      }
-    });
-
-
-  }
-
   downloadFile(filename : string){
     this.ticketService.downloadFile(filename).subscribe(
       response => {
@@ -213,5 +156,15 @@ export class TicketEditComponent implements OnInit {
   closeTicket(){
     this.ticketForm.get('ticketInfoForm')?.get('statusId')?.setValue(2);
     this.onSubmit();
+  }
+
+  activatedReply(){
+    this.activateReply = true;
+    setTimeout(() => {
+      const element = document.getElementById('editcontent');
+      if(element) {
+        element.scrollTop = element.scrollHeight;
+      }
+    },200);
   }
 }

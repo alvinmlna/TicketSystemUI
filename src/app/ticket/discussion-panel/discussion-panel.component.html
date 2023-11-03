@@ -55,7 +55,7 @@
     </div>
 </div>
 
-<div class="reply mt-4">
+<div class="reply mt-4" *ngIf="activateReply">
          <p-editor [(ngModel)]="message" [style]="{ height: '200px' }">
             <ng-template pTemplate="header">
                 <select class="ql-size">
@@ -101,4 +101,18 @@
                 </p-button>
             </div>
         </div>
+
+        
+</div>
+
+
+<div class="reply mt-4" *ngIf="!activateReply">
+    <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default"  (onClick)="callActivatedReply()">
+        <ng-template pTemplate="buttonicon">
+            <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+            <span class="ms-2">
+                Reply
+            </span>
+        </ng-template>
+    </p-button>
 </div>

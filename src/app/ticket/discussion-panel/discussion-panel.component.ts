@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DiscussionService } from '../discussion.service';
 import { discussion } from 'src/app/shared/shared/models/discussion';
 import { MessageService } from 'primeng/api';
@@ -14,11 +14,15 @@ import Utils from 'src/app/shared/shared/Helpers/utils';
 })
 export class DiscussionPanelComponent implements OnInit {
   @Input() ticketId! : number;
+  @Input() activateReply = false;
   discussions! : discussion[];
   message!: string;
   currentUserId! : number;
   uploadedFiles: any[] = [];
 
+
+  @Output("callReply") callReply: EventEmitter<any> = new EventEmitter();
+  
   constructor(
     private discussionService: DiscussionService,
     private messageService: MessageService,
@@ -94,5 +98,9 @@ export class DiscussionPanelComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  callActivatedReply(){
+    this.callReply.emit();
   }
 }

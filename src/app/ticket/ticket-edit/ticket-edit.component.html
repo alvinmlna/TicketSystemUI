@@ -5,6 +5,15 @@
 <div style="margin-left: 70px;">
     <div class="filter">
         <div>
+            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2" (onClick)="activatedReply()">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Reply
+                    </span>
+                </ng-template>
+            </p-button>
+
             <p-button type="button" 
                 [disabled]="isStatusClose ? true : false" 
                 label="Close" iconPos="right" styleClass="p-button-default me-2"
@@ -31,7 +40,7 @@
     <div class="height: 100vh;">
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
             <div class="row me-0" formGroupName="ticketInfoForm">
-                <div class="col-10" style="max-height: 79vh;overflow-y: scroll;" >
+                <div class="col-10" #editcontent id="editcontent" style="max-height: 79vh;overflow-y: scroll;" >
                     <div class="mx-3 mt-3">
                         <div class="ticket-content">
                             <h5>
@@ -88,7 +97,7 @@
                             </div>
                         </div>
                         <div *ngIf="IdOfItems">
-                            <app-discussion-panel [ticketId]="IdOfItems"></app-discussion-panel>
+                            <app-discussion-panel [ticketId]="IdOfItems" [activateReply]="activateReply" (callReply)="activatedReply()"></app-discussion-panel>
                         </div>
                     </div>
                 </div>
