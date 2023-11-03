@@ -50,7 +50,7 @@ export class AccountService {
         if (auth) {
           if(auth.isSuccess){
             //Good
-            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token};
+            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token, imagePath : null};
             this.currentUserSource.next(user);
           } else {
             this.currentUserService.removeUser();

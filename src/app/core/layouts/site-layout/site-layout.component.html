@@ -8,12 +8,14 @@
             </div>
             <div class="navuseroptions">
                 <div class="dropdown">
-                    <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn"></button>
+                    <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn"
+                        style="background: url({{imagePath}})"
+                    > </button>
                     <div id="myDropdown" [ngClass]="isMenuOpen ? 'dropdown-content show' : 'dropdown-content' ">
                         <div class="media media-element">
-                            <div class="media-head me-2">
+                            <div class="media-head me-2 ms-2">
                                 <div class="avatar">
-                                    <img class="media-element"  src="https://boys-cry.com/wp-content/uploads/2022/04/bc_logo_black.png" >
+                                    <img class="media-element profile-image"  src="{{imagePath}}" >
                                 </div>
                             </div>
                             <div class="media-body  mt-2  me-2">
