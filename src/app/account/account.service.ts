@@ -12,8 +12,7 @@ import { CurrentUserService } from '../core/services/current-user.service';
 export class AccountService {
   baseUrl = "https://localhost:7047/api/";
 
-  private currentUserSource = new ReplaySubject<CurrentUser | null>(1);
-  currentUser$ = this.currentUserSource.asObservable();
+  authenticated = false;
 
   constructor(private http : HttpClient, 
     private router: Router,
@@ -24,7 +23,7 @@ export class AccountService {
     return this.http.post<CurrentUser>(this.baseUrl + 'auth/login', values)
     .pipe(
       map(user => {
-        this.currentUserSource.next(user);
+        this.authenticated = true;
         this.currentUserService.savingUser(user);
         return user;
       })
@@ -33,13 +32,13 @@ export class AccountService {
 
   logout(){
     this.currentUserService.removeUser();
-    this.currentUserSource.next(null);
+    this.authenticated = false;
     this.router.navigateByUrl('/account/login');
   }
 
   loadCurrentUser(token: string | null){
     if (token === null) {
-      this.currentUserSource.next(null);
+      this.authenticated = false;
       return of(null);
     } 
 
@@ -51,11 +50,10 @@ export class AccountService {
         if (auth) {
           if(auth.isSuccess){
             //Good
-            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token, imagePath : null, roleId : null};
-            this.currentUserSource.next(user);
+            this.authenticated = true;
           } else {
             this.currentUserService.removeUser();
-            this.currentUserSource.next(null);
+            this.authenticated = false;
           }
           return auth.isSuccess;
         } else {

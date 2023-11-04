@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, isEmpty, map } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, catchError, isEmpty, map, of, throwError } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  showModal$ = new BehaviorSubject<boolean>(false);
 
   constructor(private accountService: AccountService, private router: Router){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
-      
-    if(this.accountService.currentUser$.pipe(isEmpty())){
-      this.router.navigate(['/account/login']);
-    }
+    state: RouterStateSnapshot): boolean {
 
-    return this.accountService.currentUser$.pipe(
-      map(auth => {
-        if(auth) return true;
-        else {
-          this.router.navigate(['/account/login']);
-          return false;
-        }
-      })
-    );
+    if(this.accountService.authenticated){
+      return true;
+    } 
+      else 
+    {
+      this.router.navigate(['/account/login']);
+      return false;
+    }
   }
-  
 }
