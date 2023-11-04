@@ -15,10 +15,10 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard', 
-        // canActivate: [RoleGuardGuard],
-        // data : {
-        //   role: 'Admin'
-        // },
+        canActivate: [RoleGuardGuard],
+        data : {
+          role: 'Admin'
+        },
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) 
       },
       {

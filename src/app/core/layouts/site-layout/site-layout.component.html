@@ -8,8 +8,10 @@
             </div>
             <div class="navuseroptions">
                 <div class="dropdown">
-                    <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn"
-                        style="background: url({{imagePath}})"
+                    <button #toggleButton id="drop" (click)="showUserInfo()" class="dropbtn" 
+                    style="
+                        border:1px solid;
+                        background: url('{{imagePath}}')"
                     > </button>
                     <div id="myDropdown" [ngClass]="isMenuOpen ? 'dropdown-content show' : 'dropdown-content' ">
                         <div class="media media-element">
@@ -36,11 +38,6 @@
         </div>
         <div class="m-3" 
         style="
-            /* overflow-y: auto;
-            margin: 0 !important;
-            margin-top: 70px !important;
-            position: relative; */
-
             margin: 0 !important;
             padding-top: 70px;
             padding-bottom: 50px;

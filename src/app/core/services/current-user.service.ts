@@ -20,9 +20,24 @@ export class CurrentUserService {
     }
     return null;
   }
-
   
   removeUser(){
     localStorage.removeItem("currentUser");
+  }
+
+  isAdmin(){
+    var currentUser = this.getUser();
+    if(currentUser && currentUser.roleId == "2")
+      return true;
+
+    return false;
+  }
+
+  isCustomer(){
+    var currentUser = this.getUser();
+    if(currentUser && currentUser.roleId == "1")
+      return true;
+      
+    return false;
   }
 }

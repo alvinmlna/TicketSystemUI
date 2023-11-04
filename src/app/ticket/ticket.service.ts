@@ -72,6 +72,10 @@ export class TicketService {
       params = params.append('statusId', element);
     });
 
+    request.raisedBy.forEach(element => {
+      params = params.append('raisedBy', element);
+    });
+
     return this.http.get<ticket[]>(this.baseUrl + 'ticket', {params} );
   }
 

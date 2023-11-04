@@ -10,6 +10,7 @@ import { ComponentService } from '../shared/shared/components/component.service'
 import { ListTicketRequest } from '../shared/shared/models/request/listticketrequest';
 import { statussummary } from '../shared/shared/models/responses/statussummary';
 import { LayoutServiceService } from '../core/services/layout-service.service';
+import { CurrentUserService } from '../core/services/current-user.service';
 
 @Component({
   selector: 'app-ticket',
@@ -42,7 +43,8 @@ export class TicketComponent implements OnInit {
     private router: Router,
     private componentService : ComponentService,
     private ticketService : TicketService,
-    private layoutService : LayoutServiceService
+    private layoutService : LayoutServiceService,
+    public currentUser : CurrentUserService
     ) {}
 
   ngOnInit() {

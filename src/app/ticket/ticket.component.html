@@ -29,7 +29,7 @@
                             [options]="statuses" [filter]="false" optionValue="statusId"
                             optionLabel="name"></p-multiSelect>
                     </td>
-                    <td>
+                    <td *ngIf="currentUser.isAdmin()">
                         <p-multiSelect [style]="{'width':'160px'}" defaultLabel="Raised By"
                             [(ngModel)]="selectedraisedBy" [options]="raisedBy" [filter]="false" optionValue="userId"
                             optionLabel="name"></p-multiSelect>
