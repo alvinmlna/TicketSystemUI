@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, isEmpty, map } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 
 @Injectable({
@@ -13,6 +13,11 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
+      
+    if(this.accountService.currentUser$.pipe(isEmpty())){
+      this.router.navigate(['/account/login']);
+    }
+
     return this.accountService.currentUser$.pipe(
       map(auth => {
         if(auth) return true;

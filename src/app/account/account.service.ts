@@ -31,12 +31,11 @@ export class AccountService {
     );
   }
 
-  logout (){
+  logout(){
     this.currentUserService.removeUser();
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/account/login');
   }
-  
 
   loadCurrentUser(token: string | null){
     if (token === null) {

@@ -16,7 +16,7 @@ export class RoleGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+    alert("here 2");
     var currentUser = this.currentUser.getUser();
     if(currentUser){
       if(currentUser.roleId) {
