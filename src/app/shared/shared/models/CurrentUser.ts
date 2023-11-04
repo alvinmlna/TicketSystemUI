@@ -4,4 +4,5 @@ export interface CurrentUser {
     displayName : | null;
     imagePath : string | null;
     token : string;
+    roleId : string | null;
 }

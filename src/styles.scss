@@ -124,25 +124,23 @@ main {
   padding: 0.5rem 0.5rem 0.5rem !important;
 }
 
-///SAMPLES
 
-
-.samplePhoto {
+.avatar-discussion img {
   display: block;
   width: 50px;
   height: 50px;
   background-color: black;
+  border-radius: 5px;
 }
 
-//END OF SAMPLES
 
 
 ///Attachments
 
 .attachment-icon {
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-color: var(--lightgrey);
   border-radius: 5px;
   align-items: center;
@@ -154,7 +152,7 @@ main {
   border: 1px solid var(--linecolor);
   width: 300px;
   height: 100%;
-  padding: 10px;
+  padding: 7px;
   text-decoration: none;
   color: var(--black);
   border-radius: 5px;

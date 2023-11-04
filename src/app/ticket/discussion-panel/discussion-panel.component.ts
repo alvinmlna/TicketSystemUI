@@ -86,7 +86,8 @@ export class DiscussionPanelComponent implements OnInit {
       dateSending : null,
       name : null,
       attachments : this.uploadedFiles,
-      attachmentViews : null
+      attachmentViews : null,
+      imagePath : null
     };
     this.message = '';
     this.discussionService.addDiscussion(myMessage).subscribe({

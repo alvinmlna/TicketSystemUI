@@ -5,6 +5,7 @@ export interface discussion {
     userId: number
     ticketId: number,
     name : string | null,
+    imagePath : string | null,
     attachments: any[];
     attachmentViews: DiscussionAttachmentView[] | null
   }

@@ -36,6 +36,7 @@ export class AccountService {
     this.router.navigateByUrl('/account/login');
   }
   
+
   loadCurrentUser(token: string | null){
     if (token === null) {
       this.currentUserSource.next(null);
@@ -50,7 +51,7 @@ export class AccountService {
         if (auth) {
           if(auth.isSuccess){
             //Good
-            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token, imagePath : null};
+            const user : CurrentUser = {email : null, displayName : null, userId : null , token : token, imagePath : null, roleId : null};
             this.currentUserSource.next(user);
           } else {
             this.currentUserService.removeUser();

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
+import { RoleGuardGuard } from './core/guards/role-guard.guard';
 
 const routes: Routes = [
   { path: '', component: PublicDashboardComponent, pathMatch: 'full' },
@@ -11,8 +12,22 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: SiteLayoutComponent,
     children: [
-      {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-      {path: 'ticket', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule) },
+      {
+        path: 'dashboard', 
+        canActivate: [RoleGuardGuard],
+        data : {
+          role: 'Admin'
+        },
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) 
+      },
+      {
+        path: 'ticket', 
+        canActivate: [RoleGuardGuard],
+        data : {
+          role: 'Admin,Customer'
+        },
+        loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule) 
+      },
     ]
   },
   // {
