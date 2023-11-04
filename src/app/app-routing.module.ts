@@ -7,7 +7,7 @@ import { RoleGuardGuard } from './core/guards/role-guard.guard';
 import { UnauthorizedComponent } from './shared/shared/common-pages/unauthorized/unauthorized.component';
 
 const routes: Routes = [
-  { path: '', component: PublicDashboardComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/account/login', pathMatch: 'full' },
   { 
     path: '', 
     canActivate: [AuthGuard],
@@ -38,7 +38,7 @@ const routes: Routes = [
   // },
   {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },  
   {path: 'unauthorized', component: UnauthorizedComponent },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  {path: '**', redirectTo: '/account/login', pathMatch: 'full'}
 ];
 
 @NgModule({
