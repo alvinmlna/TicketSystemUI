@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CurrentUserService } from '../services/current-user.service';
+import Utils from 'src/app/shared/shared/Helpers/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class RoleGuardGuard implements CanActivate {
         if(result) return true;
       }
     }
-    this.router.navigate(['/account/login']);
+    this.router.navigate(['/unauthorized']);
     return false;
   }
   
@@ -31,23 +32,10 @@ export class RoleGuardGuard implements CanActivate {
   Verify(roles : string, userRole: string)
   {
     const arr = roles.split(',');
-    let userRoleId = this.convertToRole(+userRole);
+    let userRoleId = Utils.convertToRole(+userRole);
     return arr.includes(userRoleId);
   }
 
 
-  convertToRole(role : number) {
-    if(!role) return "No Access";
-    switch (role){
-      case 1: {
-        return "Customer";
-      }
-      case 2: {
-        return "Admin";
-      }
-      default: {
-        return "No Access";
-      }
-    }
-  }
+  
 }

@@ -4,6 +4,7 @@ import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.comp
 import { AuthGuard } from './core/guards/auth.guard';
 import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
 import { RoleGuardGuard } from './core/guards/role-guard.guard';
+import { UnauthorizedComponent } from './shared/shared/common-pages/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   { path: '', component: PublicDashboardComponent, pathMatch: 'full' },
@@ -35,7 +36,8 @@ const routes: Routes = [
   //   pathMatch : 'full',
   //   redirectTo: '/dashboard'
   // },
-  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
+  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },  
+  {path: 'unauthorized', component: UnauthorizedComponent },
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 

@@ -26,6 +26,7 @@ export class AccountService {
       map(user => {
         this.currentUserSource.next(user);
         this.currentUserService.savingUser(user);
+        return user;
       })
     );
   }

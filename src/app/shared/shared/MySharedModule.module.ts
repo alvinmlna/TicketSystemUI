@@ -21,6 +21,7 @@ import { PrioritydropdownComponent } from './components/prioritydropdown/priorit
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { UnauthorizedComponent } from './common-pages/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TextInputComponent } from './components/text-input/text-input.component
     StatusdropdownComponent,
     AssigneddropdownComponent,
     PrioritydropdownComponent,
-    TextInputComponent
+    TextInputComponent,
+    UnauthorizedComponent
   ],
   imports: [
     CommonModule,

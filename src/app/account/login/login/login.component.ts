@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../account.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
+import Utils from 'src/app/shared/shared/Helpers/utils';
 
 @Component({
   selector: 'app-login',
@@ -17,25 +18,21 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   })
 
-  returnUrl: string;
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private accountService : AccountService,
     private messageService : MessageService,
     private spinnerService: NgxSpinnerService
-    )
-    {
-      this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/dashboard';
-    }
-
+    ){}
+    
   onSubmit(){
     this.spinnerService.show();
     this.accountService.login(this.loginForm.value).subscribe({
-      next: () => {
+      next: res => {
         this.spinnerService.hide();
-        this.router.navigateByUrl(this.returnUrl);
+        var returnUrl = Utils.userHomePage(res.roleId)
+        this.router.navigateByUrl(returnUrl);
       },
       error: err => {
         this.spinnerService.hide();
