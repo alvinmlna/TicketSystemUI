@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { PublicDashboardComponent } from './core/layouts/public-dashboard/public-dashboard.component';
 import { RoleGuardGuard } from './core/guards/role-guard.guard';
 import { UnauthorizedComponent } from './shared/shared/common-pages/unauthorized/unauthorized.component';
 
@@ -29,6 +28,14 @@ const routes: Routes = [
         },
         loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule) 
       },
+      {
+        path: 'user', 
+        canActivate: [RoleGuardGuard],
+        data : {
+          role: 'Admin'
+        },
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule) 
+      }
     ]
   },
   // {

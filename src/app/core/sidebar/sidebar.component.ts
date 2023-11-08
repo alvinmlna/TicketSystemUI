@@ -32,7 +32,7 @@ export class SidebarComponent {
   }
 
   adminMenu(title : string) {
-    var menu = ['ticket', 'dashboard'];
+    var menu = ['ticket', 'dashboard','user'];
     return menu.includes(title);
   }
 

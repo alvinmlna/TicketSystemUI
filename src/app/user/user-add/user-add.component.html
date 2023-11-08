@@ -1,0 +1,14 @@
+
+<p-toast></p-toast>
+<div style="margin-left: 70px;" >
+    <div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <input  type="text" pInputText formControlName="email" />
+        <input  type="text" pInputText formControlName="name" />
+        <input  type="text" pInputText formControlName="password" />
+        <input  type="text" pInputText formControlName="roleId" />
+
+        <button type="submit">SUBMIT</button>
+    </form>
+    </div>
+</div>

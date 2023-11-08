@@ -1,0 +1,17 @@
+
+
+<p-toast></p-toast>
+<div style="margin-left: 70px;" >
+    <div class="container">
+
+        <a href="user/add">Add New User</a>
+
+        <div *ngIf="users">
+            <div *ngFor="let user of users">
+                <span>{{user.name}} - <a href="user/{{user.userId}}">Edit</a>  - <button (click)="deleteUser(user.userId)">DELETE</button></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+

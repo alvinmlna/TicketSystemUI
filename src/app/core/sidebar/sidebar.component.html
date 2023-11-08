@@ -14,5 +14,10 @@
         <fa-icon [icon]="['fas', 'ticket-alt']" style="size: 1.5rem;"></fa-icon>
       </a>
     </li>
+    <li class="nav-item"  pTooltip="Users" *ngIf="enableSideBar('user')" >
+      <a href="#" class="nav-link" routerLink="/user" routerLinkActive="active" aria-current="page">
+        <fa-icon [icon]="['fas', 'ticket-alt']" style="size: 1.5rem;"></fa-icon>
+      </a>
+    </li>
   </ul>
 </div>
