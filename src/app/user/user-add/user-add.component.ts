@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { userregisterrequest } from 'src/app/shared/shared/models/request/user-register-request';
 import { UserService } from '../user.service';
 import { MessageService } from 'primeng/api';
 import { Route, Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-user-add',
@@ -12,6 +13,8 @@ import { Route, Router } from '@angular/router';
   providers: [MessageService]
 })
 export class UserAddComponent {
+  @Output("refreshTable") refreshTable: EventEmitter<any> = new EventEmitter();
+  @Input() bsModalRef! : BsModalRef;
 
   userForm = this.fb.group({
     email : new FormControl<string>(''),
@@ -24,7 +27,6 @@ export class UserAddComponent {
     private userService : UserService, 
     private messageService : MessageService,
     private route: Router
-    
     ){}
   
   onSubmit(){
@@ -37,10 +39,8 @@ export class UserAddComponent {
       };
       this.userService.addUser(user).subscribe({
         next : res => {
-          console.log(res);
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Ticket submitted successfully' });
-          
-          this.route.navigateByUrl("/user");
+          this.refreshTable.emit();
+          this.bsModalRef.hide();
         } ,
           error : err => {
             console.log(err);

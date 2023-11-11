@@ -1,17 +1,68 @@
 
-
 <p-toast></p-toast>
 <div style="margin-left: 70px;" >
-    <div class="container">
-
-        <a href="user/add">Add New User</a>
-
-        <div *ngIf="users">
-            <div *ngFor="let user of users">
-                <span>{{user.name}} - <a href="user/{{user.userId}}">Edit</a>  - <button (click)="deleteUser(user.userId)">DELETE</button></span>
-            </div>
+    <div class="filter" >
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="text" pInputText />
+                        </span>
+                    </td>
+                    <td>
+                        <p-button styleClass="p-button-default" class="ms-2 " label="Search"></p-button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+    <div class="table-content">
+        <p-table
+            [value]="users"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]"
+
+    selectionMode="single" [(selection)]="selectedUser" dataKey="userId"
+    (onRowSelect)="onRowSelect($event, editModal)"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr [pSelectableRow]="user">
+            <td>{{user.email}}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.roleId }}</td>
+            <td>
+                <p-button (click)="deleteUser(user.userId)" styleClass="p-button-default" class="ms-2 " label="Remove Account"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+    </div>
 </div>
+<p-toast></p-toast>
+
+<a href="javascript:void(0)" (click)="addUser($event, addModal)" class="float">
+    <i class="pi pi-plus my-float"></i>
+</a>
+
+<ng-template #addModal>
+    <app-user-add (refreshTable)="CompleteSaving('User added successfully')" [bsModalRef]="bsAddModalRef"></app-user-add>
+</ng-template>
 
 
+<ng-template #editModal>
+    <app-user-edit (refreshTable)="CompleteSaving('User Updated successfully')" [bsModalRef]="bsEditModalRef" [userId]="userId"></app-user-edit>
+</ng-template>

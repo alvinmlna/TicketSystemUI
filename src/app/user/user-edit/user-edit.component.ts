@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { userupdaterequest } from 'src/app/shared/shared/models/request/user-update-request';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-user-edit',
@@ -12,7 +13,10 @@ import { ActivatedRoute } from '@angular/router';
   providers: [MessageService]
 })
 export class UserEditComponent implements OnInit {
+  @Output("refreshTable") refreshTable: EventEmitter<any> = new EventEmitter();
+  @Input() bsModalRef! : BsModalRef;
   
+  @Input() userId : any;
   userExist = false;
 
   userForm = this.fb.group({
@@ -26,14 +30,14 @@ export class UserEditComponent implements OnInit {
     private fb : FormBuilder,
     private messageService : MessageService,
     private userService : UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public router : Router,
     ){}
 
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if(id) {
-      this.getUserById(id);
+    if(this.userId) {
+      this.getUserById(this.userId);
     }  
   }
 
@@ -56,11 +60,10 @@ export class UserEditComponent implements OnInit {
       };
       this.userService.editUser(user).subscribe({
         next : res => {
-          console.log(res);
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Ticket submitted successfully' });
+          this.refreshTable.emit();
+          this.bsModalRef.hide()
         } ,
           error : err => {
-            console.log(err);
             this.messageService.add({ severity: 'error', summary: 'ERROR', detail: 'Action Failed!' });
           }
       });

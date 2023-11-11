@@ -1,14 +1,33 @@
 
 <p-toast></p-toast>
-<div style="margin-left: 70px;" >
-    <div class="container">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <input  type="text" pInputText formControlName="email" />
-        <input  type="text" pInputText formControlName="name" />
-        <input  type="text" pInputText formControlName="password" />
-        <input  type="text" pInputText formControlName="roleId" />
 
-        <button type="submit">SUBMIT</button>
-    </form>
-    </div>
-</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Add New User</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+        <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <label for="nameInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="nameInput" formControlName="name">
+        </div>
+        <div class="mb-3">
+            <label for="passworInput" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passworInput" pInputText formControlName="password">
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Role Id</label>
+            <input type="text" class="form-control" id="role" formControlName="roleId">
+        </div>
+  </div>
+  <div class="modal-footer">
+    <p-button type="submit" styleClass="p-button-default" class="ms-2 " label="Save User"></p-button>
+    <!-- <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button> -->
+  </div>
+</form>
