@@ -5,6 +5,8 @@ import { userupdaterequest } from 'src/app/shared/shared/models/request/user-upd
 import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { dropdownModel } from 'src/app/shared/shared/models/components/dropdownModel';
+import RoleDataHelper from 'src/app/shared/shared/Helpers/RoleDataHelper';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,6 +21,8 @@ export class UserEditComponent implements OnInit {
   @Input() userId : any;
   userExist = false;
 
+  roleDropdownData!: dropdownModel[];
+
   userForm = this.fb.group({
     userId : [0],
     email : [''],
@@ -32,7 +36,9 @@ export class UserEditComponent implements OnInit {
     private userService : UserService,
     private activatedRoute: ActivatedRoute,
     public router : Router,
-    ){}
+    ){
+      this.roleDropdownData = RoleDataHelper.get()
+    }
 
 
   ngOnInit(): void {

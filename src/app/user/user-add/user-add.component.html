@@ -22,12 +22,11 @@
             <input type="password" class="form-control" id="passworInput" pInputText formControlName="password">
         </div>
         <div class="mb-3">
-            <label for="role" class="form-label">Role Id</label>
-            <input type="text" class="form-control" id="role" formControlName="roleId">
-        </div>
+            <label for="role" class="form-label">Role</label>
+            <app-dropdown [formGroupParent]="userForm" controlName="roleId" [data]="roleDropdownData" ></app-dropdown>
+          </div>
   </div>
   <div class="modal-footer">
     <p-button type="submit" styleClass="p-button-default" class="ms-2 " label="Save User"></p-button>
-    <!-- <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button> -->
   </div>
 </form>

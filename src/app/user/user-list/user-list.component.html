@@ -43,7 +43,7 @@
         <tr [pSelectableRow]="user">
             <td>{{user.email}}</td>
             <td>{{ user.name }}</td>
-            <td>{{ user.roleId }}</td>
+            <td>{{ user.roleName }}</td>
             <td>
                 <p-button (click)="deleteUser(user.userId)" styleClass="p-button-default" class="ms-2 " label="Remove Account"></p-button>
             </td>

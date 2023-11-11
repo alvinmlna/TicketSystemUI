@@ -5,6 +5,8 @@ import { UserService } from '../user.service';
 import { MessageService } from 'primeng/api';
 import { Route, Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { dropdownModel } from 'src/app/shared/shared/models/components/dropdownModel';
+import RoleDataHelper from 'src/app/shared/shared/Helpers/RoleDataHelper';
 
 @Component({
   selector: 'app-user-add',
@@ -15,6 +17,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class UserAddComponent {
   @Output("refreshTable") refreshTable: EventEmitter<any> = new EventEmitter();
   @Input() bsModalRef! : BsModalRef;
+  roleDropdownData!: dropdownModel[];
 
   userForm = this.fb.group({
     email : new FormControl<string>(''),
@@ -25,9 +28,10 @@ export class UserAddComponent {
 
   constructor (private fb: FormBuilder, 
     private userService : UserService, 
-    private messageService : MessageService,
-    private route: Router
-    ){}
+    private messageService : MessageService
+    ){
+      this.roleDropdownData = RoleDataHelper.get()
+    }
   
   onSubmit(){
     if(this.userForm.valid) {
@@ -51,4 +55,6 @@ export class UserAddComponent {
       console.log("NOT VALID");
     }
   }
+
+
 }

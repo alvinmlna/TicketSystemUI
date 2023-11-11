@@ -4,5 +4,6 @@ export interface user {
     email: string
     password: any
     roleId: number
+    roleName: string
   }
   
