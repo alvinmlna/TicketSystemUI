@@ -12,7 +12,7 @@ import { PublicDashboardComponent } from './core/layouts/public-dashboard/public
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHandsHelping, faTachometerAlt, faTicketAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHandsHelping, faTachometerAlt, faTicketAlt, faUserAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
@@ -44,7 +44,8 @@ export class AppModule {
     library.addIcons(
       faTachometerAlt,
       faTicketAlt,
-      faHandsHelping
+      faHandsHelping,
+      faUsers
     )
   }
 

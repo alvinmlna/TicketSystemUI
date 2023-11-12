@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { UserAddComponent } from '../user-add/user-add.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { LayoutServiceService } from 'src/app/core/services/layout-service.service';
 
 @Component({
   selector: 'app-user-list',
@@ -27,8 +28,11 @@ export class UserListComponent implements OnInit {
   constructor (private userService: UserService,
     private messageService: MessageService,
     private router : Router,
-    private modalService: BsModalService
-    ){}
+    private modalService: BsModalService,
+    private layoutService : LayoutServiceService
+    ){
+      this.layoutService.loadPageTitle("Manage Users");
+    }
 
   ngOnInit(): void {
     this.getAllUser();
