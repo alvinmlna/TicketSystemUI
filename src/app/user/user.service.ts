@@ -13,8 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<user[]>(this.baseUrl + "user").pipe(retry(1), catchError(this.errorHandl));
+  getAll(search : string | null) {
+    return this.http.get<user[]>(this.baseUrl + "user?search=" + search).pipe(retry(1), catchError(this.errorHandl));
+    // if(search) {
+    // } 
+    //   else 
+    // {
+    //   return this.http.get<user[]>(this.baseUrl + "user").pipe(retry(1), catchError(this.errorHandl));
+    // }
   }
   
   getUserById(id: number){

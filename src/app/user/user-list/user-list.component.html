@@ -8,11 +8,11 @@
                     <td>
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input type="text" pInputText />
+                            <input type="text" [(ngModel)]="search" pInputText />
                         </span>
                     </td>
                     <td>
-                        <p-button styleClass="p-button-default" class="ms-2 " label="Search"></p-button>
+                        <p-button (onClick)="getAllUser()"  styleClass="p-button-default" class="ms-2 " label="Search"></p-button>
                     </td>
                 </tr>
             </table>

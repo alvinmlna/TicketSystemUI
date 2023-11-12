@@ -21,6 +21,8 @@ export class UserListComponent implements OnInit {
   userId : any;
   users! : user[];
   selectedUser! : user;
+
+  search = "";
   
   constructor (private userService: UserService,
     private messageService: MessageService,
@@ -33,7 +35,7 @@ export class UserListComponent implements OnInit {
   }
 
   getAllUser() {
-    this.userService.getAll().subscribe({
+    this.userService.getAll(this.search).subscribe({
       next: res => {
         this.users = res;
       }
