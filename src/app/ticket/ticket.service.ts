@@ -88,13 +88,21 @@ export class TicketService {
   }
 
   errorHandl(error : any) {
+    console.log(error);
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
-    } else {
+    } 
+    if(error.error.error){
+      errorMessage = error.error.error;
+    }
+    if(error.status == 404){
+      errorMessage = "Ticket Not Found!";
+    }
+    else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Error Code: ${error.status}`;
     }
     console.log(errorMessage);
     return throwError(() => {

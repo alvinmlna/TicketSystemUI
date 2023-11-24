@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message, MessageService } from 'primeng/api';
 import { TicketService } from '../ticket.service';
 import { AttachmentView, ticket } from 'src/app/shared/shared/models/ticket';
@@ -59,7 +59,8 @@ export class TicketEditComponent implements OnInit {
     private messageService: MessageService,
     private ticketService: TicketService,
     private fb : FormBuilder,
-    private layoutService : LayoutServiceService
+    private layoutService : LayoutServiceService,
+    private router : Router
     ) {
       this.isTicketExist = true;
     }
@@ -108,7 +109,10 @@ export class TicketEditComponent implements OnInit {
 
         this.ticketForm.get('ticketInfoForm')?.get('expectedDate')?.setValue(formatDate(response.expectedDate, 'dd MMMM yyyy HH:mm a', 'en'));
       },
-      error: error => this.ticketNotFound()
+      error: error => {
+        this.ticketNotFoundMessage = [{ severity: 'error', summary: 'ERROR', detail: error }] ;
+        this.ticketNotFound();
+      }
     })
   }
 
@@ -166,5 +170,9 @@ export class TicketEditComponent implements OnInit {
         element.scrollTop = element.scrollHeight;
       }
     },200);
+  }
+
+  backToList(){
+    this.router.navigateByUrl("/ticket");
   }
 }

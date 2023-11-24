@@ -22,9 +22,11 @@
                             </div>
                             <div class="media-body  mt-2  me-2">
                                 <div class="media-element" style="font-size: 0.9rem;">
-                                    Alvin Maulana
+                                    {{ this.currentUser.getUser()?.name }}
                                 </div>
-                                <div class="media-element" style="font-size: 0.75rem;color: var(--textcolor2);">contact@hencework.com</div>
+                                <div class="media-element" style="font-size: 0.75rem;color: var(--textcolor2);">
+                                    {{ this.currentUser.getUser()?.email }}
+                                </div>
                                 <a  class="media-element media-sign-out p-0" href="javascript:void(0)" (click)="accountService.logout()" >
                                     <span>
                                         Sign Out

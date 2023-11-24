@@ -22,7 +22,7 @@ export class SiteLayoutComponent implements OnInit  {
     public accountService: AccountService,
     private renderer: Renderer2,
     private layoutService: LayoutServiceService,
-    private currentUser : CurrentUserService
+    public currentUser : CurrentUserService
     ) {
     /**
      * This events get called by all clicks on the page

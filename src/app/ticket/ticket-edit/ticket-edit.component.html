@@ -1,10 +1,18 @@
-<div *ngIf="!isTicketExist">
-    <p-messages [(value)]="ticketNotFoundMessage" [enableService]="false" [closable]="false"></p-messages>
-</div>
+
 
 <div style="margin-left: 70px;">
     <div class="filter">
-        <div>
+        <div *ngIf="!isTicketExist">
+            <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2" (onClick)="backToList()">
+                <ng-template pTemplate="buttonicon">
+                    <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
+                    <span class="ms-2">
+                        Back to list
+                    </span>
+                </ng-template>
+            </p-button>
+        </div>
+        <div *ngIf="isTicketExist">
             <p-button type="button" label="Reply" iconPos="right" styleClass="p-button-default me-2" (onClick)="activatedReply()">
                 <ng-template pTemplate="buttonicon">
                     <fa-icon [icon]="['fas', 'reply']" style="size: 1.5rem;"> </fa-icon>
@@ -37,7 +45,10 @@
             </p-button> -->
         </div>
     </div>
-    <div class="height: 100vh;">
+    <div *ngIf="!isTicketExist">
+        <p-messages [(value)]="ticketNotFoundMessage" [enableService]="false" [closable]="false"></p-messages>
+    </div>
+    <div *ngIf="isTicketExist" class="height: 100vh;">
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
             <div class="row me-0" formGroupName="ticketInfoForm">
                 <div class="col-10" #editcontent id="editcontent" style="max-height: 79vh;overflow-y: scroll;" >
