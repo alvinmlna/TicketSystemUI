@@ -120,7 +120,7 @@
 
                         <div class="col-12">
                             <!-- [disabled]="isStatusClose ? true : false" -->
-                            <p-button type="submit" label="Update Ticket"  icon="pi pi-save" iconPos="right"
+                            <p-button  [disabled]="isStatusClose ? true : false"  type="submit" label="Update Ticket"  icon="pi pi-save" iconPos="right"
                                 styleClass="p-button-default w-100" style="width: 100%;"></p-button>
                         </div>
 

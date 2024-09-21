@@ -35,7 +35,7 @@ export class CategorydropdownComponent implements OnInit {
         var mappedResponse =  response.map((x) => {
           return {id : x.categoryId, name : x.categoryName};
         })
-        this.category = [{id:0, name: 'Select Product'}, ...mappedResponse]
+        this.category = [{id:0, name: 'Select Category'}, ...mappedResponse]
       }
     });
   }

@@ -103,7 +103,7 @@ export class TicketEditComponent implements OnInit {
         }
         
         var statusId = this.ticketForm.get('ticketInfoForm')?.get('statusId')?.value;
-        if(statusId && statusId === 2) {
+        if(statusId && statusId === 3) {
           this.isStatusClose = true;
         }
 
@@ -127,6 +127,10 @@ export class TicketEditComponent implements OnInit {
     };
 
     this.ticketService.editTicket(ticket).subscribe((res) => {
+      if(ticket.statusId == 3){
+        this.isStatusClose = true;
+      }
+
       this.messageService.add({ key: 'bc', severity: 'success', summary: 'SUCCESS', detail: 'Action Successfull!' });
     },
     err => {
@@ -158,7 +162,7 @@ export class TicketEditComponent implements OnInit {
   }
   
   closeTicket(){
-    this.ticketForm.get('ticketInfoForm')?.get('statusId')?.setValue(2);
+    this.ticketForm.get('ticketInfoForm')?.get('statusId')?.setValue(3);
     this.onSubmit();
   }
 
